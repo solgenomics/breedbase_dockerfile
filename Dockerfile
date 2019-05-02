@@ -72,8 +72,9 @@ RUN mkdir -p /home/production/cxgn
 RUN mkdir -p /home/production/cxgn/local-lib
 WORKDIR /home/production/cxgn	
 RUN bash -c "git clone --quiet https://github.com/solgenomics/cxgn-corelibs.git /home/production/cxgn/cxgn-corelibs"
-RUN bash -c "git clone --quiet https://github.com/lukasmueller/sgn.git /home/production/cxgn/sgn"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/sgn.git /home/production/cxgn/sgn"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/Phenome.git /home/production/cxgn/Phenome"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/rPackages.git /home/production/cxgn/rPackages"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/biosource.git /home/production/cxgn/biosource"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/Cview.git /home/production/cxgn/Cview"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/ITAG.git /home/production/cxgn/ITAG"
@@ -200,9 +201,10 @@ RUN cpanm -L ../local-lib/ Net::Server::SS::PreFork --force
 
 # run the Build.PL to install the R dependencies...
 #
-RUN echo "R_LIBS_USER=/home/production/cxgn/R_files" >> /etc/R/Renviron
-RUN mkdir -p /home/production/cxgn/sgn/R_files/
-ENV R_LIBS_USER=/home/production/cxgn/R_files
+ENV HOME=/home/production
+RUN echo "R_LIBS_USER=/home/production/cxgn/R_libs" >> /etc/R/Renviron
+RUN mkdir -p /home/production/cxgn/sgn/R_libs
+ENV R_LIBS_USER=/home/production/cxgn/R_libs
 RUN rm /home/production/cxgn/sgn/static/static
 RUN rm /home/production/cxgn/sgn/static/s
 RUN rm /home/production/cxgn/sgn/documents
