@@ -2,6 +2,7 @@ FROM debian:stretch
 
 LABEL maintainer="lam87@cornell.edu"
 
+ENV CPANMIRROR=http://cpan.cpantesters.org
 # based on the vagrant provision.sh script by Nick Morales <nm529@cornell.edu>
 
 # open port 8080
@@ -25,18 +26,16 @@ RUN mkdir -p  /home/production/cxgn
 #
 RUN echo "deb http://lib.stat.cmu.edu/R/CRAN/bin/linux/debian stretch-cran35/" >> /etc/apt/sources.list
 
-
-
 # install system dependencies
 #
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
 RUN apt-get update -y --allow-unauthenticated 
 RUN apt-get upgrade -y
-RUN apt-get install build-essential pkg-config apt-utils gnupg2  curl -y
+RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl -y
 
 # key for cran-backports (not working though)
 #
-RUN apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF' > /key.out 2>&1
+RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF' 2> /key.out"
 
 RUN apt-get update -y
 
@@ -135,69 +134,67 @@ ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/li
 
 # load prerequisites for building packages using Build.PL
 #
-RUN cpanm -L /home/production/cxgn/local-lib Parse::Deb::Control Module::Build Class::MethodMaker Data::UUID HTML::Lint Module::Build::Tiny Test::JSON  Test::Most  Test::WWW::Mechanize  Test::WWW::Mechanize::Catalyst  Test::WWW::Selenium DBIx::Connector local::lib ExtUtils::PkgConfig
+RUN cpanm -L /home/production/cxgn/local-lib --mirror $CPANMIRROR Parse::Deb::Control Module::Build Class::MethodMaker Data::UUID HTML::Lint Module::Build::Tiny Test::JSON  Test::Most  Test::WWW::Mechanize  Test::WWW::Mechanize::Catalyst  Test::WWW::Selenium DBIx::Connector local::lib ExtUtils::PkgConfig
 
 # data structure basics
 #
-RUN cpanm -L ../local-lib/ IO::Event --force
-RUN cpanm -L ../local-lib Hash::Merge  Tie::UrlEncoder Data::BitMask enum  Class::MethodMaker  Modern::Perl   Config::JFDI Config::INI::Reader Array::Utils JSON::Any JSON::XS URI::FromHash URI::Encode JSAN::ServerSide  String::Random String::CRC String::Approx Tie::Function Digest::Crc32  Math::Base36   Array::Compare Number::Bytes::Human List::Compare List::AllUtils Data::UUID  XML::Twig XML::Generator XML::Feed
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR IO::Event --force
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Hash::Merge  Tie::UrlEncoder Data::BitMask enum  Class::MethodMaker  Modern::Perl   Config::JFDI Config::INI::Reader Array::Utils JSON::Any JSON::XS URI::FromHash URI::Encode JSAN::ServerSide  String::Random String::CRC String::Approx Tie::Function Digest::Crc32  Math::Base36   Array::Compare Number::Bytes::Human List::Compare List::AllUtils Data::UUID  XML::Twig XML::Generator XML::Feed
 
 # file system
 #
-RUN cpanm -L ../local-lib/ --force File::Find::Rule
-RUN cpanm -L ../local-lib/ Cache::File File::Flock File::NFSLock
-RUN cpanm -L ../local-lib/ Lucy::Simple
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force File::Find::Rule
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Cache::File File::Flock File::NFSLock
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Lucy::Simple
 
 # Moose etc.
 #
-RUN cpanm -L ../local-lib/ Moose MooseX::FollowPBP MooseX::Object::Pluggable MooseX::Types::URI MooseX::Runnable@0.09 MooseX::Declare MooseX::Singleton
-RUN cpanm -L ../local-lib/ --force MooseX::Daemonize
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Moose MooseX::FollowPBP MooseX::Object::Pluggable MooseX::Types::URI MooseX::Runnable@0.09 MooseX::Declare MooseX::Singleton
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force MooseX::Daemonize
 
 # graphics libraries (older)
 #
-RUN cpanm -L ../local-lib/ GD GD::Graph::lines GD::Graph::Map GD::Barcode::QRcode Graph Chart::Clicker SVG Cairo Imager::QRCode Barcode::Code128
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR GD GD::Graph::lines GD::Graph::Map GD::Barcode::QRcode Graph Chart::Clicker SVG Cairo Imager::QRCode Barcode::Code128
 
 # bioperl
 #
-RUN cpanm -L ../local-lib/ Bio::Restriction::Analysis Bio::PrimarySeq Bio::BLAST::Database  Bio::GFF3::LowLevel Bio::GMOD::GenericGenePage Bio::SeqFeature::Annotated Catalyst::ScriptRunner Bio::GMOD::Blast::Graph
-RUN cpanm -L ../local-lib --force Starman Bio::Graphics::FeatureFile 
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Bio::Restriction::Analysis Bio::PrimarySeq Bio::BLAST::Database  Bio::GFF3::LowLevel Bio::GMOD::GenericGenePage Bio::SeqFeature::Annotated Catalyst::ScriptRunner Bio::GMOD::Blast::Graph
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force Starman Bio::Graphics::FeatureFile 
 
 # generic web
 #
-RUN cpanm -L ../local-lib WWW::Mechanize::TreeBuilder HTML::Mason::Interp HTML::TreeBuilder::XPath  LWP::UserAgent
-RUN cpanm -L ../local-lib/ URI::SmartURI HTML::Lint Mail::Sendmail --force
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR WWW::Mechanize::TreeBuilder HTML::Mason::Interp HTML::TreeBuilder::XPath  LWP::UserAgent
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR/ URI::SmartURI HTML::Lint Mail::Sendmail --force
 
 # database
 #
-RUN cpanm -L ../local-lib DBI DBIx::Class::Schema Bio::Chado::Schema DBIx::Class::Schema::Loader DBD::Pg
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR DBI DBIx::Class::Schema Bio::Chado::Schema DBIx::Class::Schema::Loader DBD::Pg
 
 # Catalyst
 #
-RUN cpanm -L ../local-lib/ Catalyst Catalyst::Helper Catalyst::Restarter Captcha::reCAPTCHA  Catalyst::Plugin::SmartURI Catalyst::Plugin::Authorization::Roles Catalyst::View::Email Catalyst::View::HTML::Mason  Catalyst::View::Bio::SeqIO Catalyst::View::JavaScript::Minifier::XS@2.101001  Catalyst::View::Download::CSV Class::DBI Catalyst::DispatchType::Regex
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Catalyst Catalyst::Helper Catalyst::Restarter Captcha::reCAPTCHA  Catalyst::Plugin::SmartURI Catalyst::Plugin::Authorization::Roles Catalyst::View::Email Catalyst::View::HTML::Mason  Catalyst::View::Bio::SeqIO Catalyst::View::JavaScript::Minifier::XS@2.101001  Catalyst::View::Download::CSV Class::DBI Catalyst::DispatchType::Regex
 
-RUN cpanm -L ../local-lib/ CatalystX::GlobalContext Catalyst::Plugin::Assets --force
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR CatalystX::GlobalContext Catalyst::Plugin::Assets --force
 
 # math
 #
-RUN cpanm -L ../local-lib/ Math::Round Math::Round::Var Statistics::Descriptive Algorithm::Combinatorics Statistics::R
-RUN cpanm -L ../local-lib --force R::YapRI::Base
-
-RUN cpanm -L ../local-lib/ Test::Aggregate::Nested --force
-RUN cpanm -L ../local-lib/ IPC::Run3 SOAP::Transport::HTTP 
-RUN cpanm -L ../local-lib/ Spreadsheet::WriteExcel Spreadsheet::ParseExcel Spreadsheet::Read PDF::Create  PDF::API2 CAM::PDF Archive::Zip
-RUN cpanm -L ../local-lib/  --force
-RUN cpanm -L ../local-lib/ AnyEvent --force
-RUN cpanm -L ../local-lib/ DateTime::Format::Flexible DateTime::Format::Pg
-RUN cpanm -L ../local-lib/ Lingua::EN::Inflect
-RUN cpanm -L ../local-lib/ Test::Class Test::JSON Test::MockObject Test::WWW::Selenium
-
-RUN cpanm -L ../local-lib/ Sort::Versions Sort::Maker
-RUN cpanm -L ../local-lib/ Term::ReadKey --force
-RUN cpanm -L ../local-lib/ Term::Size::Any Proc::ProcessTable
-RUN cpanm -L ../local-lib/ Text::CSV
-RUN cpanm -L ../local-lib/ Set::Product
-RUN cpanm -L ../local-lib/ Server::Starter
-RUN cpanm -L ../local-lib/ Net::Server::SS::PreFork --force
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Math::Round Math::Round::Var Statistics::Descriptive Algorithm::Combinatorics Statistics::R
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force R::YapRI::Base
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Test::Aggregate::Nested --force
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR IPC::Run3 SOAP::Transport::HTTP 
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Spreadsheet::WriteExcel Spreadsheet::ParseExcel Spreadsheet::Read PDF::Create  PDF::API2 CAM::PDF Archive::Zip
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR  --force
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR AnyEvent --force
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR DateTime::Format::Flexible DateTime::Format::Pg
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Lingua::EN::Inflect
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Test::Class Test::JSON Test::MockObject Test::WWW::Selenium
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Sort::Versions Sort::Maker
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Term::ReadKey --force
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Term::Size::Any Proc::ProcessTable
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Text::CSV
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Set::Product
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Server::Starter
+RUN cpanm -L ../local-lib --mirror $CPANMIRROR Net::Server::SS::PreFork --force
 
 # run the Build.PL to install the R dependencies...
 #
@@ -212,10 +209,12 @@ RUN perl /home/production/cxgn/sgn/Build.PL
 RUN perl /home/production/cxgn/sgn/Build manifest
 RUN perl /home/production/cxgn/sgn/Build installdeps
 
+RUN apt-get install apt-transport-https -y
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
-
-
+RUN sed s/localhost/$HOSTNAME/g /etc/slurm-llnl/slurm.conf
+RUN apt-get install screen -y
+COPY entrypoint.sh /entrypoint.sh
 
 # start services when running container...
-#ENTRYPOINT bash /entrypoint.sh
-#ENTRYPOINT /home/production/cxgn/sgn/bin/sgn_server.pl -r --fork -p 8080
+ENTRYPOINT bash /entrypoint.sh
+
