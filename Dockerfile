@@ -98,7 +98,7 @@ RUN bash -c "git clone --quiet https://github.com/solgenomics/musabase.git /home
 RUN bash -c "git clone --quiet https://github.com/solgenomics/potatobase.git /home/production/cxgn/potatobase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/cea.git /home/production/cxgn/cea"
 
-COPY sgn_local.conf /home/production/cxgn/sgn
+COPY sgn_local.conf.template /home/production/cxgn/sgn
 COPY starmachine.conf /etc/starmachine/
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 COPY entrypoint.sh /entrypoint.sh
