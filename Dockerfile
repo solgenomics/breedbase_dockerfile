@@ -11,13 +11,15 @@ EXPOSE 8080
 
 # create directory layout
 #
-RUN mkdir -p /export/prod/public
-RUN mkdir /export/prod/public/sgn_static_content
-RUN mkdir /export/prod/tmp
-RUN mkdir /export/prod/tmp/solgs
-RUN mkdir -p /data/prod/archive
-RUN mkdir -p /export/prod/public/images/image_files
-RUN mkdir -p /data/shared/tmp
+RUN mkdir -p /home/production/public
+RUN mkdir /home/production/public/sgn_static_content
+RUN mkdir /home/production/tmp
+RUN mkdir /home/production/tmp/solgs
+RUN mkdir -p /home/production/archive
+RUN mkdir -p /home/production/public/images/image_files
+RUN mkdir -p /home/production/tmp
+RUN mkdir -p /home/production/archive/breedbase
+RUN mkdir -p /home/production/blast/databases/current
 RUN mkdir /etc/starmachine
 RUN mkdir /var/log/sgn
 RUN mkdir -p  /home/production/cxgn
@@ -40,7 +42,7 @@ RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B1
 RUN apt-get update -y
 
 RUN apt-get install -y libterm-readline-zoid-perl
-RUN apt-get install nginx starman emacs gedit vim less sudo htop git dkms linux-headers-$(uname -r) perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+  -y
+RUN apt-get install nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-9-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+  -y
 RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
 
 RUN apt-get install libmunge-dev libmunge2 munge -y
