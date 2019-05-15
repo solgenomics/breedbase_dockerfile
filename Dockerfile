@@ -213,7 +213,7 @@ RUN perl /home/production/cxgn/sgn/Build installdeps
 
 RUN apt-get install apt-transport-https -y
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
-RUN sed s/localhost/$HOSTNAME/g /etc/slurm-llnl/slurm.conf
+RUN sed -i s/localhost/$HOSTNAME/g /etc/slurm-llnl/slurm.conf
 RUN apt-get install screen -y
 COPY entrypoint.sh /entrypoint.sh
 
