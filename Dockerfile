@@ -132,71 +132,75 @@ RUN apt-get install nodejs -y
 
 WORKDIR /home/production/cxgn/sgn
 
-ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib
+# ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib
 
-# load prerequisites for building packages using Build.PL
-#
-RUN cpanm -L /home/production/cxgn/local-lib --mirror $CPANMIRROR Parse::Deb::Control Module::Build Class::MethodMaker Data::UUID HTML::Lint Module::Build::Tiny Test::JSON  Test::Most  Test::WWW::Mechanize  Test::WWW::Mechanize::Catalyst  Test::WWW::Selenium DBIx::Connector local::lib ExtUtils::PkgConfig
+# # load prerequisites for building packages using Build.PL
+# #
+# RUN cpanm -L /home/production/cxgn/local-lib --mirror $CPANMIRROR Parse::Deb::Control Module::Build Class::MethodMaker Data::UUID HTML::Lint Module::Build::Tiny Test::JSON  Test::Most  Test::WWW::Mechanize  Test::WWW::Mechanize::Catalyst  Test::WWW::Selenium DBIx::Connector local::lib ExtUtils::PkgConfig
 
-# data structure basics
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR IO::Event --force
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Hash::Merge  Tie::UrlEncoder Data::BitMask enum  Class::MethodMaker  Modern::Perl   Config::JFDI Config::INI::Reader Array::Utils JSON::Any JSON::XS URI::FromHash URI::Encode JSAN::ServerSide  String::Random String::CRC String::Approx Tie::Function Digest::Crc32  Math::Base36   Array::Compare Number::Bytes::Human List::Compare List::AllUtils Data::UUID  XML::Twig XML::Generator XML::Feed
+# # data structure basics
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR IO::Event --force
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Hash::Merge  Tie::UrlEncoder Data::BitMask enum  Class::MethodMaker  Modern::Perl   Config::JFDI Config::INI::Reader Array::Utils JSON::Any JSON::XS URI::FromHash URI::Encode JSAN::ServerSide  String::Random String::CRC String::Approx Tie::Function Digest::Crc32  Math::Base36   Array::Compare Number::Bytes::Human List::Compare List::AllUtils Data::UUID  XML::Twig XML::Generator XML::Feed
 
-# file system
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force File::Find::Rule
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Cache::File File::Flock File::NFSLock
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Lucy::Simple
+# # file system
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force File::Find::Rule
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Cache::File File::Flock File::NFSLock
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Lucy::Simple
 
-# Moose etc.
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Moose MooseX::FollowPBP MooseX::Object::Pluggable MooseX::Types::URI MooseX::Runnable@0.09 MooseX::Declare MooseX::Singleton
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force MooseX::Daemonize
+# # Moose etc.
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Moose MooseX::FollowPBP MooseX::Object::Pluggable MooseX::Types::URI MooseX::Runnable@0.09 MooseX::Declare MooseX::Singleton
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force MooseX::Daemonize
 
-# graphics libraries (older)
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR GD GD::Graph::lines GD::Graph::Map GD::Barcode::QRcode Graph Chart::Clicker SVG Cairo Imager::QRCode Barcode::Code128
+# # graphics libraries (older)
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR GD GD::Graph::lines GD::Graph::Map GD::Barcode::QRcode Graph Chart::Clicker SVG Cairo Imager::QRCode Barcode::Code128
 
-# bioperl
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Bio::Restriction::Analysis Bio::PrimarySeq Bio::BLAST::Database  Bio::GFF3::LowLevel Bio::GMOD::GenericGenePage Bio::SeqFeature::Annotated Catalyst::ScriptRunner Bio::GMOD::Blast::Graph
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force Starman Bio::Graphics::FeatureFile 
+# # bioperl
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Bio::Restriction::Analysis Bio::PrimarySeq Bio::BLAST::Database  Bio::GFF3::LowLevel Bio::GMOD::GenericGenePage Bio::SeqFeature::Annotated Catalyst::ScriptRunner Bio::GMOD::Blast::Graph
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force Starman Bio::Graphics::FeatureFile 
 
-# generic web
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR WWW::Mechanize::TreeBuilder HTML::Mason::Interp HTML::TreeBuilder::XPath  LWP::UserAgent
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR/ URI::SmartURI HTML::Lint Mail::Sendmail --force
+# # generic web
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR WWW::Mechanize::TreeBuilder HTML::Mason::Interp HTML::TreeBuilder::XPath  LWP::UserAgent
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR/ URI::SmartURI HTML::Lint Mail::Sendmail --force
 
-# database
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR DBI DBIx::Class::Schema Bio::Chado::Schema DBIx::Class::Schema::Loader DBD::Pg
+# # database
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR DBI DBIx::Class::Schema Bio::Chado::Schema DBIx::Class::Schema::Loader DBD::Pg
 
-# Catalyst
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Catalyst Catalyst::Helper Catalyst::Restarter Captcha::reCAPTCHA  Catalyst::Plugin::SmartURI Catalyst::Plugin::Authorization::Roles Catalyst::View::Email Catalyst::View::HTML::Mason  Catalyst::View::Bio::SeqIO Catalyst::View::JavaScript::Minifier::XS@2.101001  Catalyst::View::Download::CSV Class::DBI Catalyst::DispatchType::Regex
+# # Catalyst
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Catalyst Catalyst::Helper Catalyst::Restarter Captcha::reCAPTCHA  Catalyst::Plugin::SmartURI Catalyst::Plugin::Authorization::Roles Catalyst::View::Email Catalyst::View::HTML::Mason  Catalyst::View::Bio::SeqIO Catalyst::View::JavaScript::Minifier::XS@2.101001  Catalyst::View::Download::CSV Class::DBI Catalyst::DispatchType::Regex
 
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR CatalystX::GlobalContext Catalyst::Plugin::Assets --force
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR CatalystX::GlobalContext Catalyst::Plugin::Assets --force
 
-# math
-#
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Math::Round Math::Round::Var Statistics::Descriptive Algorithm::Combinatorics Statistics::R
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force R::YapRI::Base
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Test::Aggregate::Nested --force
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR IPC::Run3 SOAP::Transport::HTTP 
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Spreadsheet::WriteExcel Spreadsheet::ParseExcel Spreadsheet::Read PDF::Create  PDF::API2 CAM::PDF Archive::Zip
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR  --force
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR AnyEvent --force
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR DateTime::Format::Flexible DateTime::Format::Pg
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Lingua::EN::Inflect
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Test::Class Test::JSON Test::MockObject Test::WWW::Selenium
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Sort::Versions Sort::Maker
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Term::ReadKey --force
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Term::Size::Any Proc::ProcessTable
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Text::CSV
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Set::Product
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Server::Starter
-RUN cpanm -L ../local-lib --mirror $CPANMIRROR Net::Server::SS::PreFork --force
+# # math
+# #
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Math::Round Math::Round::Var Statistics::Descriptive Algorithm::Combinatorics Statistics::R
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR --force R::YapRI::Base
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Test::Aggregate::Nested --force
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR IPC::Run3 SOAP::Transport::HTTP 
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Spreadsheet::WriteExcel Spreadsheet::ParseExcel Spreadsheet::Read PDF::Create  PDF::API2 CAM::PDF Archive::Zip
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR  --force
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR AnyEvent --force
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR DateTime::Format::Flexible DateTime::Format::Pg
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Lingua::EN::Inflect
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Test::Class Test::JSON Test::MockObject Test::WWW::Selenium
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Sort::Versions Sort::Maker
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Term::ReadKey --force
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Term::Size::Any Proc::ProcessTable
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Text::CSV
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Set::Product
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Server::Starter
+# RUN cpanm -L ../local-lib --mirror $CPANMIRROR Net::Server::SS::PreFork --force
+
+RUN bash -c "git clone --quiet https://github.com/solgenomics/perl-local-lib /home/production/cxgn/local-lib"
+
+RUN bash -c "git clone --quiet https://github.com/solgenomics/R_libs /home/production/cxgn/R_libs"
 
 # run the Build.PL to install the R dependencies...
 #
@@ -207,9 +211,9 @@ ENV R_LIBS_USER=/home/production/cxgn/R_libs
 RUN rm /home/production/cxgn/sgn/static/static
 RUN rm /home/production/cxgn/sgn/static/s
 RUN rm /home/production/cxgn/sgn/documents
-RUN perl /home/production/cxgn/sgn/Build.PL
-RUN perl /home/production/cxgn/sgn/Build manifest
-RUN perl /home/production/cxgn/sgn/Build installdeps
+#RUN perl /home/production/cxgn/sgn/Build.PL
+#RUN perl /home/production/cxgn/sgn/Build manifest
+#RUN perl /home/production/cxgn/sgn/Build installdeps
 
 RUN apt-get install apt-transport-https -y
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
