@@ -97,8 +97,9 @@ RUN bash -c "git clone --quiet https://github.com/solgenomics/cassbase.git /home
 RUN bash -c "git clone --quiet https://github.com/solgenomics/musabase.git /home/production/cxgn/musabase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/potatobase.git /home/production/cxgn/potatobase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/cea.git /home/production/cxgn/cea"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/potatobase.git /home/production/cxgn/cippotatobase"
 
-COPY sgn_local.conf.template /home/production/cxgn/sgn
+COPY sgn_local.conf.template /home/production/cxgn/sgn/
 COPY starmachine.conf /etc/starmachine/
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 COPY entrypoint.sh /entrypoint.sh
@@ -132,7 +133,7 @@ RUN apt-get install nodejs -y
 
 WORKDIR /home/production/cxgn/sgn
 
-# ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib
+ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib
 
 # # load prerequisites for building packages using Build.PL
 # #
@@ -217,10 +218,10 @@ RUN rm /home/production/cxgn/sgn/documents
 
 RUN apt-get install apt-transport-https -y
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
-RUN sed -i s/localhost/$HOSTNAME/g /etc/slurm-llnl/slurm.conf
+
 RUN apt-get install screen -y
 COPY entrypoint.sh /entrypoint.sh
-
+RUN hostname
 # start services when running container...
-ENTRYPOINT bash /entrypoint.sh
+ENTRYPOINT /bin/bash /entrypoint.sh
 
