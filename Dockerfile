@@ -97,7 +97,7 @@ RUN bash -c "git clone --quiet https://github.com/solgenomics/cassbase.git /home
 RUN bash -c "git clone --quiet https://github.com/solgenomics/musabase.git /home/production/cxgn/musabase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/potatobase.git /home/production/cxgn/potatobase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/cea.git /home/production/cxgn/cea"
-RUN bash -c "git clone --quiet https://github.com/solgenomics/potatobase.git /home/production/cxgn/cippotatobase"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/cippotatobase.git /home/production/cxgn/cippotatobase"
 
 COPY sgn_local.conf.template /home/production/cxgn/sgn/
 COPY starmachine.conf /etc/starmachine/
