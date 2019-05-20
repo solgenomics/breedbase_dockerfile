@@ -15,7 +15,7 @@ docker build -t breedbase_image breedbase_dockerfile
 ```
 ### Create the docker config
 
-You need to write an sgn_local.conf file specific to your service. A template is provided in the breedbase_dockerfile repo (you have to fill in the db server host, dbname, and username and password). Then:
+You need to write an ```sgn_local.conf``` file specific to your service. A template is provided in the breedbase_dockerfile repo (you have to fill in the db server host, dbname, and username and password). Then:
 ```bash
 cat sgn_local.conf | docker config create -
 ```
