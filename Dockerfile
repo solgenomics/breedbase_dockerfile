@@ -98,6 +98,16 @@ RUN bash -c "git clone --quiet https://github.com/solgenomics/musabase.git /home
 RUN bash -c "git clone --quiet https://github.com/solgenomics/potatobase.git /home/production/cxgn/potatobase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/cea.git /home/production/cxgn/cea"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/cippotatobase.git /home/production/cxgn/cippotatobase"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/fernbase.git /home/production/cxgn/fernbase"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/solgenomics.git /home/production/cxgn/solgenomics"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/panzeabase.git /home/production/cxgn/panzeabase"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/varitome.git /home/production/cxgn/varitome"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/milkweed.git /home/production/cxgn/milkweed"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/erysimum.git /home/production/cxgn/erysimum"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/vitisbase.git /home/production/cxgn/vitisbase"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/panandbase.git /home/production/cxgn/panandbase"
+RUN bash -c "git clone --quiet https://github.com/solgenomics/triticum.git /home/production/cxgn/triticum"
+
 
 COPY sgn_local.conf.template /home/production/cxgn/sgn/
 COPY starmachine.conf /etc/starmachine/
