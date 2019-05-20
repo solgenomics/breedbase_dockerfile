@@ -26,17 +26,17 @@ docker service create --name "breedbase_service" --mount src=/export/prod/archiv
 ```
 ### Debugging
 
-The service should be visible on that host now. To debug, log into the container. You can find the container ID using
+The service should be visible on that host now. To debug, log into the container. You can find the container id using
 ```
 docker ps
 ```
 then
 ```
-docker exec -it <container> bash
+docker exec -it <container_id> bash
 ```
 You can use ```lynx localhost:8080``` to see if the server is running correclty within the docker, and look at the error log usign ```tail -f /var/log/sgn/error.log``` or ```less /var/log/sgn/error.log```.
 
-You can of course also find the IP address of the running container either in the container using ```ip address``` or from the host using ```docker inspect <container>```.
+You can of course also find the IP address of the running container either in the container using ```ip address``` or from the host using ```docker inspect <container_id>```.
 
 ### Set up forwarding in host using nginx
 
