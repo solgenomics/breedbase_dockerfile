@@ -221,7 +221,8 @@ RUN bash /home/production/cxgn/sgn/js/install_node.sh
 
 RUN apt-get install screen -y
 COPY entrypoint.sh /entrypoint.sh
-RUN hostname
+RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/sgn
+
 # start services when running container...
 ENTRYPOINT /bin/bash /entrypoint.sh
 
