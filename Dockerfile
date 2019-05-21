@@ -103,7 +103,7 @@ RUN bash -c "git clone --quiet https://github.com/solgenomics/solgenomics.git /h
 RUN bash -c "git clone --quiet https://github.com/solgenomics/panzeabase.git /home/production/cxgn/panzeabase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/varitome.git /home/production/cxgn/varitome"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/milkweed.git /home/production/cxgn/milkweed"
-RUN bash -c "git clone --quiet https://github.com/solgenomics/erysimum.git /home/production/cxgn/erysimum"
+#RUN bash -c "git clone --quiet https://github.com/solgenomics/erysimum.git /home/production/cxgn/erysimum"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/vitisbase.git /home/production/cxgn/vitisbase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/panandbase.git /home/production/cxgn/panandbase"
 RUN bash -c "git clone --quiet https://github.com/solgenomics/triticum.git /home/production/cxgn/triticum"
