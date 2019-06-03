@@ -17,7 +17,11 @@ docker build -t breedbase_image breedbase_dockerfile
 
 You need to write an ```sgn_local.conf``` file specific to your service. A template is provided in the breedbase_dockerfile repo (you have to fill in the db server host, dbname, and username and password). Then:
 ```bash
-cat sgn_local.conf | docker config create -
+cat sgn_local.conf | docker config create breedbase_sgn_local.conf -
+```
+###Start swarm service
+```bash
+docker swarm init
 ```
 ### Run the service using swarm
 To run the docker on the swarm, you have to provide the config using ```--config```, as well as any mounts that are required for presistent data. Currently, breedbase just mounts directories on the docker host (which can be nfs mounts), but later this could be changed to docker volumes. Multiple mountpoints can be provided with multiple ```--mount``` options, as follows:
