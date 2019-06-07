@@ -1,3 +1,4 @@
+#!/bin/bash
 
 # main code
 git clone --quiet https://github.com/solgenomics/cxgn-corelibs.git /home/production/cxgn/cxgn-corelibs
