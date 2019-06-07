@@ -63,49 +63,47 @@ RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticate
 #
 RUN apt-get install libudunits2-dev libgdal-dev -y
 
-
-
 # copy code repos. Run the prepare.pl script to clone them
 # before the build
 #
-COPY cxgn-corelibs /home/production/cxgn/cxgn-corelibs
-COPY sgn /home/production/cxgn/sgn
-COPY Phenome /home/production/cxgn/Phenome
-COPY rPackages /home/production/cxgn/rPackages
-COPY biosource /home/production/cxgn/biosource
-COPY Cview /home/production/cxgn/Cview
-COPY ITAG /home/production/cxgn/ITAG
-COPY tomato_genome /home/production/cxgn/tomato_genome
-COPY Chado /home/production/cxgn/Chado
-COPY sgn-devtools /home/production/cxgn/sgn-devtools
+COPY repos/cxgn-corelibs /home/production/cxgn/cxgn-corelibs
+COPY repos/sgn /home/production/cxgn/sgn
+COPY repos/Phenome /home/production/cxgn/Phenome
+COPY repos/rPackages /home/production/cxgn/rPackages
+COPY repos/biosource /home/production/cxgn/biosource
+COPY repos/Cview /home/production/cxgn/Cview
+COPY repos/ITAG /home/production/cxgn/ITAG
+COPY repos/tomato_genome /home/production/cxgn/tomato_genome
+COPY repos/Chado /home/production/cxgn/Chado
+COPY repos/sgn-devtools /home/production/cxgn/sgn-devtools
 #COPY solGS /home/production/cxgn/solGS
-COPY starmachine /home/production/cxgn/starmachine
+COPY repos/starmachine /home/production/cxgn/starmachine
 
 # Mason website skins
 #
-COPY cassava /home/production/cxgn/cassava
-COPY yambase /home/production/cxgn/yambase
-COPY sweetpotatobase /home/production/cxgn/sweetpotatobase
-COPY ricebase /home/production/cxgn/ricebase
-COPY citrusgreening /home/production/cxgn/citrusgreening
-COPY coconut /home/production/cxgn/coconut
-COPY cassbase /home/production/cxgn/cassbase
-COPY musabase /home/production/cxgn/musabase
-COPY potatobase /home/production/cxgn/potatobase
-COPY cea /home/production/cxgn/cea
-COPY cippotatobase /home/production/cxgn/cippotatobase
-COPY fernbase /home/production/cxgn/fernbase
-COPY solgenomics /home/production/cxgn/solgenomics
-COPY panzeabase /home/production/cxgn/panzeabase
-COPY varitome /home/production/cxgn/varitome
-COPY milkweed /home/production/cxgn/milkweed
-COPY erysimum /home/production/cxgn/erysimum
-COPY vitisbase /home/production/cxgn/vitisbase
-COPY panandbase /home/production/cxgn/panandbase
-COPY triticum /home/production/cxgn/triticum
+COPY repos/cassava /home/production/cxgn/cassava
+COPY repos/yambase /home/production/cxgn/yambase
+COPY repos/sweetpotatobase /home/production/cxgn/sweetpotatobase
+COPY repos/ricebase /home/production/cxgn/ricebase
+COPY repos/citrusgreening /home/production/cxgn/citrusgreening
+COPY repos/coconut /home/production/cxgn/coconut
+COPY repos/cassbase /home/production/cxgn/cassbase
+COPY repos/musabase /home/production/cxgn/musabase
+COPY repos/potatobase /home/production/cxgn/potatobase
+COPY repos/cea /home/production/cxgn/cea
+COPY repos/cippotatobase /home/production/cxgn/cippotatobase
+COPY repos/fernbase /home/production/cxgn/fernbase
+COPY repos/solgenomics /home/production/cxgn/solgenomics
+COPY repos/panzeabase /home/production/cxgn/panzeabase
+COPY repos/varitome /home/production/cxgn/varitome
+COPY repos/milkweed /home/production/cxgn/milkweed
+COPY repos/erysimum /home/production/cxgn/erysimum
+COPY repos/vitisbase /home/production/cxgn/vitisbase
+COPY repos/panandbase /home/production/cxgn/panandbase
+COPY repos/triticum /home/production/cxgn/triticum
 
-COPY perl-local-lib /home/production/cxgn/local-lib
-COPY R_libs /home/production/cxgn/R_libs"
+COPY repos/perl-local-lib /home/production/cxgn/local-lib
+COPY repos/R_libs /home/production/cxgn/R_libs
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
