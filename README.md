@@ -9,6 +9,15 @@ apt-get install docker-ce
 ```bash
 git clone https://github.com/solgenomics/breedbase_dockerfile
 ```
+
+### Run the prepare.sh script from within the breedbase_dockerfile dir
+```
+cd breedbase_dockerfile
+./prepare.sh
+```
+This will clone all the git repos that are needed for the build into a directory called repos/. 
+You can then checkout particular branches or tags in the repo before the build.
+
 ### Build the image
 ```bash
 docker build -t breedbase_image breedbase_dockerfile
