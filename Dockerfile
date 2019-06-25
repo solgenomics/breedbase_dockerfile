@@ -102,7 +102,7 @@ COPY repos/vitisbase /home/production/cxgn/vitisbase
 COPY repos/panandbase /home/production/cxgn/panandbase
 COPY repos/triticum /home/production/cxgn/triticum
 
-COPY repos/perl-local-lib /home/production/cxgn/local-lib
+COPY repos/local-lib /home/production/cxgn/local-lib
 COPY repos/R_libs /home/production/cxgn/R_libs
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
