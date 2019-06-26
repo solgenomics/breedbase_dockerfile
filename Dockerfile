@@ -58,6 +58,7 @@ RUN ln -s /var/lib/slurm-llnl /var/lib/slurm
 RUN apt-get install graphviz lsof imagemagick -y
 #RUN apt-get install gnome-core gnome-terminal -y
 RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
+RUN apt-get install blast2 -y
 
 # required for R-package spdep, and other dependencies of agricolae
 #
