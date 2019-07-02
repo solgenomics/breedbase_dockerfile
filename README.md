@@ -50,3 +50,10 @@ You can of course also find the IP address of the running container either in th
 ### Set up forwarding in host using nginx
 
 Finally, set up nginx or apache2 forwarding to the container. It is recommended to use a secure http connection (https).
+
+### Docker Hub
+
+You should be able to download the latest images from docker hub, at hub.docker.com, breedbase/breedbase:latest, using
+```
+docker pull breedbase/breedbase:latest
+```
