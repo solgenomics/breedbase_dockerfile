@@ -55,7 +55,7 @@ RUN mkdir /var/spool/slurmstate
 RUN chown slurm:slurm /var/spool/slurmstate/
 RUN /usr/sbin/create-munge-key
 RUN ln -s /var/lib/slurm-llnl /var/lib/slurm
-RUN apt-get install graphviz lsof imagemagick -y
+RUN apt-get install graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 -y
 #RUN apt-get install gnome-core gnome-terminal -y
 RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
 RUN apt-get install blast2 -y
@@ -77,8 +77,13 @@ COPY repos/ITAG /home/production/cxgn/ITAG
 COPY repos/tomato_genome /home/production/cxgn/tomato_genome
 COPY repos/Chado /home/production/cxgn/Chado
 COPY repos/sgn-devtools /home/production/cxgn/sgn-devtools
-#COPY solGS /home/production/cxgn/solGS
 COPY repos/starmachine /home/production/cxgn/starmachine
+
+# copy some tools that don't have a Debian package
+#
+COPY tools/gcta/gcta64  /usr/bin/
+COPY tools/quicktree /usr/bin/
+COPY tools/sreformat /usr/bin/
 
 # Mason website skins
 #
