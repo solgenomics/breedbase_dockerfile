@@ -27,7 +27,7 @@ WORKDIR /home/production/cxgn
 
 # add cran backports repo and required deps
 #
-RUN echo "deb http://lib.stat.cmu.edu/R/CRAN/bin/linux/debian stretch-cran35/" >> /etc/apt/sources.list
+#RUN echo "deb http://lib.stat.cmu.edu/R/CRAN/bin/linux/debian stretch-cran35/" >> /etc/apt/sources.list
 
 # install system dependencies
 #
@@ -38,9 +38,9 @@ RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl -y
 
 # key for cran-backports (not working though)
 #
-RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF' 2> /key.out"
+#RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF' 2> /key.out"
 
-RUN apt-get update -y
+RUN apt-get update --fix-missing -y
 
 RUN apt-get install -y libterm-readline-zoid-perl
 RUN apt-get install nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-9-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+  -y
@@ -59,6 +59,9 @@ RUN apt-get install graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 -y
 #RUN apt-get install gnome-core gnome-terminal -y
 RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
 RUN apt-get install blast2 -y
+
+# required for sending mails from the website
+RUN apt-get install postfix mailutils -y
 
 # required for R-package spdep, and other dependencies of agricolae
 #
