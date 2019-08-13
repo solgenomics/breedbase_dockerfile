@@ -81,6 +81,9 @@ COPY repos/tomato_genome /home/production/cxgn/tomato_genome
 COPY repos/Chado /home/production/cxgn/Chado
 COPY repos/sgn-devtools /home/production/cxgn/sgn-devtools
 COPY repos/starmachine /home/production/cxgn/starmachine
+COPY repos/Chado /home/production/cxgn/Chado
+COPY repos/chado_tools /home/production/cxgn/chado_tools
+COPY repos/Bio-Chado-Schema /home/production/cxgn/Bio-Chado-Schema
 
 # copy some tools that don't have a Debian package
 #
@@ -150,7 +153,7 @@ RUN apt-get install nodejs -y
 
 WORKDIR /home/production/cxgn/sgn
 
-ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib
+ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib
 
 
 
