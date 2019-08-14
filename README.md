@@ -22,19 +22,27 @@ You can then checkout particular branches or tags in the repo before the build.
 ```bash
 docker build -t breedbase_image breedbase_dockerfile
 ```
-### Create the docker config
 
+### Start swarm service
+```bash
+docker swarm init
+```
+
+### Create the docker config
 You need to write an ```sgn_local.conf``` file specific to your service. A template is provided in the breedbase_dockerfile repo (you have to fill in the db server host, dbname, and username and password). Then:
 ```bash
 cat sgn_local.conf | docker config create "breedbase_sgn_local.conf" -
 ```
+
 ### Run the service using swarm
 To run the docker on the swarm, you have to provide the config using ```--config```, as well as any mounts that are required for presistent data. Currently, breedbase just mounts directories on the docker host (which can be nfs mounts), but later this could be changed to docker volumes. Multiple mountpoints can be provided with multiple ```--mount``` options, as follows:
 ```bash
 docker service create --name "breedbase_service" --mount src=/export/prod/archive,target=/home/production/archive,type=bind --mount src=/export/prod/public_breedbase,target=/home/production/public,type=bind --config source="breedbase_sgn_local.conf",target="/home/production/cxgn/sgn/sgn_local.conf"  breedbase_image
 ```
-### Debugging
 
+Depending on where your database is running, you may need to use the --network option. For a database server running on the host machine (localhost in your sgn_local.conf), use --network="host".
+
+### Debugging
 The service should be visible on that host now. To debug, log into the container. You can find the container id using
 ```
 docker ps
@@ -48,11 +56,9 @@ You can use ```lynx localhost:8080``` to see if the server is running correclty 
 You can of course also find the IP address of the running container either in the container using ```ip address``` or from the host using ```docker inspect <container_id>```.
 
 ### Set up forwarding in host using nginx
-
 Finally, set up nginx or apache2 forwarding to the container. It is recommended to use a secure http connection (https).
 
 ### Docker Hub
-
 You should be able to download the latest images from docker hub, at hub.docker.com, breedbase/breedbase:latest, using
 ```
 docker pull breedbase/breedbase:latest
