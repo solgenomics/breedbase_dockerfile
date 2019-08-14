@@ -22,7 +22,7 @@ preferred_species Manihot esculenta
 	
 production_server 0
 image_dir /images/image_files_test
-image_path /export/prod/public_breedbase/images/image_files_test
+image_path /home/production/public/images/image_files_test
 cluster_shared_tempdir /home/production/tmp
 tempfiles_base /home/production/tmp/breedbase-site
 static_datasets_path /home/production/public
@@ -64,35 +64,15 @@ trait_variable_onto_root_namespaces CO_334 (Cassava Ontology), COMP (Composed Va
 	
 r_qtl_temp_path /export/prod/tmp/solqtl___USERNAME__
 	
-#intron_finder_database    /export/prod/public/intron_finder_database 
-#trace_path                /export/prod/public/chromatograms    
 image_path                /home/production/public/images
-submit_dir                /export/shared/submit-uploads
+submit_dir                /home/production/public/submit-uploads
 	
 blast_path                ""
 blast_db_path             /home/production/blast/databases/current
 	
-# Insitu file locations
-#insitu_fullsize_dir       /export/prod/public/images/insitu/processed
-#insitu_fullsize_url       /export/images/insitu/processed
-#insitu_display_dir        /export/prod/public/images/insitu/display
-#insitu_display_url        /export/images/insitu/display
-#insitu_input_dir          /export/prod/public/images/insitu/incoming
+# path to our production_ftp site
 #
-#path to our production_ftp site
 ftpsite_root              /home/production/public
-	
-	
-<feature SGN::Feature::ITAG>
-    enabled         1
-    pipeline_base   /export/shared/tomato_genome/itagpipeline/itag
-    releases_base   /export/prod/private/genomes/solanum_lycopersicum/annotation
-</feature>
-	
-	
-# global captcha keys for testing (replace this with cassava-specific keys)
-captcha_public_key 6LdC_9YSAAAAANoWaNEFqCevO2nB33a-8iFtxeVr
-captcha_private_key 6LdC_9YSAAAAAA2gufFSwfFSg0Q2Loji6TYAvjsa
 	
 <View::Mason>
 #       add_comp_root /home/production/cxgn/cassava/mason
