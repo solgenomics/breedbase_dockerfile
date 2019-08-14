@@ -12,6 +12,8 @@ git clone https://github.com/solgenomics/Cview.git repos/Cview
 git clone https://github.com/solgenomics/ITAG.git repos/ITAG
 git clone https://github.com/solgenomics/tomato_genome.git repos/tomato_genome
 git clone https://github.com/GMOD/Chado.git repos/Chado
+git clone https://github.com/GMOD/chado_tools.git repos/chado_tools
+git clone https://github.com/solgenomics/bio-chado-schema.git repos/Bio-Chado-Schema
 git clone https://github.com/solgenomics/sgn-devtools.git repos/sgn-devtools
 git clone https://github.com/solgenomics/solGS.git repos/solGS
 git clone https://github.com/solgenomics/starmachine.git repos/starmachine
