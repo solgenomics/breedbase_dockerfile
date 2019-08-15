@@ -5,6 +5,18 @@ The Dockerfiles for breeDBase
 ```bash
 apt-get install docker-ce
 ```
+
+##Installing through docker hub
+To install through docker hub:
+```
+docker pull breedbase/breedbase
+```
+This will pull in the latest release of the system.
+
+## Installing from the repo
+
+Alternatively, the docker image can be built using the github breedbase_dockerfile repo, as explained below.
+
 ### Clone the repo
 ```bash
 git clone https://github.com/solgenomics/breedbase_dockerfile
