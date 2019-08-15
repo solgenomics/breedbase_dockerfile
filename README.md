@@ -11,11 +11,11 @@ To install through docker hub:
 ```
 docker pull breedbase/breedbase
 ```
-This will pull in the latest release of the system.
+This will pull in the latest release of the system. This is the preferred way for production systems.
 
 ## Installing from the repo
 
-Alternatively, the docker image can be built using the github breedbase_dockerfile repo, as explained below.
+Alternatively, the docker image can be built using the github breedbase_dockerfile repo, as explained below. This is recommended if you would like to develop based on the docker.
 
 ### Clone the repo
 ```bash
