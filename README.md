@@ -1,12 +1,12 @@
 # breedbase_dockerfile
 The Dockerfiles for breeDBase
 
-### Install docker (on Debian/Ubuntu)
+## Install docker (on Debian/Ubuntu)
 ```bash
 apt-get install docker-ce
 ```
 
-##Installing through docker hub
+## Installing through docker hub
 To install through docker hub:
 ```
 docker pull breedbase/breedbase
