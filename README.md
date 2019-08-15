@@ -35,7 +35,10 @@ You can then checkout particular branches or tags in the repo before the build.
 docker build -t breedbase_image breedbase_dockerfile
 ```
 
-### Start swarm service
+## Running the docker
+
+Once the docker image has been created either through docker hub or by building the image, the docker can be started. First, The docker swarm needs to be initialized on the machine. This needs to be done only once.
+
 ```bash
 docker swarm init
 ```
@@ -54,7 +57,7 @@ docker service create --name "breedbase_service" --mount src=/export/prod/archiv
 
 Depending on where your database is running, you may need to use the --network option. For a database server running on the host machine (localhost in your sgn_local.conf), use --network="host".
 
-### Debugging
+## Debugging
 The service should be visible on that host now. To debug, log into the container. You can find the container id using
 ```
 docker ps
