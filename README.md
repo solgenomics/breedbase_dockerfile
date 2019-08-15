@@ -57,6 +57,14 @@ docker service create --name "breedbase_service" --mount src=/export/prod/archiv
 
 Depending on where your database is running, you may need to use the --network option. For a database server running on the host machine (localhost in your sgn_local.conf), use --network="host".
 
+### Developing using docker
+
+The docker only contains static copies of the git repos. To develop using docker, you can mount the /home/production/cxgn/breedbase_dockerfile/repos (or your equivalent) in the docker file system at /home/production/cxgn, using the following option: 
+``` --mount src=/home/production/cxgn/breedbase_dockerfile/repos,target=/home/production/cxgn```
+
+This allows docker to see your actual git checkouts which you can modify, and all the authentication info for github etc. is safely in your host computer.
+
+
 ## Debugging
 The service should be visible on that host now. To debug, log into the container. You can find the container id using
 ```
