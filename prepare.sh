@@ -17,6 +17,9 @@ git clone https://github.com/solgenomics/bio-chado-schema.git repos/Bio-Chado-Sc
 git clone https://github.com/solgenomics/sgn-devtools.git repos/sgn-devtools
 git clone https://github.com/solgenomics/solGS.git repos/solGS
 git clone https://github.com/solgenomics/starmachine.git repos/starmachine
+git clone https://github.com/GMOD/Chado repos/Chado
+git clone https://github.com/GMOD/chado_tools repos/chado_tools
+git clone https://github.com/GMOD/Bio-Chado-Schema repos/Bio-Chado-Schema
 
 # local libs
 git clone https://github.com/solgenomics/perl-local-lib repos/local-lib
