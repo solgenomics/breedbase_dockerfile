@@ -84,6 +84,8 @@ COPY repos/starmachine /home/production/cxgn/starmachine
 COPY repos/Chado /home/production/cxgn/Chado
 COPY repos/chado_tools /home/production/cxgn/chado_tools
 COPY repos/Bio-Chado-Schema /home/production/cxgn/Bio-Chado-Schema
+COPY repos/opencv /home/production/cxgn/opencv
+COPY repos/opencv_contrib /home/production/cxgn/opencv_contrib
 
 # copy some tools that don't have a Debian package
 #
@@ -122,7 +124,6 @@ COPY slurm.conf /etc/slurm-llnl/slurm.conf
 COPY sgn_local.conf.template /home/production/cxgn/sgn/
 COPY starmachine.conf /etc/starmachine/
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
-COPY entrypoint.sh /entrypoint.sh
 
 # XML::Simple dependency
 #
@@ -173,18 +174,16 @@ RUN apt-get install -y libgdal-dev
 RUN apt-get install -y exiftool libzbar-dev
 
 RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar \
-    && git clone https://github.com/opencv/opencv \
-    && git clone https://github.com/opencv/opencv_contrib \
-    && cd /opencv_contrib \
+    && cd /home/production/cxgn/opencv_contrib \
     && git checkout 4.1.0 \
-    && cd /opencv \
+    && cd /home/production/cxgn/opencv \
     && git checkout 4.1.0 \
     && mkdir build \
-    && cd /opencv/build \
+    && cd /home/production/cxgn/opencv/build \
     && cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -D CMAKE_INSTALL_PREFIX=/usr/local \
         -D INSTALL_PYTHON_EXAMPLES=ON \
-        -D OPENCV_EXTRA_MODULES_PATH=/opencv_contrib/modules \
+        -D OPENCV_EXTRA_MODULES_PATH=/home/production/cxgn/opencv_contrib/modules \
         -D PYTHON3_EXECUTABLE=$(which python3) \
         -D PYTHON3_NUMPY_INCLUDE_DIRS=$(python3 -c "import numpy; print(numpy.get_include())") \
         -D BUILD_EXAMPLES=ON \

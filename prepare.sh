@@ -20,6 +20,8 @@ git clone https://github.com/GMOD/Chado repos/Chado
 git clone https://github.com/GMOD/chado_tools repos/chado_tools
 git clone https://github.com/GMOD/Bio-Chado-Schema repos/Bio-Chado-Schema
 git clone https://github.com/solgenomics/DroneImageScripts.git repos/DroneImageScripts
+git clone https://github.com/opencv/opencv repos/opencv
+git clone https://github.com/opencv/opencv_contrib repos/opencv_contrib
 
 # local libs
 git clone https://github.com/solgenomics/perl-local-lib repos/local-lib
