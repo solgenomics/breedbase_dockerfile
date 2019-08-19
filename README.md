@@ -34,8 +34,12 @@ You can then checkout particular branches or tags in the repo before the build.
 ```bash
 docker build -t breedbase_image breedbase_dockerfile
 ```
-
 ## Running the docker
+
+There are a couple of ways in which the docker can be run: (1) using ```docker swarm```, or (2) using docker run. 
+In both cases, the docker can be run using the postres_docker docker to provide the database.
+
+### Running using Docker swarm
 
 Once the docker image has been created either through docker hub or by building the image, the docker can be started. First, The docker swarm needs to be initialized on the machine. This needs to be done only once.
 
@@ -43,13 +47,13 @@ Once the docker image has been created either through docker hub or by building 
 docker swarm init
 ```
 
-### Create the docker config
+#### Create the docker config
 You need to write an ```sgn_local.conf``` file specific to your service. A template is provided in the breedbase_dockerfile repo (you have to fill in the db server host, dbname, and username and password). Then:
 ```bash
 cat sgn_local.conf | docker config create "breedbase_sgn_local.conf" -
 ```
 
-### Run the service using swarm
+#### Run the service using swarm
 To run the docker on the swarm, you have to provide the config using ```--config```, as well as any mounts that are required for presistent data. Currently, breedbase just mounts directories on the docker host (which can be nfs mounts), but later this could be changed to docker volumes. Multiple mountpoints can be provided with multiple ```--mount``` options, as follows:
 ```bash
 docker service create --name "breedbase_service" --mount src=/export/prod/archive,target=/home/production/archive,type=bind --mount src=/export/prod/public_breedbase,target=/home/production/public,type=bind --config source="breedbase_sgn_local.conf",target="/home/production/cxgn/sgn/sgn_local.conf"  breedbase_image
@@ -57,7 +61,22 @@ docker service create --name "breedbase_service" --mount src=/export/prod/archiv
 
 Depending on where your database is running, you may need to use the --network option. For a database server running on the host machine (localhost in your sgn_local.conf), use --network="host".
 
-### Developing using docker
+### Running using ```docker run```
+
+Base docker run command:
+```
+docker run -d -p 7080:8080 -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive breedbase/breedbase:latest
+```
+
+### Running using the ```postgres_docker``` database backend
+
+For more information on how to use the postgres_docker backend, see its README file.
+
+Connecting Breedbase DB container:
+```docker run -d -p 7080:8080 --link breedbase_db_container_name:db -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive breedbase/breedbase:latest
+```
+
+## Developing using docker
 
 The docker only contains static copies of the git repos. To develop using docker, you can mount the /home/production/cxgn/breedbase_dockerfile/repos (or your equivalent) in the docker file system at /home/production/cxgn, using the following option: 
 ``` --mount src=/home/production/cxgn/breedbase_dockerfile/repos,target=/home/production/cxgn```
