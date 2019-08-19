@@ -68,7 +68,7 @@ Using ```docker run```, you also need to prepare an ```sgn_local.conf``` file as
 
 Base docker run command:
 ```
-docker run -d -p 7080:8080 -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive breedbase/breedbase:latest
+docker run -d -p 7080:8080 -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive -v /host/path/to/public_breedbase:/home/production/public breedbase/breedbase:latest
 ```
 
 ### Running using the ```postgres_docker``` database backend
