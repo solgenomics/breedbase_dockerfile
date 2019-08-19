@@ -94,29 +94,7 @@ COPY tools/sreformat /usr/local/bin/
 
 # Mason website skins
 #
-COPY repos/cassava /home/production/cxgn/cassava
-COPY repos/yambase /home/production/cxgn/yambase
-COPY repos/sweetpotatobase /home/production/cxgn/sweetpotatobase
-COPY repos/ricebase /home/production/cxgn/ricebase
-COPY repos/citrusgreening /home/production/cxgn/citrusgreening
-COPY repos/coconut /home/production/cxgn/coconut
-COPY repos/cassbase /home/production/cxgn/cassbase
-COPY repos/musabase /home/production/cxgn/musabase
-COPY repos/potatobase /home/production/cxgn/potatobase
-COPY repos/cea /home/production/cxgn/cea
-COPY repos/cippotatobase /home/production/cxgn/cippotatobase
-COPY repos/fernbase /home/production/cxgn/fernbase
-COPY repos/solgenomics /home/production/cxgn/solgenomics
-COPY repos/panzeabase /home/production/cxgn/panzeabase
-COPY repos/varitome /home/production/cxgn/varitome
-COPY repos/milkweed /home/production/cxgn/milkweed
-COPY repos/erysimum /home/production/cxgn/erysimum
-COPY repos/vitisbase /home/production/cxgn/vitisbase
-COPY repos/panandbase /home/production/cxgn/panandbase
-COPY repos/triticum /home/production/cxgn/triticum
-
-COPY repos/local-lib /home/production/cxgn/local-lib
-COPY repos/R_libs /home/production/cxgn/R_libs
+ADD repos /home/production/cxgn
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
