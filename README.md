@@ -36,7 +36,7 @@ docker build -t breedbase_image breedbase_dockerfile
 ```
 ## Running the docker
 
-There are a couple of ways in which the docker can be run: (1) using ```docker swarm```, or (2) using docker run. 
+There are a couple of ways in which the docker can be run: (1) using ```docker swarm```, or (2) using ```docker run```. 
 In both cases, the docker can be run using the postres_docker docker to provide the database.
 
 ### Running using ```docker swarm```
