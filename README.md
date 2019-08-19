@@ -39,7 +39,7 @@ docker build -t breedbase_image breedbase_dockerfile
 There are a couple of ways in which the docker can be run: (1) using ```docker swarm```, or (2) using docker run. 
 In both cases, the docker can be run using the postres_docker docker to provide the database.
 
-### Running using Docker swarm
+### Running using ```docker swarm```
 
 Once the docker image has been created either through docker hub or by building the image, the docker can be started. First, The docker swarm needs to be initialized on the machine. This needs to be done only once.
 
