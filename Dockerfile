@@ -16,6 +16,7 @@ RUN mkdir -p /home/production/tmp/solgs
 RUN mkdir -p /home/production/archive
 RUN mkdir -p /home/production/public/images/image_files
 RUN mkdir -p /home/production/tmp
+RUN chown -R www-data /home/production/tmp
 RUN mkdir -p /home/production/archive/breedbase
 RUN mkdir -p /home/production/blast/databases/current
 RUN mkdir -p /home/production/cxgn
@@ -87,9 +88,9 @@ COPY repos/Bio-Chado-Schema /home/production/cxgn/Bio-Chado-Schema
 
 # copy some tools that don't have a Debian package
 #
-COPY tools/gcta/gcta64  /usr/bin/
-COPY tools/quicktree /usr/bin/
-COPY tools/sreformat /usr/bin/
+COPY tools/gcta/gcta64  /usr/local/bin/
+COPY tools/quicktree /usr/local/bin/
+COPY tools/sreformat /usr/local/bin/
 
 # Mason website skins
 #
