@@ -68,31 +68,15 @@ RUN apt-get install postfix mailutils -y
 #
 RUN apt-get install libudunits2-dev libgdal-dev -y
 
-# copy code repos. Run the prepare.pl script to clone them
-# before the build
-#
-COPY repos/cxgn-corelibs /home/production/cxgn/cxgn-corelibs
-COPY repos/sgn /home/production/cxgn/sgn
-COPY repos/Phenome /home/production/cxgn/Phenome
-COPY repos/rPackages /home/production/cxgn/rPackages
-COPY repos/biosource /home/production/cxgn/biosource
-COPY repos/Cview /home/production/cxgn/Cview
-COPY repos/ITAG /home/production/cxgn/ITAG
-COPY repos/tomato_genome /home/production/cxgn/tomato_genome
-COPY repos/Chado /home/production/cxgn/Chado
-COPY repos/sgn-devtools /home/production/cxgn/sgn-devtools
-COPY repos/starmachine /home/production/cxgn/starmachine
-COPY repos/Chado /home/production/cxgn/Chado
-COPY repos/chado_tools /home/production/cxgn/chado_tools
-COPY repos/Bio-Chado-Schema /home/production/cxgn/Bio-Chado-Schema
-
 # copy some tools that don't have a Debian package
 #
 COPY tools/gcta/gcta64  /usr/local/bin/
 COPY tools/quicktree /usr/local/bin/
 COPY tools/sreformat /usr/local/bin/
 
-# Mason website skins
+# copy code repos. Run the prepare.pl script to clone them
+# before the build
+# This also adds the Mason website skins
 #
 ADD repos /home/production/cxgn
 
