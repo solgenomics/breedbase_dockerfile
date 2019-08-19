@@ -83,11 +83,12 @@ docker run -d -p 7080:8080 --link breedbase_db_container_name:db -v /host/path/t
 ## Developing using docker
 
 The docker only contains static copies of the git repos. To develop using docker, you can mount the /home/production/cxgn/breedbase_dockerfile/repos (or your equivalent) in the docker file system at /home/production/cxgn, using the following option: 
+
 ``` --mount src=/home/production/cxgn/breedbase_dockerfile/repos,target=/home/production/cxgn```
 
 This allows docker to see your actual git checkouts which you can modify, and all the authentication info for github etc. is safely in your host computer.
 
-For development, you can also use the ``` -e MODE=DEVELOPMENT``` flag, which will run the site using Catalyst instead of Starman. In this configuration, the server will restart when any changes are detected in the code libraries. It is recommended to mount the git directories from the host (the docker images only contains static copies): 
+For development, you can also use the ``` -e MODE=DEVELOPMENT``` flag, which will run the site using Catalyst instead of Starman. In this configuration, the server will restart when any changes are detected in the code libraries. Again, it is recommended to mount the git directories from the host as well:
 
 ```
 docker run -d -p 7080:8080 -e MODE=DEVELOPMENT -v /host/path/to/sgn:/home/production/cxgn/sgn -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive breedbase/breedbase:latest
