@@ -73,7 +73,8 @@ docker run -d -p 7080:8080 -v /host/path/to/sgn_local.conf:/home/production/cxgn
 For more information on how to use the postgres_docker backend, see its README file.
 
 Connecting Breedbase DB container:
-```docker run -d -p 7080:8080 --link breedbase_db_container_name:db -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive breedbase/breedbase:latest
+```
+docker run -d -p 7080:8080 --link breedbase_db_container_name:db -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive breedbase/breedbase:latest
 ```
 
 ## Developing using docker
