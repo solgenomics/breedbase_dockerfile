@@ -43,26 +43,17 @@ RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl -y
 
 RUN apt-get update --fix-missing -y
 
-RUN apt-get install -y libterm-readline-zoid-perl
-RUN apt-get install nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-9-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+  -y
-RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
+RUN apt-get install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-9-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils postgresql
 
-RUN apt-get install libmunge-dev libmunge2 munge -y
-RUN apt-get install slurm-wlm slurmctld slurmd libslurm-perl -y
-RUN apt-get install libssl-dev -y
+RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
 
 RUN chmod 777 /var/spool/
 RUN mkdir /var/spool/slurmstate
 RUN chown slurm:slurm /var/spool/slurmstate/
 RUN /usr/sbin/create-munge-key
 RUN ln -s /var/lib/slurm-llnl /var/lib/slurm
-RUN apt-get install graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 -y
-#RUN apt-get install gnome-core gnome-terminal -y
-RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
-RUN apt-get install blast2 -y
 
-# required for sending mails from the website
-RUN apt-get install postfix mailutils -y
+RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
 
 # required for R-package spdep, and other dependencies of agricolae
 #
@@ -116,7 +107,7 @@ RUN apt-get install nodejs -y
 
 WORKDIR /home/production/cxgn/sgn
 
-ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib
+ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
 
 
 
