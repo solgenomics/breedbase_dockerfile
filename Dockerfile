@@ -11,17 +11,17 @@ EXPOSE 8080
 
 # create directory layout
 #
-RUN mkdir -p /home/production/public/sgn_static_content
-RUN mkdir -p /home/production/tmp/solgs
-RUN mkdir -p /home/production/archive
-RUN mkdir -p /home/production/public/images/image_files
-RUN mkdir -p /home/production/tmp
-RUN mkdir -p /home/production/archive/breedbase
-RUN mkdir -p /home/production/blast/databases/current
-RUN mkdir -p /home/production/cxgn
-RUN mkdir -p /home/production/cxgn/local-lib
-RUN mkdir /etc/starmachine
-RUN mkdir /var/log/sgn
+RUN mkdir -p /home/production/public/sgn_static_content \
+    && mkdir -p /home/production/tmp/solgs \
+    && mkdir -p /home/production/archive \
+    && mkdir -p /home/production/public/images/image_files \
+    && mkdir -p /home/production/tmp \
+    && mkdir -p /home/production/archive/breedbase \
+    && mkdir -p /home/production/blast/databases/current \
+    && mkdir -p /home/production/cxgn \
+    && mkdir -p /home/production/cxgn/local-lib \
+    && mkdir /etc/starmachine \
+    && mkdir /var/log/sgn
 
 WORKDIR /home/production/cxgn
 
@@ -86,6 +86,7 @@ COPY repos/chado_tools /home/production/cxgn/chado_tools
 COPY repos/Bio-Chado-Schema /home/production/cxgn/Bio-Chado-Schema
 COPY repos/opencv /home/production/cxgn/opencv
 COPY repos/opencv_contrib /home/production/cxgn/opencv_contrib
+COPY repos/DroneImageScripts /home/production/cxgn/DroneImageScripts
 
 # copy some tools that don't have a Debian package
 #
@@ -172,12 +173,10 @@ RUN apt-get install -y python3-dev python-pip python3-pip python-numpy
 RUN apt-get install -y libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran
 RUN apt-get install -y libgdal-dev
 RUN apt-get install -y exiftool libzbar-dev
+RUN apt-get install -y cmake
 
 RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar \
-    && cd /home/production/cxgn/opencv_contrib \
-    && git checkout 4.1.0 \
     && cd /home/production/cxgn/opencv \
-    && git checkout 4.1.0 \
     && mkdir build \
     && cd /home/production/cxgn/opencv/build \
     && cmake -D CMAKE_BUILD_TYPE=RELEASE \
@@ -194,10 +193,7 @@ RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pyso
     && ldconfig \
     && mv /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.so
 
-COPY repos/DroneImageScripts /home/production/cxgn/DroneImageScripts
-RUN cd /home/production/cxgn/DroneImageScripts \
-    && git checkout 1.02 \
-    && g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/bin/stitching_multi `pkg-config opencv4 --cflags --libs` \
+RUN g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/bin/stitching_multi `pkg-config opencv4 --cflags --libs` \
     && g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_single.cpp -o /usr/bin/stitching_single `pkg-config opencv4 --cflags --libs`
 
 RUN apt-get install apt-transport-https -y
