@@ -70,6 +70,7 @@ COPY tools/sreformat /usr/local/bin/
 # This also adds the Mason website skins
 #
 ADD repos /home/production/cxgn
+COPY configure_postgres.pl /home/production/
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
@@ -108,8 +109,6 @@ RUN apt-get install nodejs -y
 WORKDIR /home/production/cxgn/sgn
 
 ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
-
-
 
 # run the Build.PL to install the R dependencies...
 #
