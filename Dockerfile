@@ -50,11 +50,12 @@ RUN apt-get install libmunge-dev libmunge2 munge -y
 RUN apt-get install slurm-wlm slurmctld slurmd libslurm-perl -y
 RUN apt-get install libssl-dev -y
 
-RUN chmod 777 /var/spool/
-RUN mkdir /var/spool/slurmstate
-RUN chown slurm:slurm /var/spool/slurmstate/
-RUN /usr/sbin/create-munge-key
-RUN ln -s /var/lib/slurm-llnl /var/lib/slurm
+RUN chmod 777 /var/spool/ \
+    && mkdir /var/spool/slurmstate
+    && chown slurm:slurm /var/spool/slurmstate/ \
+    && /usr/sbin/create-munge-key \
+    && ln -s /var/lib/slurm-llnl /var/lib/slurm \
+
 RUN apt-get install graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 -y
 #RUN apt-get install gnome-core gnome-terminal -y
 RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
@@ -190,8 +191,8 @@ RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pyso
         -D OPENCV_GENERATE_PKGCONFIG=YES .. \
     && make \
     && make install \
-    && ldconfig \
-    && mv /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.so
+    && ldconfig
+RUN mv /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.so
 
 RUN g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/bin/stitching_multi `pkg-config opencv4 --cflags --libs` \
     && g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_single.cpp -o /usr/bin/stitching_single `pkg-config opencv4 --cflags --libs`
