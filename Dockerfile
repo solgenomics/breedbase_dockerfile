@@ -51,8 +51,7 @@ RUN chmod 777 /var/spool/ \
     && mkdir /var/spool/slurmstate \
     && chown slurm:slurm /var/spool/slurmstate/ \
     && /usr/sbin/create-munge-key \
-    && ln -s /var/lib/slurm-llnl /var/lib/slurm \
-
+    && ln -s /var/lib/slurm-llnl /var/lib/slurm
 
 RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
 
