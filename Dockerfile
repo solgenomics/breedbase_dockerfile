@@ -16,6 +16,7 @@ RUN mkdir -p /home/production/public/sgn_static_content \
     && mkdir -p /home/production/archive \
     && mkdir -p /home/production/public/images/image_files \
     && mkdir -p /home/production/tmp \
+    && chown -R www-data /home/production/tmp \
     && mkdir -p /home/production/archive/breedbase \
     && mkdir -p /home/production/blast/databases/current \
     && mkdir -p /home/production/cxgn \
@@ -42,13 +43,9 @@ RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl -y
 
 RUN apt-get update --fix-missing -y
 
-RUN apt-get install -y libterm-readline-zoid-perl
-RUN apt-get install nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-9-amd64 perl-doc ack-grep make xutils-dev nfs-common htop unzip screen lynx xvfb ncbi-blast+  -y
-RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
+RUN apt-get install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-9-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils postgresql screen apt-transport-https
 
-RUN apt-get install libmunge-dev libmunge2 munge -y
-RUN apt-get install slurm-wlm slurmctld slurmd libslurm-perl -y
-RUN apt-get install libssl-dev -y
+RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
 
 RUN chmod 777 /var/spool/ \
     && mkdir /var/spool/slurmstate
@@ -56,70 +53,24 @@ RUN chmod 777 /var/spool/ \
     && /usr/sbin/create-munge-key \
     && ln -s /var/lib/slurm-llnl /var/lib/slurm \
 
-RUN apt-get install graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 -y
-#RUN apt-get install gnome-core gnome-terminal -y
-RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
-RUN apt-get install blast2 -y
 
-# required for sending mails from the website
-RUN apt-get install postfix mailutils -y
+RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
 
 # required for R-package spdep, and other dependencies of agricolae
 #
 RUN apt-get install libudunits2-dev libgdal-dev -y
 
-# copy code repos. Run the prepare.pl script to clone them
-# before the build
-#
-COPY repos/cxgn-corelibs /home/production/cxgn/cxgn-corelibs
-COPY repos/sgn /home/production/cxgn/sgn
-COPY repos/Phenome /home/production/cxgn/Phenome
-COPY repos/rPackages /home/production/cxgn/rPackages
-COPY repos/biosource /home/production/cxgn/biosource
-COPY repos/Cview /home/production/cxgn/Cview
-COPY repos/ITAG /home/production/cxgn/ITAG
-COPY repos/tomato_genome /home/production/cxgn/tomato_genome
-COPY repos/Chado /home/production/cxgn/Chado
-COPY repos/sgn-devtools /home/production/cxgn/sgn-devtools
-COPY repos/starmachine /home/production/cxgn/starmachine
-COPY repos/Chado /home/production/cxgn/Chado
-COPY repos/chado_tools /home/production/cxgn/chado_tools
-COPY repos/Bio-Chado-Schema /home/production/cxgn/Bio-Chado-Schema
-COPY repos/opencv /home/production/cxgn/opencv
-COPY repos/opencv_contrib /home/production/cxgn/opencv_contrib
-COPY repos/DroneImageScripts /home/production/cxgn/DroneImageScripts
-
 # copy some tools that don't have a Debian package
 #
-COPY tools/gcta/gcta64  /usr/bin/
-COPY tools/quicktree /usr/bin/
-COPY tools/sreformat /usr/bin/
+COPY tools/gcta/gcta64  /usr/local/bin/
+COPY tools/quicktree /usr/local/bin/
+COPY tools/sreformat /usr/local/bin/
 
-# Mason website skins
+# copy code repos. Run the prepare.pl script to clone them
+# before the build
+# This also adds the Mason website skins
 #
-COPY repos/cassava /home/production/cxgn/cassava
-COPY repos/yambase /home/production/cxgn/yambase
-COPY repos/sweetpotatobase /home/production/cxgn/sweetpotatobase
-COPY repos/ricebase /home/production/cxgn/ricebase
-COPY repos/citrusgreening /home/production/cxgn/citrusgreening
-COPY repos/coconut /home/production/cxgn/coconut
-COPY repos/cassbase /home/production/cxgn/cassbase
-COPY repos/musabase /home/production/cxgn/musabase
-COPY repos/potatobase /home/production/cxgn/potatobase
-COPY repos/cea /home/production/cxgn/cea
-COPY repos/cippotatobase /home/production/cxgn/cippotatobase
-COPY repos/fernbase /home/production/cxgn/fernbase
-COPY repos/solgenomics /home/production/cxgn/solgenomics
-COPY repos/panzeabase /home/production/cxgn/panzeabase
-COPY repos/varitome /home/production/cxgn/varitome
-COPY repos/milkweed /home/production/cxgn/milkweed
-COPY repos/erysimum /home/production/cxgn/erysimum
-COPY repos/vitisbase /home/production/cxgn/vitisbase
-COPY repos/panandbase /home/production/cxgn/panandbase
-COPY repos/triticum /home/production/cxgn/triticum
-
-COPY repos/local-lib /home/production/cxgn/local-lib
-COPY repos/R_libs /home/production/cxgn/R_libs
+ADD repos /home/production/cxgn
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
@@ -156,7 +107,7 @@ RUN apt-get install nodejs -y
 
 WORKDIR /home/production/cxgn/sgn
 
-ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib
+ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
 
 
 # run the Build.PL to install the R dependencies...
@@ -171,10 +122,7 @@ ENV R_LIBS_USER=/home/production/cxgn/R_libs
 
 #INSTALL OPENCV IMAGING LIBRARY
 RUN apt-get install -y python3-dev python-pip python3-pip python-numpy
-RUN apt-get install -y libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran
-RUN apt-get install -y libgdal-dev
-RUN apt-get install -y exiftool libzbar-dev
-RUN apt-get install -y cmake
+RUN apt-get install -y libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
 
 RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar \
     && cd /home/production/cxgn/opencv \
@@ -192,12 +140,11 @@ RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pyso
     && make \
     && make install \
     && ldconfig
-RUN mv /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.cpython-36m-x86_64-linux-gnu.so /usr/local/lib/python3.6/dist-packages/cv2/python-3.6/cv2.so
+RUN mv /usr/local/lib/python3.5/dist-packages/cv2/python-3.5/cv2.cpython-35m-x86_64-linux-gnu.so /usr/local/lib/python3.5/dist-packages/cv2/python-3.5/cv2.so
 
 RUN g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/bin/stitching_multi `pkg-config opencv4 --cflags --libs` \
     && g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_single.cpp -o /usr/bin/stitching_single `pkg-config opencv4 --cflags --libs`
 
-RUN apt-get install apt-transport-https -y
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
 
 COPY entrypoint.sh /entrypoint.sh
@@ -205,4 +152,3 @@ RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/s
 
 # start services when running container...
 ENTRYPOINT /bin/bash /entrypoint.sh
-
