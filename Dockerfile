@@ -48,7 +48,7 @@ RUN apt-get install -y libterm-readline-zoid-perl nginx starman emacs gedit vim 
 RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
 
 RUN chmod 777 /var/spool/ \
-    && mkdir /var/spool/slurmstate
+    && mkdir /var/spool/slurmstate \
     && chown slurm:slurm /var/spool/slurmstate/ \
     && /usr/sbin/create-munge-key \
     && ln -s /var/lib/slurm-llnl /var/lib/slurm \
