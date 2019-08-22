@@ -71,6 +71,7 @@ COPY tools/sreformat /usr/local/bin/
 #
 ADD repos /home/production/cxgn
 COPY configure_postgres.pl /home/production/
+COPY update_password.sh /home/production/
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 

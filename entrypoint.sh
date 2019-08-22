@@ -5,11 +5,9 @@ sed -i s/localhost/$HOSTNAME/g /etc/slurm-llnl/slurm.conf
 /etc/init.d/slurmctld start
 /etc/init.d/slurmd start
 
-
-
 if [ "$MODE" == "DEVELOPMENT" ]; then
-    perl /home/production/config_postgres.pl
-    /etc/init.d/postgres start
+    /etc/init.d/postgresql start
+    perl /home/production/configure_postgres.pl
     /home/production/cxgn/sgn/bin/sgn_server.pl --fork -r -d -p 8080
 else
   /etc/init.d/sgn start

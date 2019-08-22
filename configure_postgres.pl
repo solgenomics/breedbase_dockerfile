@@ -16,6 +16,6 @@ my $db_postgres_password = $config->[0]->{$file}->{DatabaseConnection}->{sgn_tes
 
 print STDERR "Found password $db_postgres_password\n";
 
-system("su postgres; echo \"CREATE ROLE blabla WITH password \'$db_postgres_password\'\"");
+system("bash /home/production/update_password.sh $db_postgres_password");
 
 print STDERR "Done.\n";
