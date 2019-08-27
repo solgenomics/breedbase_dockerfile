@@ -147,6 +147,7 @@ RUN g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
 
 
+
 COPY entrypoint.sh /entrypoint.sh
 RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/sgn
 
