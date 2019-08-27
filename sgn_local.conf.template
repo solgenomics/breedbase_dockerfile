@@ -17,7 +17,12 @@ disable_login 0
 	
 www_user www-data
 www_group www-data
-	
+
+error_log                 /var/log/sgn/error.log
+access_log                /var/log/sgn/access.log
+
+python_executable python3
+
 preferred_species Manihot esculenta
 	
 production_server 0
