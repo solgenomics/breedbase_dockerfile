@@ -7,7 +7,7 @@ services:
       - breedbase_db
     container_name: breedbase_web
     ports:
-      - 7070:8080
+      - 7080:8080
     volumes:
       - type: bind
         source: ./sgn_local.conf
