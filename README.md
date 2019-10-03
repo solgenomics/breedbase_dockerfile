@@ -56,7 +56,7 @@ Docker Swarm allows you to define a service, as well as to allow you to configur
     Depending on where your database is running, you may need to use the `--network` option. For a database server running on the host machine (localhost in your sgn_local.conf), use `--network="host"`.
 1. Access the application
 
-    Once the service is running, you can access the application at http://localhost:8080
+    Once the service is running, you can access the application at http://localhost:7080
 
 ## Using `docker run`
 Docker run allows you to define and start a single instance of a container.
@@ -71,7 +71,7 @@ Docker run allows you to define and start a single instance of a container.
     ```
 1. Access the application
 
-    Once the container is running, you can access the application at http://localhost:8080
+    Once the container is running, you can access the application at http://localhost:7080
     
 ## Using `docker-compose`
 Docker compose allows you to configure one or more containers and their dependencies, and then use one command to start, stop, or remove all of the containers. 
@@ -106,7 +106,7 @@ Docker compose allows you to configure one or more containers and their dependen
    
 1. Access the application
 
-    Once the container is running, you can access the application at http://localhost:8080
+    Once the container is running, you can access the application at http://localhost:7080
 
 Helpful commands:
 
