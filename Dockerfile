@@ -18,6 +18,7 @@ RUN mkdir -p /home/production/public/images/image_files
 RUN mkdir -p /home/production/tmp
 RUN chown -R www-data /home/production/tmp
 RUN mkdir -p /home/production/archive/breedbase
+RUN chown -R www-data /home/production/archive
 RUN mkdir -p /home/production/blast/databases/current
 RUN mkdir -p /home/production/cxgn
 RUN mkdir -p /home/production/cxgn/local-lib
