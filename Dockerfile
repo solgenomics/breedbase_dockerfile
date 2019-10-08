@@ -12,6 +12,7 @@ EXPOSE 8080
 # create directory layout
 #
 RUN mkdir -p /home/production/public/sgn_static_content
+RUN chown -R www-data /home/production/public
 RUN mkdir -p /home/production/tmp/solgs
 RUN mkdir -p /home/production/archive
 RUN mkdir -p /home/production/public/images/image_files
