@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   breedbase:
-    image: breedbase/breedbase:dev
+    image: breedbase/breedbase:devel
     depends_on:
       - breedbase_db
     container_name: breedbase_web
@@ -13,14 +13,11 @@ services:
         source: ./sgn_local.conf
         target: /home/production/cxgn/sgn/sgn_local.conf
       - type: bind
-        source: ../sgn
-        target: /home/production/cxgn/sgn
+        source: ./repos
+        target: /home/production/cxgn
       - type: bind
-        source: ../archive
+        source: ./archive
         target: /home/production/archive
-      - type: bind
-        source: ../skins
-        target: /home/production/cxgn/skins
     environment:
       MODE: 'DEVELOPMENT'
   breedbase_db:

@@ -1,7 +1,5 @@
 FROM debian:stretch
 
-LABEL maintainer="lam87@cornell.edu"
-
 ENV CPANMIRROR=http://cpan.cpantesters.org
 # based on the vagrant provision.sh script by Nick Morales <nm529@cornell.edu>
 
@@ -35,7 +33,7 @@ WORKDIR /home/production/cxgn
 # install system dependencies
 #
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN apt-get update -y --allow-unauthenticated 
+RUN apt-get update -y --allow-unauthenticated
 RUN apt-get upgrade -y
 RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl -y
 
@@ -130,6 +128,20 @@ RUN apt-get install screen -y
 COPY entrypoint.sh /entrypoint.sh
 RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/sgn
 
+ARG CREATED
+ARG REVISION
+ARG BUILD_VERSION
+
+LABEL maintainer="lam87@cornell.edu"
+LABEL org.opencontainers.image.created=$CREATED
+LABEL org.opencontainers.image.url="https://breedbase.org/"
+LABEL org.opencontainers.image.source="https://github.com/solgenomics/breedbase_dockerfile"
+LABEL org.opencontainers.image.version=$BUILD_VERSION
+LABEL org.opencontainers.image.revision=$REVISION
+LABEL org.opencontainers.image.vendor="Boyce Thompson Institute"
+LABEL org.opencontainers.image.title="breedbase/breedbase"
+LABEL org.opencontainers.image.description="Breedbase web server"
+LABEL org.opencontainers.image.documentation="https://solgenomics.github.io/sgn/"
+
 # start services when running container...
 ENTRYPOINT /bin/bash /entrypoint.sh
-
