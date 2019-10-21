@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+  breedbase:
+    image: breedbase/breedbase:production
+    environment:
+      MODE: 'PRODUCTION'

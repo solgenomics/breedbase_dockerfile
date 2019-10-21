@@ -6,26 +6,7 @@ services:
     depends_on:
       - breedbase_db
     container_name: breedbase_web
-    ports:
-      - 7080:8080
-    volumes:
-      - type: bind
-        source: ./sgn_local.conf
-        target: /home/production/cxgn/sgn/sgn_local.conf
-      - type: bind
-        source: ./repos
-        target: /home/production/cxgn
-      - type: bind
-        source: ./archive
-        target: /home/production/archive
-    environment:
-      MODE: 'DEVELOPMENT'
+
   breedbase_db:
     image: breedbase/pg:latest
     container_name: breedbase_db
-    volumes:
-      - "dbdata:/var/lib/postgresql/data"
-
-volumes:
-  dbdata:
-    name: bb_postgres
