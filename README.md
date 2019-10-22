@@ -2,21 +2,21 @@
 This repo contains the Dockerfile for the breeDBase webserver, and the docker compose files for joint deployment of the breeDBase webserver and postgres database.
 
 ## Table of Contents  
-[Learn More](#more)  
-[Deploy for Development](#development)  
-[Deploy in Production](#production)
-[Deploy Individually](#individual)
-[Build a New Image](#new)
-[Debugging](#debug)
+[Learn More](#learn-more)  
+[Deploy for Development](#deploy-for-development)  
+[Deploy in Production](#deploy-for-production)  
+[Deploy Individually](#deploy-individually)  
+[Build a New Image](#build-a-new-image)  
+[Debugging](#debugging)  
 
-<a name="more"/>
+
 ## Learn More
 
 Access the [SGN repository](https://github.com/solgenomics/sgn) to contribute to the underlying codebase or submit new issues
 Access the [manual](https://solgenomics.github.io/sgn/) to learn how to use breeDBase's many features
 Access [breedbase.org](https://breedbase.org/) to explore a default instance of breeDBase.
 
-<a name="development"/>
+
 ## Deploy for Development
 
 1. Install docker-compose
@@ -67,7 +67,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
     `docker-compose stop breedbase` This will stop both containers (web and db), but will not remove them.
     `docker-compose down`   This will remove both containers, but only when run within the breedbase_dockerfile directory where the `docker-compose.yml` file is located.
 
-<a name="development"/>
+
 ## Deploy in Production
 
 ### Using `docker compose`
@@ -125,7 +125,6 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     Once the service is running, you can access the application at http://localhost:7080
 
 
-<a name="individual"/>
 ## Deploy Individually
 
 1. Install docker
@@ -171,7 +170,7 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
 
     Finally access the application at http://localhost:7080
 
-<a name="new"/>
+
 ## Build a New Image
 
 If desired, a breedbase docker image can be built from scratch using this repo, as explained below. This is not recommended unless you have some time to kill, or are responsible for pushing a new image to dockerhub.
@@ -208,7 +207,7 @@ If desired, a breedbase docker image can be built from scratch using this repo, 
     docker push breedbase/breedbase:production
     ```
 
-<a name="debug"/>
+
 ## Debugging
 
 To debug, log into the container. You can find the container id using
