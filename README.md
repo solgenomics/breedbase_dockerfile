@@ -1,5 +1,5 @@
 
-![BreeDBase](Breedbase_HighRes.png)
+![BreeDBase](Breedbase_MedRes.png)
 
 ## Table of Contents  
 
@@ -15,10 +15,8 @@ This repo contains the Dockerfile for the breeDBase webserver, and the docker co
 
 ## Learn More
 
-Access the [SGN repository](https://github.com/solgenomics/sgn) to contribute to the underlying codebase or submit new issues
-
-Access the [manual](https://solgenomics.github.io/sgn/) to learn how to use breeDBase's many features
-
+Access the [SGN repository](https://github.com/solgenomics/sgn) to contribute to the underlying codebase or submit new issues  
+Access the [manual](https://solgenomics.github.io/sgn/) to learn how to use breeDBase's many features  
 Access [breedbase.org](https://breedbase.org/) to explore a default instance of breeDBase.
 
 
@@ -64,13 +62,13 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
     ```
     Once logged in, change the password of the admin user!!
 
-    Docker has a [wealth of command-line options](https://docs.docker.com/engine/reference/commandline/docker/) for working with your new containers. Some commonly used commands include:
-    `docker ps -a` This will list all running containers and their details.
-    `docker-compose start breedbase` This will start both containers (web and db) that were previously created, but have been stopped.
-    `docker exec -it breedbase_web bash` This will open a new bash terminal session within the breedbase_web container.
-    `docker logs breedbase_web` This will allow you to access breedbase webserver error output from your host.
-    `docker-compose stop breedbase` This will stop both containers (web and db), but will not remove them.
-    `docker-compose down`   This will remove both containers, but only when run within the breedbase_dockerfile directory where the `docker-compose.yml` file is located.
+    Docker has a [wealth of command-line options](https://docs.docker.com/engine/reference/commandline/docker/) for working with your new containers. Some commonly used commands include:  
+    `docker ps -a` This will list all running containers and their details.  
+    `docker-compose start breedbase` This will start both containers (web and db) that were previously created, but have been stopped.  
+    `docker exec -it breedbase_web bash` This will open a new bash terminal session within the breedbase_web container.  
+    `docker logs breedbase_web` This will allow you to access breedbase webserver error output from your host.  
+    `docker-compose stop breedbase` This will stop both containers (web and db), but will not remove them.  
+    `docker-compose down`   This will remove both containers, but only when run within the breedbase_dockerfile directory where the `docker-compose.yml` file is located.  
 
 
 ## Deploy in Production
