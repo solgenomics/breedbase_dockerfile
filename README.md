@@ -1,5 +1,6 @@
-
-![BreeDBase](Breedbase.png)
+<p align="center">
+  <img src="Breedbase.png">
+</p>
 
 This repo contains the Dockerfile for the breeDBase webserver, and the docker compose files for joint deployment of the breeDBase webserver and postgres database.
 To learn more about breeDBase:
