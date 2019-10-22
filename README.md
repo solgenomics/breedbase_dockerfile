@@ -1,23 +1,20 @@
 
 ![BreeDBase](Breedbase_MedRes.png)
 
-## Table of Contents  
-
 This repo contains the Dockerfile for the breeDBase webserver, and the docker compose files for joint deployment of the breeDBase webserver and postgres database.
+To learn more about breeDBase:
 
-[Learn More](#learn-more)  
+Access the [SGN repository](https://github.com/solgenomics/sgn) to contribute to the underlying codebase or submit new issues  
+Access the [manual](https://solgenomics.github.io/sgn/) to learn how to use breeDBase's many features  
+Access [breedbase.org](https://breedbase.org/) to explore a default instance of breeDBase.
+
+#### Table of Contents  
+
 [Deploy for Development](#deploy-for-development)  
 [Deploy in Production](#deploy-for-production)  
 [Deploy Individually](#deploy-individually)  
 [Build a New Image](#build-a-new-image)  
 [Debugging](#debugging)  
-
-
-## Learn More
-
-Access the [SGN repository](https://github.com/solgenomics/sgn) to contribute to the underlying codebase or submit new issues  
-Access the [manual](https://solgenomics.github.io/sgn/) to learn how to use breeDBase's many features  
-Access [breedbase.org](https://breedbase.org/) to explore a default instance of breeDBase.
 
 
 ## Deploy for Development
