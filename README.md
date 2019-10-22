@@ -11,8 +11,8 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
 #### Table of Contents  
 
-[Deploy in Production](#deploy-in-production)
-[Deploy for Development](#deploy-for-development)
+[Deploy in Production](#deploy-in-production)  
+[Deploy for Development](#deploy-for-development)  
 [Deploy Individually](#deploy-individually)  
 [Build a New Image](#build-a-new-image)  
 [Debugging](#debugging)  
@@ -118,12 +118,12 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     Once logged in, change the password of the admin user!!
 
     Docker has a [wealth of command-line options](https://docs.docker.com/engine/reference/commandline/docker/) for working with your new containers. Some commonly used commands include:  
-    `docker ps -a` This will list all running containers and their details.  
-    `docker-compose start breedbase` This will start both containers (web and db) that were previously created, but have been stopped.  
-    `docker exec -it breedbase_web bash` This will open a new bash terminal session within the breedbase_web container.  
-    `docker logs breedbase_web` This will allow you to access breedbase webserver error output from your host.  
-    `docker-compose stop breedbase` This will stop both containers (web and db), but will not remove them.  
-    `docker-compose down`   This will remove both containers, but only when run within the breedbase_dockerfile directory where the `docker-compose.yml` file is located.  
+    `docker ps -a` Will list all running containers and their details.  
+    `docker-compose start breedbase` Will start both containers (web and db) if they have been stopped.  
+    `docker exec -it breedbase_web bash` Will open a new bash terminal within the web container.  
+    `docker logs breedbase_web` Will let you access webserver error output from your host.  
+    `docker-compose stop breedbase` Will stop both containers (web and db), but will not remove them.  
+    `docker-compose down`   Will remove both containers, but only if run within the breedbase_dockerfile directory.
 
 
 ## Deploy Individually
