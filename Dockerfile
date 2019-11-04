@@ -11,18 +11,20 @@ EXPOSE 8080
 
 # create directory layout
 #
-RUN mkdir -p /home/production/public/sgn_static_content \
-    && mkdir -p /home/production/tmp/solgs \
-    && mkdir -p /home/production/archive \
-    && mkdir -p /home/production/public/images/image_files \
-    && mkdir -p /home/production/tmp \
-    && chown -R www-data /home/production/tmp \
-    && mkdir -p /home/production/archive/breedbase \
-    && mkdir -p /home/production/blast/databases/current \
-    && mkdir -p /home/production/cxgn \
-    && mkdir -p /home/production/cxgn/local-lib \
-    && mkdir /etc/starmachine \
-    && mkdir /var/log/sgn
+RUN mkdir -p /home/production/public/sgn_static_content
+RUN mkdir -p /home/production/tmp/solgs
+RUN mkdir -p /home/production/archive
+RUN mkdir -p /home/production/public/images/image_files
+RUN chown -R www-data /home/production/public
+RUN mkdir -p /home/production/tmp
+RUN chown -R www-data /home/production/tmp
+RUN mkdir -p /home/production/archive/breedbase
+RUN chown -R www-data /home/production/archive
+RUN mkdir -p /home/production/blast/databases/current
+RUN mkdir -p /home/production/cxgn
+RUN mkdir -p /home/production/cxgn/local-lib
+RUN mkdir /etc/starmachine
+RUN mkdir /var/log/sgn
 
 WORKDIR /home/production/cxgn
 
@@ -43,7 +45,7 @@ RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl -y
 
 RUN apt-get update --fix-missing -y
 
-RUN apt-get install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-9-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils postgresql screen apt-transport-https
+RUN apt-get install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-11-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils postgresql screen apt-transport-https
 
 RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
 
