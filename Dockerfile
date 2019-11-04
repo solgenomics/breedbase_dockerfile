@@ -125,7 +125,8 @@ ENV R_LIBS_USER=/home/production/cxgn/R_libs
 RUN apt-get install -y python3-dev python-pip python3-pip python-numpy
 RUN apt-get install -y libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
 
-RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar \
+RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas \
+    && pip3 install -U keras-tuner \
     && cd /home/production/cxgn/opencv \
     && mkdir build \
     && cd /home/production/cxgn/opencv/build \
