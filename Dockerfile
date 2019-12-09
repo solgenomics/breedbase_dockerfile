@@ -45,15 +45,15 @@ RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl -y
 
 RUN apt-get update --fix-missing -y
 
-RUN apt-get install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-11-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils postgresql
+RUN apt-get install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-11-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils postgresql screen apt-transport-https
 
 RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
 
-RUN chmod 777 /var/spool/
-RUN mkdir /var/spool/slurmstate
-RUN chown slurm:slurm /var/spool/slurmstate/
-RUN /usr/sbin/create-munge-key
-RUN ln -s /var/lib/slurm-llnl /var/lib/slurm
+RUN chmod 777 /var/spool/ \
+    && mkdir /var/spool/slurmstate \
+    && chown slurm:slurm /var/spool/slurmstate/ \
+    && /usr/sbin/create-munge-key \
+    && ln -s /var/lib/slurm-llnl /var/lib/slurm
 
 RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
 
@@ -78,7 +78,6 @@ COPY slurm.conf /etc/slurm-llnl/slurm.conf
 COPY sgn_local.conf.template /home/production/cxgn/sgn/
 COPY starmachine.conf /etc/starmachine/
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
-COPY entrypoint.sh /entrypoint.sh
 
 # XML::Simple dependency
 #
@@ -112,7 +111,6 @@ WORKDIR /home/production/cxgn/sgn
 ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
 
 
-
 # run the Build.PL to install the R dependencies...
 #
 ENV HOME=/home/production
@@ -123,13 +121,36 @@ ENV R_LIBS_USER=/home/production/cxgn/R_libs
 #RUN rm /home/production/cxgn/sgn/static/s
 #RUN rm /home/production/cxgn/sgn/documents
 
-RUN apt-get install apt-transport-https -y
+#INSTALL OPENCV IMAGING LIBRARY
+RUN apt-get install -y python3-dev python-pip python3-pip python-numpy
+RUN apt-get install -y libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
+
+RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas \
+    && pip3 install -U keras-tuner \
+    && cd /home/production/cxgn/opencv \
+    && mkdir build \
+    && cd /home/production/cxgn/opencv/build \
+    && cmake -D CMAKE_BUILD_TYPE=RELEASE \
+        -D CMAKE_INSTALL_PREFIX=/usr/local \
+        -D INSTALL_PYTHON_EXAMPLES=OFF \
+        -D OPENCV_EXTRA_MODULES_PATH=/home/production/cxgn/opencv_contrib/modules \
+        -D PYTHON3_EXECUTABLE=$(which python3) \
+        -D PYTHON3_NUMPY_INCLUDE_DIRS=$(python3 -c "import numpy; print(numpy.get_include())") \
+        -D BUILD_EXAMPLES=OFF \
+        -D OPENCV_ENABLE_NONFREE=ON \
+        -D OPENCV_GENERATE_PKGCONFIG=YES .. \
+    && make \
+    && make install \
+    && ldconfig
+RUN mv /usr/local/lib/python3.5/dist-packages/cv2/python-3.5/cv2.cpython-35m-x86_64-linux-gnu.so /usr/local/lib/python3.5/dist-packages/cv2/python-3.5/cv2.so
+
+RUN g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/bin/stitching_multi `pkg-config opencv4 --cflags --libs` \
+    && g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_single.cpp -o /usr/bin/stitching_single `pkg-config opencv4 --cflags --libs`
+
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
 
-RUN apt-get install screen -y
 COPY entrypoint.sh /entrypoint.sh
 RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/sgn
 
 # start services when running container...
 ENTRYPOINT /bin/bash /entrypoint.sh
-
