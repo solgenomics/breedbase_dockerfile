@@ -41,6 +41,7 @@ triticum
 *.o
 *.pm.tdy
 *.bs
+*.pyc
 
 # Devel::Cover
 cover_db/
