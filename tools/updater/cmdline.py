@@ -1,6 +1,10 @@
 from argparse import ArgumentParser
 from pathlib import Path
 import os, sys
+try:
+  import ipdb
+except ImportError:
+  ipdb = None
 
 from .main import main as real_main
 
@@ -26,9 +30,7 @@ def main(args=None):
       import traceback
       traceback.print_exc()
       extype, value, tb = sys.exc_info()
-      try:
-        import ipdb
-      except ImportError:
+      if ipdb is None:
         raise value
       else:
         ipdb.post_mortem(tb)
