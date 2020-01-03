@@ -23,10 +23,15 @@ def main(args=None):
     except KeyboardInterrupt:
       error = 0
     except:
-      import ipdb, traceback
+      import traceback
       traceback.print_exc()
       extype, value, tb = sys.exc_info()
-      ipdb.post_mortem(tb)
+      try:
+        import ipdb
+      except ImportError:
+        raise value
+      else:
+        ipdb.post_mortem(tb)
   else:
     error = real_main(options)
   sys.exit(error)
