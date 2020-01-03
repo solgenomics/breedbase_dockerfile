@@ -1,6 +1,9 @@
 import os
+import re
 
 import git
+
+detached_head_re = re.compile(r'^HEAD is .* detached')
 
 def format_commit(commit):
   return f'{commit.hexsha[:7]} by {commit.author} on {commit.authored_datetime}: {commit.summary}'
@@ -27,7 +30,13 @@ class PullResult(object):
 def check_repos(options):
   changed = []
   for repo in os.listdir(options.repos):
-    res = PullResult(os.path.join(options.repos, repo), options)
+    try:
+      res = PullResult(os.path.join(options.repos, repo), options)
+    except TypeError as e:
+      if detached_head_re.match(str(e)):
+        print(f'WARNING: {repo} is detached, not updating')
+      else:
+        raise e
     if res.commits:
       changed.append(res)
   return changed
