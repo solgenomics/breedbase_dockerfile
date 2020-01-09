@@ -27,10 +27,13 @@ def main(options):
         if options.verbose:
           print(result.log)
           print('=' * 80)
+  elif options.force_build:
+    print('No changes detected, but building anyway as requested')
+  elif options.verbose:
+    print('No changes.')
 
-    if error:
-      print('Not building image (error occurred)')
-    elif options.dry_run:
+  if changed or options.force_build:
+    if options.dry_run:
       print('Not building image (dry run)')
     else:
       docker_res = update_docker(options)
@@ -42,10 +45,14 @@ def main(options):
           print('Error building docker image')
         error = docker_res['error']
       else:
-        print(f'Built {options.image_name}:{docker_res["tag"]} ({docker_res["id"]})')
+        print(f'Built {options.image_name}:{docker_res["tag"]} ({docker_res.get("id", "id not known")})')
       print('Produced logs:', ', '.join(docker_res['logs'].keys()))
       if options.verbose and docker_res['logs'].get('stream'):
         for line in docker_res['logs']['stream']:
+          print(line.strip())
+        print('=' * 80)
+      elif options.verbose and docker_res['logs'].get('docker_build_out'):
+        for line in docker_res['logs']['docker_build_out']:
           print(line.strip())
         print('=' * 80)
 
@@ -92,8 +99,5 @@ def main(options):
             else:
               import json
               json.dump(content, f, indent=2)
-
-  elif options.verbose:
-    print('No changes.')
 
   return error

@@ -13,6 +13,7 @@ parser.add_argument('root', metavar='DIR', default='.', nargs='?', help='Root di
 parser.add_argument('--image-name', metavar='NAME', default='breedbase/breedbase', help='Name to tag the docker image with')
 parser.add_argument('--write-logs', metavar='DIR', help='Write log files to DIR')
 parser.add_argument('-c', '--update-compose', action='store_true', help='Update running container on docker-compose')
+parser.add_argument('-f', '--force-build', action='store_true', help='Build even if no git changes detected')
 parser.add_argument('-v', '--verbose', action='store_true', help='Extra output')
 parser.add_argument('-n', '--dry-run', action='store_true', help='Do not update trees or build the image, but otherwise pretend to')
 
