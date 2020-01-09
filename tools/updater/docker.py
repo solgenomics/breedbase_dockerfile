@@ -24,9 +24,9 @@ def update_docker(options):
     return {'error': 0, 'tag': tag, 'id': image.id.split(':', 1)[1][:12], 'logs': stream_to_map(logs)}
   else:
     res = subprocess.run(['docker', 'build', '-t', f'{options.image_name}:{tag}', options.root], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    logs = {'docker_build_out': res.stdout, 'docker_build_err': res.stderr}
+    logs = {'docker_build_out': [res.stdout.decode(sys.stdout.encoding)], 'docker_build_err': [res.stderr.decode(sys.stdout.encoding)]}
     if res.returncode:
       return {'error': res.returncode, 'tag': None, 'id': None, 'logs': logs}
     res = subprocess.run(['docker', 'tag', f'{options.image_name}:{tag}', f'{options.image_name}:latest'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    logs.update({'docker_tag_out': res.stdout, 'docker_tag_err': res.stderr})
+    logs.update({'docker_tag_out': [res.stdout.decode(sys.stdout.encoding)], 'docker_tag_err': [res.stderr.decode(sys.stdout.encoding)]})
     return {'error': res.returncode, 'tag': tag, 'id': None, 'logs': logs}
