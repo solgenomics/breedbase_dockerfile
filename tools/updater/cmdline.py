@@ -21,6 +21,7 @@ def main(args=None):
   options = parser.parse_args(args)
   options.repos = os.path.join(options.root, 'repos')
   options.compose_root = Path(__file__).resolve().parent.parent.parent
+  options.use_docker_py = False
   if sys.stdout.isatty():
     try:
       error = real_main(options)

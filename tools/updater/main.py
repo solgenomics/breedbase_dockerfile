@@ -28,19 +28,30 @@ def main(options):
           print(result.log)
           print('=' * 80)
 
-    if options.dry_run:
+    if error:
+      print('Not building image (error occurred)')
+    elif options.dry_run:
       print('Not building image (dry run)')
     else:
       docker_res = update_docker(options)
       logs.update(docker_res['logs'])
-      print(f'Built {options.image_name}:{docker_res["tag"]} ({docker_res["id"]})')
+      if docker_res.get('error'):
+        if docker_res.get('error_msg'):
+          print(f'Error building docker image: {docker_res["error_msg"]}')
+        else:
+          print('Error building docker image')
+        error = docker_res['error']
+      else:
+        print(f'Built {options.image_name}:{docker_res["tag"]} ({docker_res["id"]})')
       print('Produced logs:', ', '.join(docker_res['logs'].keys()))
       if options.verbose and docker_res['logs'].get('stream'):
         for line in docker_res['logs']['stream']:
           print(line.strip())
         print('=' * 80)
 
-    if options.dry_run:
+    if error:
+      print('Not updating containers (error occurred)')
+    elif options.dry_run:
       print('Not updating containers (dry run)')
     elif options.update_compose:
       os.chdir(options.compose_root)
