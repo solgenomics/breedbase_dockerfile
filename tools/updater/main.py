@@ -9,6 +9,7 @@ from .docker import update_docker
 
 def main(options):
   error = 0
+  logs = {}
 
   if options.verbose:
     print(f'Checking repos in {options.repos}')
@@ -16,7 +17,6 @@ def main(options):
     print('  (dry run)')
   changed = check_repos(options)
   if changed:
-    logs = {}
     print('Changed repos:')
     for result in changed:
       print(f'{result.name}: {len(result.commits)} new commits')
