@@ -43,6 +43,7 @@ triticum
 *.pm.tdy
 *.bs
 *.pyc
+/updater-logs
 
 # Devel::Cover
 cover_db/
