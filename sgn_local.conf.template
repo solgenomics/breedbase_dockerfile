@@ -54,7 +54,11 @@ default_genotyping_protocol "GBS ApeKI Cassava genome v6_Oct2015"
 identifier_prefix BB
 project_name "breeDBase"
 cview_db_backend Cassava        
+
+# slurm config
 backend Slurm
+submit_host ""
+
 solgs_dir        /home/production/tmp/solgs/__USERNAME__
 trait_ontology_db_name CO_334
 
