@@ -1,5 +1,5 @@
 FROM debian:stretch
-
+sudo aptitude install libgdal-dev libproj-dev libudunits2-dev
 LABEL maintainer="lam87@cornell.edu"
 
 ENV CPANMIRROR=http://cpan.cpantesters.org
@@ -23,10 +23,16 @@ RUN chown -R www-data /home/production/archive
 RUN mkdir -p /home/production/blast/databases/current
 RUN mkdir -p /home/production/cxgn
 RUN mkdir -p /home/production/cxgn/local-lib
+RUN mkdir -p /home/production/cache
+RUN chown -R www-data /home/production/cache
 RUN mkdir /etc/starmachine
 RUN mkdir /var/log/sgn
 
 WORKDIR /home/production/cxgn
+
+# key for cran-backports (not working though)
+#
+RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF' 2> /key.out"
 
 # add cran backports repo and required deps
 #
@@ -38,10 +44,6 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN apt-get update -y --allow-unauthenticated 
 RUN apt-get upgrade -y
 RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl -y
-
-# key for cran-backports (not working though)
-#
-RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF' 2> /key.out"
 
 #RUN apt-get update --fix-missing -y
 RUN apt-get update -y
@@ -62,7 +64,7 @@ RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticate
 
 # required for R-package spdep, and other dependencies of agricolae
 #
-RUN apt-get install libudunits2-dev libgdal-dev -y
+RUN apt-get install libudunits2-dev libproj-dev libgdal-dev -y
 
 # copy some tools that don't have a Debian package
 #
@@ -112,7 +114,6 @@ RUN apt-get install nodejs -y
 WORKDIR /home/production/cxgn/sgn
 
 ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
-
 
 # run the Build.PL to install the R dependencies...
 #

@@ -57,7 +57,8 @@ cview_db_backend Cassava
 
 # slurm config
 backend Slurm
-submit_host ""
+cluster_host ""
+cache_file_path /home/production/cache
 
 solgs_dir        /home/production/tmp/solgs/__USERNAME__
 trait_ontology_db_name CO_334
