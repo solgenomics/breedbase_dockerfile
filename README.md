@@ -240,4 +240,4 @@ maxsockets=1
 ```
 Of course, replace ```yourproxy.server.org:3128``` with your correct proxy server hostname and port. 
 
-When running the docker, mount this file (using the mount option in ```docker-compose``` or ```-v``` with ```docker run``` etc.) at the location ```/home/production/.npmrc``` in the docker. Then start your docker and now npm should be able to fetch dependencies from the registry.
+When running the docker, mount this file (using the ```volumes``` option in ```docker-compose``` or ```-v``` with ```docker run``` etc.) at the location ```/home/production/.npmrc``` in the docker. Then start your docker and now npm should be able to fetch dependencies from the registry.
