@@ -229,7 +229,7 @@ docker run -d -p 7080:8080 -e MODE=DEVELOPMENT -v /host/path/to/sgn:/home/produc
 
 # Running Breedbase behind a proxy server
 
-In many situations, the Breedbase server will be installed behind a proxy server. While everything should run normally, there is an issue with ```npm```, and it needs to be specially configured. Create a file, let's say, ```npm_config.txt```, with the following lines in it:
+In many situations, the Breedbase server will be installed behind a proxy server. While everything should run normally, there is an issue with ```npm```, and it needs to be specially configured. Create a file on the host server, let's say, ```npm_config.txt```, with the following lines in it:
 
 ```
 strict-ssl=false
