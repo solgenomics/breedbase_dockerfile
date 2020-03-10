@@ -226,3 +226,18 @@ For development, you can also use the ` -e MODE=DEVELOPMENT` flag, which will ru
 ```
 docker run -d -p 7080:8080 -e MODE=DEVELOPMENT -v /host/path/to/sgn:/home/production/cxgn/sgn -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive breedbase/breedbase:latest
 ```
+
+# Running Breedbase behind a proxy server
+
+In many situations, the Breedbase server will be installed behind a proxy server. While everything should run normally, there is an issue with ```npm```, and it needs to be specially configured. Create a file, let's say, ```npm_config.txt```, with the following lines in it:
+
+```
+strict-ssl=false
+registry=http://registry.npmjs.org/
+proxy=http://yourproxy.server.org:3128
+https-proxy=http://yourproxy.server.org:3128
+maxsockets=1
+```
+Of course, replace yourproxy.server.org:3128 with your correct proxy server hostname and port. 
+
+When running the docker, mount this file (using the mount option in ```docker-compose``` or ```-v``` with ```docker run``` etc.) at ```/home/production/.npmrc``` in the docker.
