@@ -13,4 +13,3 @@ else
   chmod 777 /var/log/sgn/error.log
   tail -f /var/log/sgn/error.log
 fi
-

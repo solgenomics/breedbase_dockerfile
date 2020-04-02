@@ -1,21 +1,26 @@
-version: "3.7"
+version: "3.3"
 
 services:
   breedbase:
-    image: breedbase/breedbase:v0.8
+    image: breedbase/breedbase:v0.9
     depends_on:
       - breedbase_db
     container_name: breedbase_web
     ports:
       - 7080:8080
       - 25:25
+    environment:
+      - MODE=DEVELOPMENT
     volumes:
       - type: bind
-        source: ${HOME}/sgn_local.conf
+        source: ${HOME}/breedbase_dockerfile/sgn_local.conf
         target: /home/production/cxgn/sgn/sgn_local.conf
-#      - type: bind
-#        source: ${HOME}/empty_dump_20200313.sql
-#        target: /home/production/empty_dump_20200313.sql
+      - type: bind
+        source: ${HOME}/cxgn/sgn
+        target: /home/production/cxgn/sgn
+      - type: bind
+        source: ${HOME}/cxgn/DroneImageScripts
+        target: /home/production/cxgn/DroneImageScripts
       - type: bind
         source: ${HOME}/archive
         target: /home/production/archive
@@ -41,5 +46,5 @@ services:
 #      - 5431:5432
     volumes:
       - type: bind
-        source: /home/production/pgdata
+        source: ${HOME}/pgdata
         target: /var/lib/postgresql/data
