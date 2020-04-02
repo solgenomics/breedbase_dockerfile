@@ -13,7 +13,7 @@ services:
       - MODE=DEVELOPMENT
     volumes:
       - type: bind
-        source: ${HOME}/breedbase_dockerfile/sgn_local.conf
+        source: ${HOME}/work_scripts/sgn_local_docker.conf
         target: /home/production/cxgn/sgn/sgn_local.conf
       - type: bind
         source: ${HOME}/cxgn/sgn
@@ -21,6 +21,9 @@ services:
       - type: bind
         source: ${HOME}/cxgn/DroneImageScripts
         target: /home/production/cxgn/DroneImageScripts
+      - type: bind
+        source: ${HOME}/cxgn/imagesol
+        target: /home/production/cxgn/imagesol
       - type: bind
         source: ${HOME}/archive
         target: /home/production/archive
