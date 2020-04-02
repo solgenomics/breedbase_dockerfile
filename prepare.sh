@@ -44,9 +44,9 @@ git clone https://github.com/solgenomics/solgenomics.git repos/solgenomics
 git clone https://github.com/solgenomics/panzeabase.git repos/panzeabase
 git clone https://github.com/solgenomics/varitome.git repos/varitome
 git clone https://github.com/solgenomics/milkweed.git repos/milkweed
-git clone https://github.com/solgenomics/erysimum.git repos/erysimum 
+git clone https://github.com/solgenomics/erysimum.git repos/erysimum
 git clone https://github.com/solgenomics/vitisbase.git repos/vitisbase
 git clone https://github.com/solgenomics/panandbase.git repos/panandbase
 git clone https://github.com/solgenomics/triticum.git repos/triticum
 git clone https://github.com/solgenomics/gorelabbase.git repos/gorelabbbase
-
+git clone https://github.com/solgenomics/imagesol.git repos/imagesol
