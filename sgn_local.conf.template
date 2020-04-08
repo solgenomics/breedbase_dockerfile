@@ -62,8 +62,6 @@ trait_ontology_db_name CO_334
 
 #For display on onto tree
 onto_root_namespaces  CO_334 (Cassava Trait Ontology), GO (Gene Ontology), PO (Plant Ontology), SO (Sequence Ontology), PATO (Phenotype and Trait Ontology)
-#For display on trait search
-trait_variable_onto_root_namespaces CO_334 (Cassava Ontology), COMP (Composed Variables)
 
 <Controller::Cview>
         cview_default_map_id 1
@@ -71,7 +69,6 @@ trait_variable_onto_root_namespaces CO_334 (Cassava Ontology), COMP (Composed Va
 
 r_qtl_temp_path /export/prod/tmp/solqtl___USERNAME__
 
-image_path                /home/production/public/images
 submit_dir                /home/production/public/submit-uploads
 
 blast_path                ""
