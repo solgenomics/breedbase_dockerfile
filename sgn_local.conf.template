@@ -6,9 +6,6 @@ dbpass <password>
 rootpath /home/production/cxgn
 basepath /home/production/cxgn/sgn
 
-composable_cvs trait,toy
-composable_cvs_allowed_combinations Time Series|trait+toy
-
 homepage_files_dir        /home/production/public/static_content
 
 trial_download_logfile /home/production/logs/cassava_trial_download_log
@@ -53,7 +50,7 @@ default_genotyping_protocol "GBS ApeKI Cassava genome v6_Oct2015"
 
 identifier_prefix BB
 project_name "breeDBase"
-cview_db_backend Cassava        
+cview_db_backend Cassava
 
 # slurm config
 backend Slurm
@@ -68,7 +65,7 @@ onto_root_namespaces  CO_334 (Cassava Trait Ontology), GO (Gene Ontology), PO (P
 #For display on trait search
 trait_variable_onto_root_namespaces CO_334 (Cassava Ontology), COMP (Composed Variables)
 
-<Controller::Cview>     
+<Controller::Cview>
         cview_default_map_id 1
 </Controller::Cview>
 
