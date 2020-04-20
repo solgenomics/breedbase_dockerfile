@@ -11,6 +11,7 @@ services:
       - 25:25
     environment:
       - MODE=DEVELOPMENT
+      - PGPASSFILE=/home/production/.pgpass
     volumes:
       - type: bind
         source: ${HOME}/work_scripts/sgn_local_docker.conf
