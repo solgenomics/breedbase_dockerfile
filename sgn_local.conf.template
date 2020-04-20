@@ -1,7 +1,7 @@
-dbhost <dbhost>
-dbname <dbname>
-dbuser web_usr
-dbpass <password>
+dbhost breedbase_db
+dbname empty_fixture
+dbuser postgres
+dbpass postgres
 
 rootpath /home/production/cxgn
 basepath /home/production/cxgn/sgn
@@ -54,7 +54,7 @@ cview_db_backend Cassava
 
 # slurm config
 backend Slurm
-cluster_host ""
+cluster_host breedbase_web
 cache_file_path /home/production/cache
 
 solgs_dir        /home/production/tmp/solgs/__USERNAME__
@@ -85,7 +85,7 @@ ftpsite_root              /home/production/public
 <DatabaseConnection sgn_test>
   dsn dbi:Pg:host=localhost;dbname=cxgn
   user postgres
-  password <your postgres user password>
+  password postgres
 
   search_path public
   search_path sgn
