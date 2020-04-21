@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   breedbase:
-    image: breedbase/breedbase:v0.9
+    image: breedbase/breedbase:v0.10
     depends_on:
       - breedbase_db
     container_name: breedbase_web
