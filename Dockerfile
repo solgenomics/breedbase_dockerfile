@@ -152,6 +152,8 @@ RUN mv /usr/local/lib/python3.5/dist-packages/cv2/python-3.5/cv2.cpython-35m-x86
 RUN g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/bin/stitching_multi `pkg-config opencv4 --cflags --libs` \
     && g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_single.cpp -o /usr/bin/stitching_single `pkg-config opencv4 --cflags --libs`
 
+RUN pip3 install tensorflow "numpy<1.17"
+
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
 
 COPY entrypoint.sh /entrypoint.sh
