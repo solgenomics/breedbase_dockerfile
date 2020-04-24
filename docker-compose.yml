@@ -42,7 +42,7 @@ services:
         target: /home/production/blast
       - type: bind
         source: ${HOME}/images
-        target: /home/production/images
+        target: /home/production/public/images
   breedbase_db:
     image: breedbase/pg:latest
     container_name: breedbase_db
