@@ -24,7 +24,7 @@ preferred_species Manihot esculenta
 
 production_server 0
 image_dir /images/image_files_test
-image_path /home/production/images/image_files_test
+image_path /home/production/public/images/image_files_test
 cluster_shared_tempdir /home/production/tmp
 tempfiles_base /home/production/tmp/breedbase-site
 static_datasets_path /home/production/public
