@@ -241,3 +241,16 @@ maxsockets=1
 Of course, replace ```yourproxy.server.org:3128``` with your correct proxy server hostname and port. 
 
 When running the docker, mount this file (using the ```volumes``` option in ```docker-compose``` or ```-v``` with ```docker run``` etc.) at the location ```/home/production/.npmrc``` in the docker. Then start your docker and now npm should be able to fetch dependencies from the registry.
+
+# Running tests from the docker
+
+To run tests from the docker, please note that the $HOME environment variable is set to ```/home/production```, so the ```.pgpass``` file will be written there. Most likely you will run the test as root, so the ```.pgpass``` file will be expected in the ```root``` directory. To make the tests work, first set ```$HOME``` to the correct dir: 
+```
+export HOME=/root
+```
+Also, the tests expect a ```web_usr``` role in the postgres instance. Log into the postgres instance and issue the commands:
+```
+create role web_usr with password '?????';
+alter role web_usr with login;
+
+```
