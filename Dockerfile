@@ -151,10 +151,20 @@ RUN mv /usr/local/lib/python3.5/dist-packages/cv2/python-3.5/cv2.cpython-35m-x86
 RUN g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/bin/stitching_multi `pkg-config opencv4 --cflags --libs` \
     && g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_single.cpp -o /usr/bin/stitching_single `pkg-config opencv4 --cflags --libs`
 
-RUN pip3 install tensorflow "numpy<1.17" scipy cython h5py imgaug IPython[all] "six>=1.15.0"
+RUN pip3 install tensorflow "numpy<1.17" scipy cython h5py imgaug IPython[all] "six>=1.15.0" 
 RUN git clone https://github.com/matterport/Mask_RCNN.git \
     && cd Mask_RCNN \
+    && pip3 install -r requirements.txt \
+    && pip3 install "setuptools>=46.4.0" \
     && python3 setup.py install
+
+#macs mrcnn/model.py # Edit model.py
+#--------------------------------------
+#At line 2199
+# self.keras_model.metrics_tensors.append(loss) # <- comment out
+#self.keras_model.add_metric(loss, name) # <- Add
+#--------------------------------------
+#sudo python3 setup.py install # <- mask_rcnn-2.1-py3.6.egg is automaticalliy replaced
 
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
 
