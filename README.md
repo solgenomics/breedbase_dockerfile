@@ -254,3 +254,9 @@ create role web_usr with password '?????';
 alter role web_usr with login;
 
 ```
+
+Then, start the tests with (from the ```/home/production/cxgn/sgn``` dir):
+```
+t/test_fixture.pl t/unit_fixture/
+
+```
