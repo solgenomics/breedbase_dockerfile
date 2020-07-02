@@ -273,3 +273,8 @@ The database can be updated to the current level in one step by running the ```r
     perl run_all_patches.pl -u postgres -p postgres -h breedbase_db -d
     breedbase -e admin [-s <startfrom>] [--test]
 ```
+
+Note that for this to work, the $PERL5LIB environment variable should have the current directory included. If it isn't, run:
+```
+    export PERL5LIB=$PERL5LIB:.
+```
