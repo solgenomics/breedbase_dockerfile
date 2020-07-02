@@ -73,7 +73,7 @@ Docker run allows you to define and start a single instance of a container.
 
     Once the container is running, you can access the application at http://localhost:7080
     
-## Using `docker-compose` (Preferrred method)
+## Using `docker-compose` (Preferred method)
 Docker compose allows you to configure one or more containers and their dependencies, and then use one command to start, stop, or remove all of the containers. 
 
 1. Install docker-compose
