@@ -263,7 +263,11 @@ t/test_fixture.pl t/unit_fixture/
 
 # Updating the database from the docker
 
-Code updates sometimes require the database structure to be updated. This is done based on so-called db patches. The db patches are in numbered directories in the the ```db/``` directory of the ```sgn``` repository. The db patches can be run individually by changing into the specific directory, and then running the script using ```mx-run```, using the parameters as described in the ```perldoc``` for the scripts. The database can be updated to the current level in one step by running the ```run_all_patches.pl``` script in the ```db/``` directory, which calls all the db patches individually. If you are using the standard docker-compose setup, the command line is (options in square brackets are optional):
+Code updates sometimes require the database structure to be updated. This is done based on so-called db patches. The db patches are in numbered directories in the the ```db/``` directory of the ```sgn``` repository. 
+
+The db patches can be run individually by changing into the specific directory, and then running the script using ```mx-run```, using the parameters as described in the ```perldoc``` for the scripts. 
+
+The database can be updated to the current level in one step by running the ```run_all_patches.pl``` script in the ```db/``` directory, which calls all the db patches individually. If you are using the standard docker-compose setup, the command line is (options in square brackets are optional):
 ```
     cd cxgn/sgn/db
     perl run_all_patches.pl -u postgres -p postgres -h breedbase_db -d
