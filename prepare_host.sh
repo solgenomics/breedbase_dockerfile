@@ -39,4 +39,6 @@ chown www-data "$DIR/cluster"
 mkdir "$DIR/pgdata"
 chown postgres "$DIR/pgdata"
 
+mkdir "$DIR/blast"
+
 echo "Done."
