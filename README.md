@@ -4,6 +4,10 @@ The Dockerfile for [breeDBase](https://github.com/solgenomics/sgn)
 # Starting a Breedbase instance
 There are a few ways in which the image can be run: (1) [using docker swarm](#using-docker-swarm), (2) [using docker run](#using-docker-run), or (3) [using docker compose](#using-docker-compose).  Before running the image, some prereqs must be satisfied.
 
+```
+The recommended method for running Breedbase is using docker-compose.
+```
+
 ## Prereqs
 
 ### Docker
