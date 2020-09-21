@@ -10,5 +10,6 @@ if [ "$MODE" == "DEVELOPMENT" ]; then
 	/home/production/cxgn/sgn/bin/sgn_server.pl --fork -r -d -p 8080
 else
   /etc/init.d/sgn start
+  chmod 777 /var/log/sgn/error.log
   tail -f /var/log/sgn/error.log
 fi

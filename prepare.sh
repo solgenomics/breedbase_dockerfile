@@ -13,13 +13,15 @@ git clone https://github.com/solgenomics/ITAG.git repos/ITAG
 git clone https://github.com/solgenomics/tomato_genome.git repos/tomato_genome
 git clone https://github.com/GMOD/Chado.git repos/Chado
 git clone https://github.com/GMOD/chado_tools.git repos/chado_tools
-git clone https://github.com/solgenomics/bio-chado-schema.git repos/Bio-Chado-Schema
 git clone https://github.com/solgenomics/sgn-devtools.git repos/sgn-devtools
 git clone https://github.com/solgenomics/solGS.git repos/solGS
 git clone https://github.com/solgenomics/starmachine.git repos/starmachine
 git clone https://github.com/GMOD/Chado repos/Chado
 git clone https://github.com/GMOD/chado_tools repos/chado_tools
 git clone https://github.com/GMOD/Bio-Chado-Schema repos/Bio-Chado-Schema
+git clone https://github.com/solgenomics/DroneImageScripts.git repos/DroneImageScripts
+git clone --branch 4.1.0 --depth 1 https://github.com/opencv/opencv repos/opencv
+git clone --branch 4.1.0 --depth 1 https://github.com/opencv/opencv_contrib repos/opencv_contrib
 
 # local libs
 git clone https://github.com/solgenomics/perl-local-lib repos/local-lib
@@ -42,9 +44,9 @@ git clone https://github.com/solgenomics/solgenomics.git repos/solgenomics
 git clone https://github.com/solgenomics/panzeabase.git repos/panzeabase
 git clone https://github.com/solgenomics/varitome.git repos/varitome
 git clone https://github.com/solgenomics/milkweed.git repos/milkweed
-git clone https://github.com/solgenomics/erysimum.git repos/erysimum 
+git clone https://github.com/solgenomics/erysimum.git repos/erysimum
 git clone https://github.com/solgenomics/vitisbase.git repos/vitisbase
 git clone https://github.com/solgenomics/panandbase.git repos/panandbase
 git clone https://github.com/solgenomics/triticum.git repos/triticum
 git clone https://github.com/solgenomics/gorelabbase.git repos/gorelabbbase
-
+git clone https://github.com/solgenomics/imagesol.git repos/imagesol

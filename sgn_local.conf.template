@@ -6,9 +6,6 @@ dbpass <password>
 rootpath /home/production/cxgn
 basepath /home/production/cxgn/sgn
 
-composable_cvs trait,toy
-composable_cvs_allowed_combinations Time Series|trait+toy
-
 homepage_files_dir        /home/production/public/static_content
 
 trial_download_logfile /home/production/logs/cassava_trial_download_log
@@ -17,6 +14,11 @@ disable_login 0
 
 www_user www-data
 www_group www-data
+
+error_log                 /var/log/sgn/error.log
+access_log                /var/log/sgn/access.log
+
+python_executable python3
 
 preferred_species Manihot esculenta
 
@@ -49,14 +51,17 @@ default_genotyping_protocol "GBS ApeKI Cassava genome v6_Oct2015"
 identifier_prefix BB
 project_name "breeDBase"
 cview_db_backend Cassava
+
+# slurm config
 backend Slurm
+cluster_host ""
+cache_file_path /home/production/cache
+
 solgs_dir        /home/production/tmp/solgs/__USERNAME__
 trait_ontology_db_name CO_334
 
 #For display on onto tree
 onto_root_namespaces  CO_334 (Cassava Trait Ontology), GO (Gene Ontology), PO (Plant Ontology), SO (Sequence Ontology), PATO (Phenotype and Trait Ontology)
-#For display on trait search
-trait_variable_onto_root_namespaces CO_334 (Cassava Ontology), COMP (Composed Variables)
 
 <Controller::Cview>
         cview_default_map_id 1
@@ -64,7 +69,6 @@ trait_variable_onto_root_namespaces CO_334 (Cassava Ontology), COMP (Composed Va
 
 r_qtl_temp_path /export/prod/tmp/solqtl___USERNAME__
 
-image_path                /home/production/public/images
 submit_dir                /home/production/public/submit-uploads
 
 blast_path                ""

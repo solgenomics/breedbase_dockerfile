@@ -4,6 +4,7 @@ services:
   breedbase:
     ports:
       - 7080:8080
+      - 25:25
     volumes:
       - type: bind
         source: ./sgn_local.conf

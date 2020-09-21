@@ -1,0 +1,23 @@
+version: "3.7"
+
+# Docker compose for SGN production servers
+# For testing purposes
+#
+
+services:
+  breedbase:
+    image: breedbase/breedbase:v0.8
+#    depends_on:
+#      - breedbase_db
+    container_name: breedbase_web
+    ports:
+      - 7080:8080
+      - 25:25
+    volumes:
+      - type: bind
+        source: /home/production/cxgn_config/sgn_local.conf
+        target: /home/production/cxgn/sgn/sgn_local.conf
+      - type: bind
+        source: /export/prod
+	target: /export/prod
+
