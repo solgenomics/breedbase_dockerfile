@@ -13,9 +13,10 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
 [Deploy in Production](#deploy-in-production)  
 [Deploy for Development](#deploy-for-development)  
-[Deploy Individually](#deploy-individually)  
-[Build a New Image](#build-a-new-image)  
+[Building and Releasing New Images](#building-and-releasing-new-images)  
 [Debugging](#debugging)  
+[Testing](#testing)  
+[Miscellaneous](#miscellaneous)  
 
 
 ## Deploy in Production
@@ -126,7 +127,110 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     `docker-compose down`   Will remove both containers, but only if run within the breedbase_dockerfile directory.
 
 
-## Deploy Individually
+## Building and Releasing New Images
+
+If desired, a breedbase docker image can be built from scratch, as explained below. This is not recommended unless necessary for testing or unless you are responsible for releasing new images on dockerhub.
+
+1. Clone the repo
+    ```
+    git clone https://github.com/solgenomics/breedbase_dockerfile
+    ```
+
+2. Run the prepare.sh script from within the breedbase_dockerfile dir
+    ```
+    cd breedbase_dockerfile
+    ./prepare.sh
+    ```
+    This will clone all the git repos that are needed for the build into a directory called `repos/`.
+    You can then checkout particular branches or tags in the included repos before the build.
+
+3. Build a new image just for local testing
+    ```
+    ./build.sh
+    ```
+    The build script will retrieve label metadata and run docker build.
+
+4. Or, build and push a new release to Dockerhub
+    ```
+    ./release.sh
+    ```
+    The release script will run the build script, then push the build to dockerhub.
+
+
+## Debugging
+
+To debug, log into the container. You can find the container id using
+```
+docker ps
+```
+then
+```
+docker exec -it <container_id> bash
+```
+
+You can use `lynx localhost:8080` to see if the server is running correctly within the container, and look at the error log using `tail -f /var/log/sgn/error.log` or `less /var/log/sgn/error.log`.
+
+You can of course also find the IP address of the running container either in the container using `ip address` or from the host using `docker inspect <container_id>`.
+
+
+## Testing
+
+To run tests from the docker, please note that the $HOME environment variable is set to ```/home/production```, so the ```.pgpass``` file will be written there. Most likely you will run the test as root, so the ```.pgpass``` file will be expected in the ```root``` directory. To make the tests work, first set ```$HOME``` to the correct dir:
+```
+export HOME=/root
+```
+Also, the tests expect a ```web_usr``` role in the postgres instance. Log into the postgres instance and issue the commands:
+```
+create role web_usr with password '?????';
+alter role web_usr with login;
+
+```
+
+Then, start the tests with (from the ```/home/production/cxgn/sgn``` dir):
+```
+t/test_fixture.pl t/unit_fixture/
+
+```
+
+
+## Miscellaneous
+
+### Running Breedbase behind a proxy server
+
+In many situations, the Breedbase server will be installed behind a proxy server. While everything should run normally, there is an issue with ```npm```, and it needs to be specially configured. Create a file on the host server, let's say, ```npm_config.txt```, with the following lines in it:
+
+```
+strict-ssl=false
+registry=http://registry.npmjs.org/
+proxy=http://yourproxy.server.org:3128
+https-proxy=http://yourproxy.server.org:3128
+maxsockets=1
+```
+Of course, replace ```yourproxy.server.org:3128``` with your correct proxy server hostname and port.
+
+When running the docker, mount this file (using the ```volumes``` option in ```docker-compose``` or ```-v``` with ```docker run``` etc.) at the location ```/home/production/.npmrc``` in the docker. Then start your docker and now npm should be able to fetch dependencies from the registry.
+
+### Updating the database schema from the docker
+
+Code updates sometimes require the database schema to be updated. This is done using so-called db patches. The db patches are in numbered directories in the the ```db/``` directory of the ```sgn``` repository.
+
+The db patches can be run individually by changing into the specific directory, and then running the script using ```mx-run```, using the parameters as described in the ```perldoc``` for the scripts.
+
+The database can be updated to the current level in one step (recommended method) by running the ```run_all_patches.pl``` script in the ```db/``` directory, which calls all the db patches individually. If you are using the standard docker-compose setup, the command line is (options in square brackets are optional):
+```
+    cd cxgn/sgn/db
+    perl run_all_patches.pl -u postgres -p postgres -h breedbase_db -d
+    breedbase -e admin [-s <startfrom>] [--test]
+```
+
+Note that for this to work, the $PERL5LIB environment variable should have the current directory included. If it isn't, run:
+```
+    export PERL5LIB=$PERL5LIB:.
+```
+
+### Deploying Services Individually
+
+ * Individual deployment is generally not necessary or recommended. When possible deploy jointly with docker compose *
 
 1. Install docker
 
@@ -134,7 +238,7 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
 
   For Mac/Windows: [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
-2. Deploy Web Server
+2. Deploy a Web Server
 
   This will create a Breedbase web server container. The -v flag is used to mount a local conf file and a couple of dirs from the host. Create the file and ris on your host if they don't exist and update the paths before running the command. If you will use this container for development it is also recommended to run `./prepare.sh` and mount the resulting `repos` repo at `/home/production/cxgn`.
 
@@ -142,7 +246,7 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
   docker run -d --name breedbase_web -p 7080:8080 -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive -v /host/path/to/public_breedbase:/home/production/public breedbase/breedbase:latest
   ```
 
-3. Deploy Postgres Database
+3. Deploy a Postgres Database
 
   This will create an empty Breedbase postgres database container.
 
@@ -170,108 +274,3 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
   ```
 
   Finally access the application at http://localhost:7080
-
-
-## Build a New Image
-
-If desired, a breedbase docker image can be built from scratch using this repo, as explained below. This is not recommended unless you have some time to kill, or are responsible for pushing a new image to dockerhub.
-
-1. Clone the repo
-    ```
-    git clone https://github.com/solgenomics/breedbase_dockerfile
-    ```
-
-2. Run the prepare.sh script from within the breedbase_dockerfile dir
-    ```
-    cd breedbase_dockerfile
-    ./prepare.sh
-    ```
-    This will clone all the git repos that are needed for the build into a directory called `repos/`.
-    You can then checkout particular branches or tags in the repo before the build.
-
-3. Build the image
-    ```
-    ./build.sh
-    ```
-    The build script will retrieve label metadata and run docker build. If the sgn repo is checked out on a branch, then your new build will be tagged `:devel`. If it is checked out on a git release tag your new image will be tagged `:production`.
-
-4. Optional - Push to Dockerhub
-    ```
-    docker login
-    ```
-    then
-    ```
-    docker push breedbase/breedbase:devel
-    ```
-    or
-    ```
-    docker push breedbase/breedbase:production
-    ```
-
-
-## Debugging
-
-To debug, log into the container. You can find the container id using
-```
-docker ps
-```
-then
-```
-docker exec -it <container_id> bash
-```
-
-You can use `lynx localhost:8080` to see if the server is running correctly within the container, and look at the error log using `tail -f /var/log/sgn/error.log` or `less /var/log/sgn/error.log`.
-
-You can of course also find the IP address of the running container either in the container using `ip address` or from the host using `docker inspect <container_id>`.
-
-# Running Breedbase behind a proxy server
-
-In many situations, the Breedbase server will be installed behind a proxy server. While everything should run normally, there is an issue with ```npm```, and it needs to be specially configured. Create a file on the host server, let's say, ```npm_config.txt```, with the following lines in it:
-
-```
-strict-ssl=false
-registry=http://registry.npmjs.org/
-proxy=http://yourproxy.server.org:3128
-https-proxy=http://yourproxy.server.org:3128
-maxsockets=1
-```
-Of course, replace ```yourproxy.server.org:3128``` with your correct proxy server hostname and port.
-
-When running the docker, mount this file (using the ```volumes``` option in ```docker-compose``` or ```-v``` with ```docker run``` etc.) at the location ```/home/production/.npmrc``` in the docker. Then start your docker and now npm should be able to fetch dependencies from the registry.
-
-# Running tests from the docker
-
-To run tests from the docker, please note that the $HOME environment variable is set to ```/home/production```, so the ```.pgpass``` file will be written there. Most likely you will run the test as root, so the ```.pgpass``` file will be expected in the ```root``` directory. To make the tests work, first set ```$HOME``` to the correct dir:
-```
-export HOME=/root
-```
-Also, the tests expect a ```web_usr``` role in the postgres instance. Log into the postgres instance and issue the commands:
-```
-create role web_usr with password '?????';
-alter role web_usr with login;
-
-```
-
-Then, start the tests with (from the ```/home/production/cxgn/sgn``` dir):
-```
-t/test_fixture.pl t/unit_fixture/
-
-```
-
-# Updating the database schema from the docker
-
-Code updates sometimes require the database schema to be updated. This is done using so-called db patches. The db patches are in numbered directories in the the ```db/``` directory of the ```sgn``` repository.
-
-The db patches can be run individually by changing into the specific directory, and then running the script using ```mx-run```, using the parameters as described in the ```perldoc``` for the scripts.
-
-The database can be updated to the current level in one step (recommended method) by running the ```run_all_patches.pl``` script in the ```db/``` directory, which calls all the db patches individually. If you are using the standard docker-compose setup, the command line is (options in square brackets are optional):
-```
-    cd cxgn/sgn/db
-    perl run_all_patches.pl -u postgres -p postgres -h breedbase_db -d
-    breedbase -e admin [-s <startfrom>] [--test]
-```
-
-Note that for this to work, the $PERL5LIB environment variable should have the current directory included. If it isn't, run:
-```
-    export PERL5LIB=$PERL5LIB:.
-```
