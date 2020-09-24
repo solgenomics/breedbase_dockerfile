@@ -38,7 +38,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
     ```
 3. Deploy with docker-compose
 
-    Make sure to specify both the base yml file and the production yml file with your command. These will overwrite the default development settings found in `docker-compose.override.yml`, and instead use production settings. These settings include pulling the latest image tagged `:production` from dockerhub, rather than `:devel`, setting env MODE to PRODUCTION rather than DEVELOPMENT, and mounting fewer volumes from the host (won't use host `/repos` dir to overwrite `/home/production/cxgn` in the container).  
+    Make sure to specify both the base yml file and the production yml file with your command. These will overwrite the default development settings found in `docker-compose.override.yml`, and instead use production settings. These settings include setting the env MODE to PRODUCTION rather than DEVELOPMENT, and mounting fewer volumes from the host (won't use host `/repos` dir to overwrite `/home/production/cxgn` in the container).  
 
     ```
     docker-compose -f docker-compose.yml -f production.yml up -d
