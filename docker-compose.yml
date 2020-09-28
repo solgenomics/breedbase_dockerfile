@@ -3,10 +3,12 @@ version: "3.7"
 services:
   breedbase:
     image: breedbase/breedbase:latest
+    restart: always
     depends_on:
       - breedbase_db
     container_name: breedbase_web
 
   breedbase_db:
     image: breedbase/pg:latest
+    restart: always
     container_name: breedbase_db
