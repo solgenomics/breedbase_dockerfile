@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   breedbase:
-    image: breedbase/breedbase:v0.8
+    image: breedbase/breedbase:v0.17
     depends_on:
       - breedbase_db
     container_name: breedbase_web
@@ -35,7 +35,7 @@ services:
         source: ${HOME}/images
         target: /home/production/images
   breedbase_db:
-    image: breedbase/pg:latest
+    image: breedbase/pg12:v0.5
     container_name: breedbase_db
 #    ports:
 #      - 5431:5432
