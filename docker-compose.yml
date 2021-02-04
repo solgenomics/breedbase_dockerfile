@@ -35,7 +35,7 @@ services:
         source: ${HOME}/images
         target: /home/production/images
   breedbase_db:
-    image: breedbase/pg12:v0.5
+    image: breedbase/breedbase_pg12.4:v0.5
     container_name: breedbase_db
 #    ports:
 #      - 5431:5432
