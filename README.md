@@ -13,7 +13,6 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
 [Deploy in Production](#deploy-in-production)  
 [Deploy for Development](#deploy-for-development)  
-[Building and Releasing New Images](#building-and-releasing-new-images)  
 [Debugging](#debugging)  
 [Testing](#testing)  
 [Miscellaneous](#miscellaneous)  
@@ -125,36 +124,6 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     `docker logs breedbase_web` Will let you access webserver error output from your host.  
     `docker-compose stop breedbase` Will stop both containers (web and db), but will not remove them.  
     `docker-compose down`   Will remove both containers, but only if run within the breedbase_dockerfile directory.
-
-
-## Building and Releasing New Images
-
-If desired, a breedbase docker image can be built from scratch, as explained below. This is not recommended unless necessary for testing or unless you are responsible for releasing new images on dockerhub.
-
-1. Clone the repo
-    ```
-    git clone https://github.com/solgenomics/breedbase_dockerfile
-    ```
-
-2. Run the prepare.sh script from within the breedbase_dockerfile dir
-    ```
-    cd breedbase_dockerfile
-    ./prepare.sh
-    ```
-    This will clone all the git repos that are needed for the build into a directory called `repos/`.
-    You can then checkout particular branches or tags in the included repos before the build.
-
-3. Build a new image just for local testing
-    ```
-    ./build.sh
-    ```
-    The build script will retrieve label metadata and run docker build.
-
-4. Or, build and push a new release to Dockerhub
-    ```
-    ./release.sh
-    ```
-    The release script will run the build script, then push the build to dockerhub.
 
 
 ## Debugging
