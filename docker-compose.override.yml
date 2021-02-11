@@ -23,8 +23,13 @@ services:
 
   breedbase_db:
     volumes:
-      - "dbdata:/var/lib/postgresql/data"
+      - dbdata:/var/lib/postgresql/data
 
 volumes:
+  archive:
+  tmp:
+  cache:
+  cluster:
+  blast:
+  images:
   dbdata:
-    name: bb_postgres
