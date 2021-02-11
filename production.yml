@@ -2,6 +2,10 @@ version: "3.7"
 
 services:
   breedbase:
-    image: breedbase/breedbase:production
+    image: breedbase/breedbase:v0.17
+    restart: always
     environment:
       MODE: 'PRODUCTION'
+
+  breedbase_db:
+    restart: always
