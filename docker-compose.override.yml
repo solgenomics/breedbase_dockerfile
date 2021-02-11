@@ -12,9 +12,24 @@ services:
       - type: bind
         source: ./repos
         target: /home/production/cxgn
-      - type: bind
-        source: ./archive
+      - type: volume
+        source: archive
         target: /home/production/archive
+      - type: volume
+        source: tmp
+        target: /home/production/tmp
+      - type: volume
+        source: cache
+        target: /home/production/cache
+      - type: volume
+        source: cluster
+        target: /home/production/cluster
+      - type: volume
+        source: blast
+        target: /home/production/blast
+      - type: volume
+        source: images
+        target: /home/production/images
     environment:
       MODE: 'DEVELOPMENT'
 

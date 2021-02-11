@@ -5,17 +5,17 @@
 This repo contains the Dockerfile for the breeDBase webserver, and the docker compose files for joint deployment of the breeDBase webserver and postgres database.
 To learn more about breeDBase:
 
-Access the [SGN repository](https://github.com/solgenomics/sgn) to contribute to the underlying codebase or submit new issues  
-Access the [manual](https://solgenomics.github.io/sgn/) to learn how to use breeDBase's many features  
+Access the [SGN repository](https://github.com/solgenomics/sgn) to contribute to the underlying codebase or submit new issues
+Access the [manual](https://solgenomics.github.io/sgn/) to learn how to use breeDBase's many features
 Access [breedbase.org](https://breedbase.org/) to explore a default instance of breeDBase.
 
-#### Table of Contents  
+#### Table of Contents
 
-[Deploy in Production](#deploy-in-production)  
-[Deploy for Development](#deploy-for-development)  
-[Debugging](#debugging)  
-[Testing](#testing)  
-[Miscellaneous](#miscellaneous)  
+[Deploy in Production](#deploy-in-production)
+[Deploy for Development](#deploy-for-development)
+[Debugging](#debugging)
+[Testing](#testing)
+[Miscellaneous](#miscellaneous)
 
 
 ## Deploy in Production
@@ -37,7 +37,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
     ```
 3. Deploy with docker-compose
 
-    Make sure to specify both the base yml file and the production yml file with your command. These will overwrite the default development settings found in `docker-compose.override.yml`, and instead use production settings. These settings include setting the env MODE to PRODUCTION rather than DEVELOPMENT, and mounting fewer volumes from the host (won't use host `/repos` dir to overwrite `/home/production/cxgn` in the container).  
+    Make sure to specify both the base yml file and the production yml file with your command. These will overwrite the default development settings found in `docker-compose.override.yml`, and instead use production settings. These settings include setting the env MODE to PRODUCTION rather than DEVELOPMENT, and mounting fewer volumes from the host (won't use host `/repos` dir to overwrite `/home/production/cxgn` in the container).
 
     ```
     docker-compose -f docker-compose.yml -f production.yml up -d
@@ -89,18 +89,13 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     git clone https://github.com/solgenomics/breedbase_dockerfile
     ```
     Run the prepare.sh script from within the breedbase_dockerfile dir
-    This will clone all the git repos that are needed for breedbase into a directory called `repos/`.
+    This will create a local conf file and clone all the git repos that are needed for breedbase into a directory called `repos/`.
     This directory will be mounted onto the devel container during the compose step, but will still be accessible from the host for development work.
     ```
     cd breedbase_dockerfile
     ./prepare.sh
     ```
-    Create a local conf file and archive dir on the host that will be mounted on the devel container
-    ```
-    mkdir archive
-    cp sgn_local.conf.template  sgn_local.conf
 
-    ```
 3. Deploy with docker-compose and start developing!
     ```
     docker-compose up -d
@@ -117,12 +112,12 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     ```
     Once logged in, change the password of the admin user!!
 
-    Docker has a [wealth of command-line options](https://docs.docker.com/engine/reference/commandline/docker/) for working with your new containers. Some commonly used commands include:  
-    `docker ps -a` Will list all running containers and their details.  
-    `docker-compose start breedbase` Will start both containers (web and db) if they have been stopped.  
-    `docker exec -it breedbase_web bash` Will open a new bash terminal within the web container.  
-    `docker logs breedbase_web` Will let you access webserver error output from your host.  
-    `docker-compose stop breedbase` Will stop both containers (web and db), but will not remove them.  
+    Docker has a [wealth of command-line options](https://docs.docker.com/engine/reference/commandline/docker/) for working with your new containers. Some commonly used commands include:
+    `docker ps -a` Will list all running containers and their details.
+    `docker-compose start breedbase` Will start both containers (web and db) if they have been stopped.
+    `docker exec -it breedbase_web bash` Will open a new bash terminal within the web container.
+    `docker logs breedbase_web` Will let you access webserver error output from your host.
+    `docker-compose stop breedbase` Will stop both containers (web and db), but will not remove them.
     `docker-compose down`   Will remove both containers, but only if run within the breedbase_dockerfile directory.
 
 
@@ -227,7 +222,7 @@ Note that for this to work, the $PERL5LIB environment variable should have the c
 
 4. Connect containers via Docker Network
 
-  Assuming you've named the Breedbase database container `breedbase_db`, in your `sgn_local.conf`, set the following:  
+  Assuming you've named the Breedbase database container `breedbase_db`, in your `sgn_local.conf`, set the following:
 
   ```
   dbhost breedbase_db
