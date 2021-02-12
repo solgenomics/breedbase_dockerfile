@@ -2,13 +2,7 @@ version: "3.7"
 
 services:
   breedbase:
-    ports:
-      - 7080:8080
-      - 25:25
     volumes:
-      - type: bind
-        source: ./sgn_local.conf
-        target: /home/production/cxgn/sgn/sgn_local.conf
       - type: bind
         source: ./repos
         target: /home/production/cxgn

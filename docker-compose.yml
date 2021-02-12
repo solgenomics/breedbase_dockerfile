@@ -2,6 +2,13 @@ version: "3.7"
 
 services:
   breedbase:
+    volumes:
+      - type: bind
+        source: ./sgn_local.conf
+        target: /home/production/cxgn/sgn/sgn_local.conf
+    ports:
+      - 7080:8080
+      - 25:25
     image: breedbase/breedbase:v0.17
     depends_on:
       - breedbase_db
