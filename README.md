@@ -13,6 +13,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
 [Deploy in Production](#deploy-in-production)
 [Deploy for Development](#deploy-for-development)
+[Access and Configure](#access-and-configure)
 [Debugging](#debugging)
 [Testing](#testing)
 [Miscellaneous](#miscellaneous)
@@ -70,10 +71,6 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
 
     Depending on where your database is running, you may need to use the `--network` option. For a database server running on the host machine (localhost in your sgn_local.conf), use `--network="host"`.
 
-4. Access the application
-
-    Once the service is running, you can access the application at http://localhost:7080
-
 
 ## Deploy for Development
 
@@ -103,15 +100,6 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     This will deploy 2 containers, `breedbase_web` and `breedbase_db`, combined in a single service named `breedbase`
     The deployment will set the container environment MODE to DEVELOPMENT, which will run the web server using Catalyst instead of Starman. In this configuration, the server will restart when any changes are detected in the config file or sgn perl libraries.
 
-    Once the containers are running, you can access the application at http://localhost:7080
-
-    When you first log in via the web, the default username and password are:
-    ```
-    username: admin
-    password: password
-    ```
-    Once logged in, change the password of the admin user!!
-
     Docker has a [wealth of command-line options](https://docs.docker.com/engine/reference/commandline/docker/) for working with your new containers. Some commonly used commands include:
     `docker ps -a` Will list all running containers and their details.
     `docker-compose start breedbase` Will start both containers (web and db) if they have been stopped.
@@ -120,6 +108,17 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     `docker-compose stop breedbase` Will stop both containers (web and db), but will not remove them.
     `docker-compose down`   Will remove both containers, but only if run within the breedbase_dockerfile directory.
 
+
+## Access and Configure
+
+Once your breedbase service is running, you can access the application at http://localhost:7080. User accounts can be created via the web interface, and their roles can be controlled by the default admin account:
+```
+username: admin
+password: password
+```
+Please login and change the password of the admin user!!
+
+Most configuration is handled in the `sgn_local.conf` file. Just edit the corresponding configuration line in the file to change your database name, species, ontology, mason skin, etc.
 
 ## Debugging
 
