@@ -19,6 +19,8 @@ apt-get install docker-ce
 
 For Mac/Windows: [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
+Please note that installing docker natively in Windows will conflict with VMWare and Virtualbox virtualization settings
+
 ### Database
 
 A Postgres database will need to be running and configured.  
