@@ -45,6 +45,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
     ```
     docker-compose -f docker-compose.yml -f production.yml up -d
     ```
+    Then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment!
 
 ### Using `docker swarm`
 Docker Swarm allows you to define a service, as well as to allow you to configure auto scaling and clustering of a service.
@@ -95,10 +96,11 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     ./prepare.sh
     ```
 
-3. Deploy with docker-compose and start developing!
+3. Deploy with docker-compose, then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment!
     ```
     docker-compose up -d
     ```
+
     This will deploy 2 containers, `breedbase_web` and `breedbase_db`, combined in a single service named `breedbase`
     The deployment will set the container environment MODE to DEVELOPMENT, which will run the web server using Catalyst instead of Starman. In this configuration, the server will restart when any changes are detected in the config file or sgn perl libraries.
 
@@ -118,7 +120,7 @@ Once your breedbase service is running, you can access the application at http:/
 username: admin
 password: password
 ```
-Please login and change the password of the admin user!!
+Please login and change the password of the admin user.
 
 Most configuration is handled in the `sgn_local.conf` file. Just edit the corresponding configuration line in the file to change your database name, species, ontology, mason skin, etc.
 
