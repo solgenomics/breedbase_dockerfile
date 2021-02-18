@@ -11,12 +11,12 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
 #### Table of Contents
 
-[Deploy in Production](#deploy-in-production)
-[Deploy for Development](#deploy-for-development)
-[Access and Configure](#access-and-configure)
-[Debugging](#debugging)
-[Testing](#testing)
-[Miscellaneous](#miscellaneous)
+[Deploy in Production](#deploy-in-production)<br>
+[Deploy for Development](#deploy-for-development)<br>
+[Access and Configure](#access-and-configure)<br>
+[Debugging](#debugging)<br>
+[Testing](#testing)<br>
+[Miscellaneous](#miscellaneous)<br>
 
 
 ## Deploy in Production
