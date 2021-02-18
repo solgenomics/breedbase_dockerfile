@@ -29,6 +29,8 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
     For Mac/Windows: It will be installed as part of installing [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
+    Please note that installing docker natively in Windows will conflict with VMWare and Virtualbox virtualization settings
+
 2. Clone this repo and set up an sgn_local.conf file
 
     ```
