@@ -6,6 +6,9 @@ services:
       - type: bind
         source: ./sgn_local.conf
         target: /home/production/cxgn/sgn/sgn_local.conf
+      - type: bind
+        source: ./entrypoint.sh
+        target: /entrypoint.sh
       - archive:/home/production/archive
       - tmp:/home/production/tmp
       - cache:/home/production/cache
@@ -21,10 +24,16 @@ services:
     container_name: breedbase_web
 
   breedbase_db:
-    image: breedbase/pg:11
-    container_name: breedbase_db
     volumes:
       - dbdata:/var/lib/postgresql/data
+    image: postgres:12.6
+    container_name: breedbase_db
+    environment:
+      POSTGRES_DB: breedbase
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: "pg_isready -U postgres -d $${POSTGRES_DB} || exit 1"
+      interval: 10s
 
 volumes:
   archive:
