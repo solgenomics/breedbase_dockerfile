@@ -6,24 +6,5 @@ services:
       - type: bind
         source: ./repos
         target: /home/production/cxgn
-      - archive:/home/production/archive
-      - tmp:/home/production/tmp
-      - cache:/home/production/cache
-      - cluster:/home/production/cluster
-      - blast:/home/production/blast
-      - images:/home/production/images
     environment:
       MODE: 'DEVELOPMENT'
-
-  breedbase_db:
-    volumes:
-      - dbdata:/var/lib/postgresql/data
-
-volumes:
-  archive:
-  tmp:
-  cache:
-  cluster:
-  blast:
-  images:
-  dbdata:
