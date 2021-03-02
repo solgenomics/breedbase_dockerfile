@@ -14,8 +14,6 @@ services:
   breedbase_db:
     image: breedbase/breedbase_pg12.4:v0.5
     container_name: breedbase_db
-#    ports:
-#      - 5431:5432
     volumes:
        - pgdata:/var/lib/postgresql/data
 
