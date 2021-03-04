@@ -135,27 +135,8 @@ ENV R_LIBS_USER=/home/production/cxgn/R_libs
 #INSTALL OPENCV IMAGING LIBRARY
 RUN apt-get install -y python3-dev python-pip python3-pip python-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
 
-RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas \
-    && pip3 install -U keras-tuner \
-    && cd /home/production/cxgn/opencv \
-    && mkdir build \
-    && cd /home/production/cxgn/opencv/build \
-    && cmake -D CMAKE_BUILD_TYPE=RELEASE \
-        -D CMAKE_INSTALL_PREFIX=/usr/local \
-        -D INSTALL_PYTHON_EXAMPLES=OFF \
-        -D OPENCV_EXTRA_MODULES_PATH=/home/production/cxgn/opencv_contrib/modules \
-        -D PYTHON3_EXECUTABLE=$(which python3) \
-        -D PYTHON3_NUMPY_INCLUDE_DIRS=$(python3 -c "import numpy; print(numpy.get_include())") \
-        -D BUILD_EXAMPLES=OFF \
-        -D OPENCV_ENABLE_NONFREE=ON \
-        -D OPENCV_GENERATE_PKGCONFIG=YES .. \
-    && make \
-    && make install \
-    && ldconfig
-RUN mv /usr/local/lib/python3.5/dist-packages/cv2/python-3.5/cv2.cpython-35m-x86_64-linux-gnu.so /usr/local/lib/python3.5/dist-packages/cv2/python-3.5/cv2.so
-
-RUN g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_multi.cpp -o /usr/bin/stitching_multi `pkg-config opencv4 --cflags --libs` \
-    && g++ /home/production/cxgn/DroneImageScripts/cpp/stitching_single.cpp -o /usr/bin/stitching_single `pkg-config opencv4 --cflags --libs`
+RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
+    && pip3 install -U keras-tuner
 
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
 

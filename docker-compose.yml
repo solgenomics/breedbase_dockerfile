@@ -9,12 +9,7 @@ services:
       - type: bind
         source: ./entrypoint.sh
         target: /entrypoint.sh
-      - archive:/home/production/archive
-      - tmp:/home/production/tmp
-      - cache:/home/production/cache
-      - cluster:/home/production/cluster
-      - blast:/home/production/blast
-      - images:/home/production/images
+      - breedbase_volume:/home/production/breedbase_volume
     ports:
       - 7080:8080
       - 25:25
@@ -36,10 +31,5 @@ services:
       interval: 10s
 
 volumes:
-  archive:
-  tmp:
-  cache:
-  cluster:
-  blast:
-  images:
+  breedbase_volume:
   dbdata:
