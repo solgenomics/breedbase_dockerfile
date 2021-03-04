@@ -2,6 +2,11 @@ version: "3.7"
 
 services:
   breedbase:
+    environment:
+      PGDATABASE: ${PGDATABASE:?}
+      PGHOST: ${PGHOST:?}
+      PGPASSWORD: ${PGPASSWORD:?}
+      PGUSER: ${PGUSER:?}
     volumes:
       - type: bind
         source: ./sgn_local.conf

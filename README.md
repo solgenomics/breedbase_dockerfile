@@ -31,13 +31,24 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
     Please note that installing docker natively in Windows will conflict with VMWare and Virtualbox virtualization settings
 
-2. Clone this repo and set up an sgn_local.conf file
+2. Clone this repo and set up a sgn_local.conf file and a .env file
 
     ```
     git clone https://github.com/solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
     cp sgn_local.conf.template  sgn_local.conf
+    touch .env
     ```
+
+    Add the following lines to `.env` to set the necessary environment variables
+
+    ```
+    PGDATABASE=breedbase
+    PGHOST=breedbase_db
+    PGPASSWORD=postgres
+    PGUSER=postgres
+    ```
+
 3. Deploy with docker-compose
 
     Make sure to specify both the base yml file and the production yml file with your command. These will overwrite the default development settings found in `docker-compose.override.yml`, and instead use production settings. These settings include setting the env MODE to PRODUCTION rather than DEVELOPMENT, and mounting fewer volumes from the host (won't use host `/repos` dir to overwrite `/home/production/cxgn` in the container).
@@ -93,7 +104,18 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     This directory will be mounted onto the devel container during the compose step, but will still be accessible from the host for development work.
     ```
     cd breedbase_dockerfile
+    cp sgn_local.conf.template  sgn_local.conf
     ./prepare.sh
+    touch .env
+    ```
+
+    Add the following lines to `.env` to set the necessary environment variables
+
+    ```
+    PGDATABASE=breedbase
+    PGHOST=breedbase_db
+    PGPASSWORD=postgres
+    PGUSER=postgres
     ```
 
 3. Deploy with docker-compose, then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment!
