@@ -1,7 +1,7 @@
-dbhost <dbhost>
-dbname <dbname>
+dbhost breedbase_db
+dbname breedbase
 dbuser web_usr
-dbpass <password>
+dbpass postgres
 
 rootpath /home/production/cxgn
 basepath /home/production/cxgn/sgn

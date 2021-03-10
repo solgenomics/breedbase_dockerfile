@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# create local conf file and dir for code repos
+cp sgn_local.conf.template  sgn_local.conf
 mkdir repos
 
 # main code

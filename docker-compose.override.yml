@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  breedbase:
+    volumes:
+      - type: bind
+        source: ./repos
+        target: /home/production/cxgn
+    environment:
+      MODE: 'DEVELOPMENT'
