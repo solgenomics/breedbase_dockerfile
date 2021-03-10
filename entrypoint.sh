@@ -7,6 +7,7 @@ sed -i s/localhost/$HOSTNAME/g /etc/slurm-llnl/slurm.conf
 /etc/init.d/slurmd start
 #/etc/init.d/postgres start
 
+
 # load empty fixture and run any missing patches
 
 if [ $(psql -Atc 'select count(distinct table_schema) from information_schema.tables;') -eq 2 ]; then
@@ -74,7 +75,6 @@ then
 else
     echo "/home/production/volume does not exist... not creating dirs";
 fi
-
 
 
 if [ "$MODE" == "DEVELOPMENT" ]; then

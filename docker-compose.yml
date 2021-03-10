@@ -8,12 +8,9 @@ services:
       PGPASSWORD: ${PGPASSWORD:?}
       PGUSER: ${PGUSER:?}
     volumes:
-      - type: bind
-        source: ./sgn_local.conf
-        target: /home/production/cxgn/sgn/sgn_local.conf
       - webdata:/home/production/volume
     ports:
-      - 7080:8080
+      - 8080:8080
       - 25:25
     image: breedbase/breedbase:v0.21
     depends_on:
@@ -35,3 +32,4 @@ services:
 volumes:
   webdata:
   dbdata:
+

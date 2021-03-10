@@ -36,7 +36,6 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
     ```
     git clone https://github.com/solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
-    cp sgn_local.conf.template  sgn_local.conf
     touch .env
     ```
 

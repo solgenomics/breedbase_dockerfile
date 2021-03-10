@@ -6,9 +6,9 @@ dbpass postgres
 rootpath /home/production/cxgn
 basepath /home/production/cxgn/sgn
 
-homepage_files_dir        /home/production/public/static_content
+homepage_files_dir        /home/production/volume/public/static_content
 
-trial_download_logfile /home/production/logs/cassava_trial_download_log
+trial_download_logfile /home/production/volume/logs/download_log
 
 disable_login 0
 
@@ -24,12 +24,12 @@ preferred_species Manihot esculenta
 
 production_server 0
 image_dir /images/image_files_test
-image_path /home/production/public/images/image_files_test
-cluster_shared_tempdir /home/production/tmp
-tempfiles_base /home/production/tmp/breedbase-site
-static_datasets_path /home/production/public
+image_path /home/production/volume/public/images/image_files_test
+cluster_shared_tempdir /home/production/volume/tmp
+tempfiles_base /home/production/volume/tmp/breedbase-site
+static_datasets_path /home/production/volume/public
 static_content_url  /static_content
-static_content_path /home/production/public/static_content
+static_content_path /home/production/volume/public/static_content
 
 main_production_site_url https://breedbase.org
 
@@ -43,7 +43,7 @@ homepage_display_phenotype_uploads 0
 jbrowse_path              /jbrowse_cassavabase/?data=data/json
 
 #path for archving uploaded files
-archive_path    /home/production/archive/breedbase/
+archive_path    /home/production/volume/archive/
 
 default_genotyping_protocol "GBS ApeKI Cassava genome v6_Oct2015"
 #default_genotyping_protocol "GBS ApeKI Cassava genome v5"
@@ -55,9 +55,9 @@ cview_db_backend Cassava
 # slurm config
 backend Slurm
 cluster_host ""
-cache_file_path /home/production/cache
+cache_file_path /home/production/volume/cache
 
-solgs_dir        /home/production/tmp/solgs/__USERNAME__
+solgs_dir        /home/production/volume/tmp/solgs/__USERNAME__
 trait_ontology_db_name CO_334
 
 #For display on onto tree
@@ -69,14 +69,14 @@ onto_root_namespaces  CO_334 (Cassava Trait Ontology), GO (Gene Ontology), PO (P
 
 r_qtl_temp_path /export/prod/tmp/solqtl___USERNAME__
 
-submit_dir                /home/production/public/submit-uploads
+submit_dir                /home/production/volume/public/submit-uploads
 
 blast_path                ""
-blast_db_path             /home/production/blast/databases/current
+blast_db_path             /home/production/volume/blast/databases/current
 
 # path to our production_ftp site
 #
-ftpsite_root              /home/production/public
+ftpsite_root              /home/production/volume/public
 
 <View::Mason>
 #       add_comp_root /home/production/cxgn/cassava/mason

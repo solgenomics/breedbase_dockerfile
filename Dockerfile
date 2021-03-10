@@ -10,19 +10,19 @@ EXPOSE 8080
 # create directory layout
 #
 RUN mkdir -p /home/production/public/sgn_static_content
-RUN mkdir -p /home/production/tmp/solgs
-RUN mkdir -p /home/production/archive
-RUN mkdir -p /home/production/public/images/image_files
-RUN chown -R www-data /home/production/public
-RUN mkdir -p /home/production/tmp
-RUN chown -R www-data /home/production/tmp
-RUN mkdir -p /home/production/archive/breedbase
-RUN chown -R www-data /home/production/archive
-RUN mkdir -p /home/production/blast/databases/current
+#RUN mkdir -p /home/production/tmp/solgs
+#RUN mkdir -p /home/production/archive
+#RUN mkdir -p /home/production/public/images/image_files
+#RUN chown -R www-data /home/production/public
+#RUN mkdir -p /home/production/tmp
+#RUN chown -R www-data /home/production/tmp
+#RUN mkdir -p /home/production/archive/breedbase
+#RUN chown -R www-data /home/production/archive
+#RUN mkdir -p /home/production/blast/databases/current
 RUN mkdir -p /home/production/cxgn
 RUN mkdir -p /home/production/cxgn/local-lib
-RUN mkdir -p /home/production/cache
-RUN chown -R www-data /home/production/cache
+#RUN mkdir -p /home/production/cache
+#RUN chown -R www-data /home/production/cache
 RUN mkdir /etc/starmachine
 RUN mkdir /var/log/sgn
 
@@ -50,6 +50,7 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc |  apt-
 RUN apt-get update -y
 
 RUN apt-get install -y aptitude
+
 RUN aptitude install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-14-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron
 
 # Set the locale correclty to UTF-8
@@ -57,8 +58,6 @@ RUN locale-gen en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
-
-
 
 RUN chmod 777 /var/spool/ \
     && mkdir /var/spool/slurmstate \
@@ -86,7 +85,7 @@ ADD repos /home/production/cxgn
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
-COPY sgn_local.conf.template /home/production/cxgn/sgn/
+COPY sgn_local.conf.template /home/production/cxgn/sgn/sgn_local.conf
 COPY starmachine.conf /etc/starmachine/
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 

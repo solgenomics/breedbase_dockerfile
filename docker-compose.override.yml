@@ -4,6 +4,9 @@ services:
   breedbase:
     volumes:
       - type: bind
+        source: ./sgn_local.conf
+        target: /home/production/cxgn/sgn/sgn_local.conf
+      - type: bind
         source: ./repos
         target: /home/production/cxgn
     environment:
