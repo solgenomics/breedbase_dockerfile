@@ -1,7 +1,5 @@
 FROM debian:stretch
 
-LABEL maintainer="lam87@cornell.edu"
-
 ENV CPANMIRROR=http://cpan.cpantesters.org
 # based on the vagrant provision.sh script by Nick Morales <nm529@cornell.edu>
 
@@ -39,9 +37,9 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" | tee 
 # install system dependencies
 #
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN apt-get update -y --allow-unauthenticated 
+RUN apt-get update -y --allow-unauthenticated
 RUN apt-get upgrade -y
-RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl wget -y 
+RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl wget -y
 # key for cran-backports (not working though)
 #
 RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B192B1A2C2AD5F960A256A04AF' 1>/key.out   2> /key.err"
@@ -51,7 +49,8 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc |  apt-
 #RUN apt-get update --fix-missing -y
 RUN apt-get update -y
 
-RUN apt-get install -y aptitude 
+RUN apt-get install -y aptitude
+
 RUN aptitude install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-14-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron
 
 # Set the locale correclty to UTF-8
@@ -59,8 +58,6 @@ RUN locale-gen en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
-
-
 
 RUN chmod 777 /var/spool/ \
     && mkdir /var/spool/slurmstate \
@@ -136,14 +133,30 @@ ENV R_LIBS_USER=/home/production/cxgn/R_libs
 
 #INSTALL OPENCV IMAGING LIBRARY
 RUN apt-get install -y python3-dev python-pip python3-pip python-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
-
+RUN pip3 install --upgrade pip
 RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
     && pip3 install -U keras-tuner
 
 RUN bash /home/production/cxgn/sgn/js/install_node.sh
 
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/sgn
+
+ARG CREATED
+ARG REVISION
+ARG BUILD_VERSION
+
+LABEL maintainer="lam87@cornell.edu"
+LABEL org.opencontainers.image.created=$CREATED
+LABEL org.opencontainers.image.url="https://breedbase.org/"
+LABEL org.opencontainers.image.source="https://github.com/solgenomics/breedbase_dockerfile"
+LABEL org.opencontainers.image.version=$BUILD_VERSION
+LABEL org.opencontainers.image.revision=$REVISION
+LABEL org.opencontainers.image.vendor="Boyce Thompson Institute"
+LABEL org.opencontainers.image.title="breedbase/breedbase"
+LABEL org.opencontainers.image.description="Breedbase web server"
+LABEL org.opencontainers.image.documentation="https://solgenomics.github.io/sgn/"
 
 # start services when running container...
 ENTRYPOINT /bin/bash /entrypoint.sh
