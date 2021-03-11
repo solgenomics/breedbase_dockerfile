@@ -128,7 +128,7 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
 
 ## Access and Configure
 
-Once your breedbase service is running, you can access the application at http://localhost:7080. User accounts can be created via the web interface, and their roles can be controlled by the default admin account:
+Once your breedbase service is running, you can access the application at http://localhost:8080. User accounts can be created via the web interface, and their roles can be controlled by the default admin account:
 ```
 username: admin
 password: password
@@ -226,7 +226,7 @@ Note that for this to work, the $PERL5LIB environment variable should have the c
   This will create a Breedbase web server container. The -v flag is used to mount a local conf file and a couple of dirs from the host. Create the file and ris on your host if they don't exist and update the paths before running the command. If you will use this container for development it is also recommended to run `./prepare.sh` and mount the resulting `repos` repo at `/home/production/cxgn`.
 
   ```
-  docker run -d --name breedbase_web -p 7080:8080 -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive -v /host/path/to/public_breedbase:/home/production/public breedbase/breedbase:latest
+  docker run -d --name breedbase_web -p 8080:8080 -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive -v /host/path/to/public_breedbase:/home/production/public breedbase/breedbase:latest
   ```
 
 3. Deploy a Postgres Database
@@ -256,4 +256,4 @@ Note that for this to work, the $PERL5LIB environment variable should have the c
   docker network connect bb_bridge_network breedbase_web
   ```
 
-  Finally access the application at http://localhost:7080
+  Finally access the application at http://localhost:8080
