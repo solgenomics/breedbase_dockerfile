@@ -108,15 +108,6 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     touch .env
     ```
 
-    Add the following lines to `.env` to set the necessary environment variables
-
-    ```
-    PGDATABASE=breedbase
-    PGHOST=breedbase_db
-    PGPASSWORD=postgres
-    PGUSER=postgres
-    ```
-
 3. Deploy with docker-compose, then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment!
     ```
     docker-compose up -d

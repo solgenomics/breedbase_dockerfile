@@ -5,6 +5,13 @@ services:
     restart: always
     environment:
       MODE: 'PRODUCTION'
+      PGDATABASE: ${PGDATABASE:?}
+      PGHOST: ${PGHOST:?}
+      PGPASSWORD: ${PGPASSWORD:?}
+      PGUSER: ${PGUSER:?}
 
   breedbase_db:
     restart: always
+    environment:
+      POSTGRES_DB: ${PGDATABASE:?}
+      POSTGRES_PASSWORD: ${PGPASSWORD:?}
