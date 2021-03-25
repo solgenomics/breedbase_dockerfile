@@ -60,7 +60,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 ### Using `docker swarm`
 Docker Swarm allows you to define a service, as well as to allow you to configure auto scaling and clustering of a service.
 
-You need to write an `sgn_local.conf` file specific to your service. A [template](./sgn_local.conf.template) is provided in the breedbase_dockerfile repo (you have to fill in the `dbhost`, `dbport`, `dbname`, and `dbuser` and `dbpassword`).
+You need to write an `sgn_local.conf` file specific to your service. A [template](./sgn_local.conf) is provided in the breedbase_dockerfile repo (you have to fill in the `dbhost`, `dbport`, `dbname`, and `dbuser` and `dbpassword`).
 
 1. (If needed) Initialize Docker Swarm
 
@@ -96,17 +96,11 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
 2. Clone this repo and set up other requirements on your host
 
     ```bash
-    git clone https://github.com/solgenomics/breedbase_dockerfile
-    ```
-    Run the prepare.sh script from within the breedbase_dockerfile dir
-    This will create a local conf file and clone all the git repos that are needed for breedbase into a directory called `repos/`.
-    This directory will be mounted onto the devel container during the compose step, but will still be accessible from the host for development work.
-    ```
+    git clone --recursive https://github.com/solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
-    cp sgn_local.conf.template  sgn_local.conf
-    ./prepare.sh
-    touch .env
     ```
+    This will clone all the git repos that are needed for breedbase into a subdirectory called `repos/`.
+    This directory will be mounted onto the devel container during the compose step, but will still be accessible from the host for development work.
 
 3. Deploy with docker-compose, then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment!
     ```
