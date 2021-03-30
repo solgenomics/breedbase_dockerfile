@@ -2,21 +2,34 @@ version: "3.7"
 
 services:
   breedbase:
-    image: breedbase/breedbase:v0.19
-    depends_on:
-      - breedbase_db
-    container_name: breedbase_web
+    environment:
+      PGDATABASE: ${PGDATABASE:?}
+      PGHOST: ${PGHOST:?}
+      PGPASSWORD: ${PGPASSWORD:?}
+      PGUSER: ${PGUSER:?}
+    volumes:
+      - webdata:/home/production/volume
     ports:
       - 8080:8080
       - 25:25
-    volumes:
-      - volume:/home/production/volume
+    image: breedbase/breedbase:v0.21
+    depends_on:
+      - breedbase_db
+    container_name: breedbase_web
+
   breedbase_db:
-    image: breedbase/breedbase_pg12.4:v0.5
-    container_name: breedbase_db
     volumes:
-       - pgdata:/var/lib/postgresql/data
+      - dbdata:/var/lib/postgresql/data
+    image: postgres:12.6
+    container_name: breedbase_db
+    environment:
+      POSTGRES_DB: ${PGDATABASE:?}
+      POSTGRES_PASSWORD: ${PGPASSWORD:?}
+    healthcheck:
+      test: "pg_isready -U postgres -d $${POSTGRES_DB} || exit 1"
+      interval: 10s
 
 volumes:
-   pgdata:
-   volume:
+  webdata:
+  dbdata:
+

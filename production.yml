@@ -1,0 +1,10 @@
+version: "3.7"
+
+services:
+  breedbase:
+    restart: always
+    environment:
+      MODE: 'PRODUCTION'
+
+  breedbase_db:
+    restart: always
