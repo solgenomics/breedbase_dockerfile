@@ -34,6 +34,7 @@ vitisbase
 panandbase
 triticum
 
+*~
 !Build/
 .last_cover_stats
 /META.yml
@@ -42,6 +43,8 @@ triticum
 *.o
 *.pm.tdy
 *.bs
+*.pyc
+/updater-logs
 
 # Devel::Cover
 cover_db/
