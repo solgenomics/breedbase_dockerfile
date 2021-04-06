@@ -41,6 +41,7 @@ then
     if [[ ! -e /home/production/volume/public ]]
     then
         mkdir /home/production/volume/public
+	chown www-data /home/production/volume/public
     fi
 
     if [[ ! -e /home/production/volume/public/images ]]
