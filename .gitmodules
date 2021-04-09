@@ -1,0 +1,123 @@
+[submodule "repos/cxgn-corelibs"]
+	path = repos/cxgn-corelibs
+	url = https://github.com/solgenomics/cxgn-corelibs.git
+[submodule "repos/sgn"]
+	path = repos/sgn
+	url = https://github.com/solgenomics/sgn.git
+[submodule "repos/Phenome"]
+	path = repos/Phenome
+	url = https://github.com/solgenomics/Phenome.git
+[submodule "repos/rPackages"]
+	path = repos/rPackages
+	url = https://github.com/solgenomics/rPackages.git
+[submodule "repos/biosource"]
+	path = repos/biosource
+	url = https://github.com/solgenomics/biosource.git
+[submodule "repos/Cview"]
+	path = repos/Cview
+	url = https://github.com/solgenomics/Cview.git
+[submodule "repos/ITAG"]
+	path = repos/ITAG
+	url = https://github.com/solgenomics/ITAG.git
+[submodule "repos/tomato_genome"]
+	path = repos/tomato_genome
+	url = https://github.com/solgenomics/tomato_genome.git
+[submodule "repos/sgn-devtools"]
+	path = repos/sgn-devtools
+	url = https://github.com/solgenomics/sgn-devtools.git
+[submodule "repos/solGS"]
+	path = repos/solGS
+	url = https://github.com/solgenomics/solGS.git
+[submodule "repos/starmachine"]
+	path = repos/starmachine
+	url = https://github.com/solgenomics/starmachine.git
+[submodule "repos/DroneImageScripts"]
+	path = repos/DroneImageScripts
+	url = https://github.com/solgenomics/DroneImageScripts.git
+[submodule "repos/local-lib"]
+	path = repos/local-lib
+	url = https://github.com/solgenomics/perl-local-lib
+[submodule "repos/R_libs"]
+	path = repos/R_libs
+	url = https://github.com/solgenomics/R_libs
+[submodule "repos/cassava"]
+	path = repos/cassava
+	url = https://github.com/solgenomics/cassava.git
+[submodule "repos/yambase"]
+	path = repos/yambase
+	url = https://github.com/solgenomics/yambase.git
+[submodule "repos/sweetpotatobase"]
+	path = repos/sweetpotatobase
+	url = https://github.com/solgenomics/sweetpotatobase.git
+[submodule "repos/ricebase"]
+	path = repos/ricebase
+	url = https://github.com/solgenomics/ricebase.git
+[submodule "repos/citrusgreening"]
+	path = repos/citrusgreening
+	url = https://github.com/solgenomics/citrusgreening.git
+[submodule "repos/coconut"]
+	path = repos/coconut
+	url = https://github.com/solgenomics/coconut.git
+[submodule "repos/cassbase"]
+	path = repos/cassbase
+	url = https://github.com/solgenomics/cassbase.git
+[submodule "repos/musabase"]
+	path = repos/musabase
+	url = https://github.com/solgenomics/musabase.git
+[submodule "repos/potatobase"]
+	path = repos/potatobase
+	url = https://github.com/solgenomics/potatobase.git
+[submodule "repos/cea"]
+	path = repos/cea
+	url = https://github.com/solgenomics/cea.git
+[submodule "repos/cippotatobase"]
+	path = repos/cippotatobase
+	url = https://github.com/solgenomics/cippotatobase.git
+[submodule "repos/fernbase"]
+	path = repos/fernbase
+	url = https://github.com/solgenomics/fernbase.git
+[submodule "repos/solgenomics"]
+	path = repos/solgenomics
+	url = https://github.com/solgenomics/solgenomics.git
+[submodule "repos/panzeabase"]
+	path = repos/panzeabase
+	url = https://github.com/solgenomics/panzeabase.git
+[submodule "repos/varitome"]
+	path = repos/varitome
+	url = https://github.com/solgenomics/varitome.git
+[submodule "repos/milkweed"]
+	path = repos/milkweed
+	url = https://github.com/solgenomics/milkweed.git
+[submodule "repos/erysimum"]
+	path = repos/erysimum
+	url = https://github.com/solgenomics/erysimum.git
+[submodule "repos/vitisbase"]
+	path = repos/vitisbase
+	url = https://github.com/solgenomics/vitisbase.git
+[submodule "repos/panandbase"]
+	path = repos/panandbase
+	url = https://github.com/solgenomics/panandbase.git
+[submodule "repos/triticum"]
+	path = repos/triticum
+	url = https://github.com/solgenomics/triticum.git
+[submodule "repos/gorelabbbase"]
+	path = repos/gorelabbbase
+	url = https://github.com/solgenomics/gorelabbase.git
+[submodule "repos/imagesol"]
+	path = repos/imagesol
+	url = https://github.com/solgenomics/imagesol.git
+[submodule "repos/Chado"]
+	path = repos/Chado
+	url = https://github.com/GMOD/Chado
+[submodule "repos/repos/chado_tools"]
+	path = repos/chado_tools
+	url = https://github.com/GMOD/chado_tools
+[submodule "repos/repos/Bio-Chado-Schema"]
+	path = repos/Bio-Chado-Schema
+	url = https://github.com/GMOD/Bio-Chado-Schema
+[submodule "repos/chado_tools"]
+	path = repos/chado_tools
+	url = https://github.com/GMOD/chado_tools
+[submodule "repos/Bio-Chado-Schema"]
+	path = repos/Bio-Chado-Schema
+	url = https://github.com/GMOD/Bio-Chado-Schema

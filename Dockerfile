@@ -85,7 +85,7 @@ ADD repos /home/production/cxgn
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
-COPY sgn_local.conf.template /home/production/cxgn/sgn/sgn_local.conf
+COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
 COPY starmachine.conf /etc/starmachine/
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 

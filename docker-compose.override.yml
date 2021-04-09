@@ -11,3 +11,12 @@ services:
         target: /home/production/cxgn
     environment:
       MODE: 'DEVELOPMENT'
+      PGDATABASE: breedbase
+      PGHOST: breedbase_db
+      PGPASSWORD: postgres
+      PGUSER: postgres
+
+  breedbase_db:
+    environment:
+      POSTGRES_DB: breedbase
+      POSTGRES_PASSWORD: postgres
