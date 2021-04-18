@@ -149,15 +149,12 @@ You can of course also find the IP address of the running container either in th
 
 ## Testing
 
-To run tests from the docker, please note that the $HOME environment variable is set to ```/home/production```, so the ```.pgpass``` file will be written there. Most likely you will run the test as root, so the ```.pgpass``` file will be expected in the ```root``` directory. To make the tests work, first set ```$HOME``` to the correct dir:
-```
-export HOME=/root
-```
+To run tests from the docker, please note that the $HOME environment variable is set to ```/home/production```, so the ```.pgpass``` file will be written there. Most likely you will run the test as root, so the ```.pgpass``` file will be expected in the ```/root``` directory.
 
-Then, start the tests with (from the ```/home/production/cxgn/sgn``` dir):
-```
-t/test_fixture.pl t/unit_fixture/
+To run the tests using docker-compose, first start breedbase in [development](#deploy-for-development) or [production](#deploy-for-production) mode, then:
 
+```
+docker-compose exec --env HOME=/root --workdir /home/production/cxgn/sgn breedbase perl t/test_fixture.pl t/unit_fixture/
 ```
 
 
