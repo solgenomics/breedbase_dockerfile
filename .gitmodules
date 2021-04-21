@@ -106,18 +106,9 @@
 [submodule "repos/imagesol"]
 	path = repos/imagesol
 	url = https://github.com/solgenomics/imagesol.git
-[submodule "repos/Chado"]
-	path = repos/Chado
-	url = https://github.com/GMOD/Chado
 [submodule "repos/repos/chado_tools"]
 	path = repos/chado_tools
 	url = https://github.com/GMOD/chado_tools
 [submodule "repos/repos/Bio-Chado-Schema"]
-	path = repos/Bio-Chado-Schema
-	url = https://github.com/GMOD/Bio-Chado-Schema
-[submodule "repos/chado_tools"]
-	path = repos/chado_tools
-	url = https://github.com/GMOD/chado_tools
-[submodule "repos/Bio-Chado-Schema"]
 	path = repos/Bio-Chado-Schema
 	url = https://github.com/GMOD/Bio-Chado-Schema

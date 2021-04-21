@@ -46,12 +46,7 @@ RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B1
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc |  apt-key add -
 
-#RUN apt-get update --fix-missing -y
-RUN apt-get update -y
-
-RUN apt-get install -y aptitude
-
-RUN aptitude install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-14-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron
+RUN apt update && apt install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-4.9.0-14-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron
 
 # Set the locale correclty to UTF-8
 RUN locale-gen en_US.UTF-8
@@ -70,24 +65,6 @@ RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticate
 # required for R-package spdep, and other dependencies of agricolae
 #
 RUN apt-get install libudunits2-dev libproj-dev libgdal-dev -y
-
-# copy some tools that don't have a Debian package
-#
-COPY tools/gcta/gcta64  /usr/local/bin/
-COPY tools/quicktree /usr/local/bin/
-COPY tools/sreformat /usr/local/bin/
-
-# copy code repos. Run the prepare.pl script to clone them
-# before the build
-# This also adds the Mason website skins
-#
-ADD repos /home/production/cxgn
-
-COPY slurm.conf /etc/slurm-llnl/slurm.conf
-
-COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
-COPY starmachine.conf /etc/starmachine/
-COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
 # XML::Simple dependency
 #
@@ -116,6 +93,32 @@ RUN apt-get install libmoosex-runnable-perl -y
 RUN apt-get install libgdbm3 libgdm-dev -y
 RUN apt-get install nodejs -y
 
+#INSTALL OPENCV IMAGING LIBRARY
+RUN apt-get install -y python3-dev python-pip python3-pip python-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
+RUN pip3 install --upgrade pip
+RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
+    && pip3 install -U keras-tuner
+
+COPY repos/sgn/js/install_node.sh /
+RUN bash /install_node.sh && rm /install_node.sh
+
+# copy some tools that don't have a Debian package
+#
+COPY tools/gcta/gcta64  /usr/local/bin/
+COPY tools/quicktree /usr/local/bin/
+COPY tools/sreformat /usr/local/bin/
+
+COPY slurm.conf /etc/slurm-llnl/slurm.conf
+
+COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
+COPY starmachine.conf /etc/starmachine/
+COPY slurm.conf /etc/slurm-llnl/slurm.conf
+
+# copy code repos.
+# This also adds the Mason website skins
+#
+ADD repos /home/production/cxgn
+
 WORKDIR /home/production/cxgn/sgn
 
 ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
@@ -127,17 +130,6 @@ ENV PGPASSFILE=/home/production/.pgpass
 RUN echo "R_LIBS_USER=/home/production/cxgn/R_libs" >> /etc/R/Renviron
 RUN mkdir -p /home/production/cxgn/sgn/R_libs
 ENV R_LIBS_USER=/home/production/cxgn/R_libs
-#RUN rm /home/production/cxgn/sgn/static/static
-#RUN rm /home/production/cxgn/sgn/static/s
-#RUN rm /home/production/cxgn/sgn/documents
-
-#INSTALL OPENCV IMAGING LIBRARY
-RUN apt-get install -y python3-dev python-pip python3-pip python-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
-RUN pip3 install --upgrade pip
-RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
-    && pip3 install -U keras-tuner
-
-RUN bash /home/production/cxgn/sgn/js/install_node.sh
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
