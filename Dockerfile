@@ -91,13 +91,12 @@ RUN apt-get install libpq-dev -y
 RUN apt-get install libmoosex-runnable-perl -y
 
 RUN apt-get install libgdbm3 libgdm-dev -y
-RUN apt-get install nodejs -y
 
 #INSTALL OPENCV IMAGING LIBRARY
 RUN apt-get install -y python3-dev python-pip python3-pip python-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
-RUN pip3 install --upgrade pip
-RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
-    && pip3 install -U keras-tuner
+RUN pip3 install --upgrade --no-cache-dir pip
+RUN pip3 install --no-cache-dir imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
+    && pip3 install --no-cache-dir -U keras-tuner
 
 RUN apt install -y --no-install-recommends libbio-chado-schema-perl
 COPY repos/sgn/js/install_node.sh /
