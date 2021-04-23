@@ -52,7 +52,7 @@ RUN apt update && apt install -y libterm-readline-zoid-perl nginx starman emacs 
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
-RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
+RUN apt install -y --no-install-recommends cpanminus
 
 RUN chmod 777 /var/spool/ \
     && mkdir /var/spool/slurmstate \
