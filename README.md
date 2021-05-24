@@ -151,10 +151,24 @@ You can of course also find the IP address of the running container either in th
 
 To run tests from the docker, please note that the $HOME environment variable is set to ```/home/production```, so the ```.pgpass``` file will be written there. Most likely you will run the test as root, so the ```.pgpass``` file will be expected in the ```/root``` directory.
 
-To run the tests using docker-compose, first start breedbase in [development](#deploy-for-development) or [production](#deploy-for-production) mode, then:
+To run all tests using `docker-compose`:
 
 ```
-docker-compose exec --env HOME=/root --workdir /home/production/cxgn/sgn breedbase perl t/test_fixture.pl t/unit_fixture/
+docker-compose -f docker-compose.test.yml run --use-aliases test_breedbase
+```
+
+Testing can be performed while other services deployed using docker-compose for development or production are up, as the services defined in docker-compose.test.yml are started on a separate Docker network.
+
+To run only select tests, list them:
+
+```
+docker-compose -f docker-compose.test.yml run --use-aliases test_breedbase t/unit_fixture t/selenium2
+```
+
+After testing, stop remaining test (for selenium & postgres):
+
+```
+docker-compose -f docker-compose.test.yml down
 ```
 
 

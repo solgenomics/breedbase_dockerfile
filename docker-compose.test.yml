@@ -1,0 +1,45 @@
+services:
+  test_breedbase:
+    build:
+      context: .
+      cache_from:
+        - breedbase/breedbase:v0.25
+    environment:
+      HOME: /root
+      PGPASSWORD: postgres
+      SGN_TEST_SERVER: http://test_breedbase:3010
+      SGN_REMOTE_SERVER_ADDR: selenium
+    depends_on:
+      breedbase_db:
+        condition: service_healthy
+      selenium:
+        condition: service_healthy
+    volumes:
+      - ./repos:/home/production/cxgn
+      # repos/sgn/sgn_test.conf assumes /home/vagrant
+      - ./repos:/home/vagrant/cxgn
+    entrypoint: ["perl", "t/test_fixture.pl", "--carpalways", "-v"]
+    command: ["t/unit", "t/unit_fixture", "t/selenium2"]
+    networks:
+      - test-breedbase
+
+  selenium:
+    image: selenium/standalone-firefox:3.141.59-20210607
+    shm_size: '2gb'
+    healthcheck:
+      test: "curl --silent --head http://localhost:4444 || exit 1"
+    networks:
+      - test-breedbase
+
+  breedbase_db:
+    image: postgres:12.7
+    environment:
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: "pg_isready -U postgres || exit 1"
+      interval: 10s
+    networks:
+      - test-breedbase
+
+networks:
+  test-breedbase:

@@ -71,24 +71,6 @@ RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticate
 #
 RUN apt-get install libudunits2-dev libproj-dev libgdal-dev -y
 
-# copy some tools that don't have a Debian package
-#
-COPY tools/gcta/gcta64  /usr/local/bin/
-COPY tools/quicktree /usr/local/bin/
-COPY tools/sreformat /usr/local/bin/
-
-# copy code repos. Run the prepare.pl script to clone them
-# before the build
-# This also adds the Mason website skins
-#
-ADD repos /home/production/cxgn
-
-COPY slurm.conf /etc/slurm-llnl/slurm.conf
-
-COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
-COPY starmachine.conf /etc/starmachine/
-COPY slurm.conf /etc/slurm-llnl/slurm.conf
-
 # XML::Simple dependency
 #
 RUN apt-get install libexpat1-dev -y
@@ -116,20 +98,7 @@ RUN apt-get install libmoosex-runnable-perl -y
 RUN apt-get install libgdbm3 libgdm-dev -y
 RUN apt-get install nodejs -y
 
-WORKDIR /home/production/cxgn/sgn
-
-ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
-
-# run the Build.PL to install the R dependencies...
-#
-ENV HOME=/home/production
-ENV PGPASSFILE=/home/production/.pgpass
-RUN echo "R_LIBS_USER=/home/production/cxgn/R_libs" >> /etc/R/Renviron
-RUN mkdir -p /home/production/cxgn/sgn/R_libs
-ENV R_LIBS_USER=/home/production/cxgn/R_libs
-#RUN rm /home/production/cxgn/sgn/static/static
-#RUN rm /home/production/cxgn/sgn/static/s
-#RUN rm /home/production/cxgn/sgn/documents
+RUN cpanm Selenium::Remote::Driver@1.44
 
 #INSTALL OPENCV IMAGING LIBRARY
 RUN apt-get install -y python3-dev python-pip python3-pip python-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
@@ -137,10 +106,41 @@ RUN pip3 install --upgrade pip
 RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
     && pip3 install -U keras-tuner
 
-RUN bash /home/production/cxgn/sgn/js/install_node.sh
+# copy some tools that don't have a Debian package
+#
+COPY tools/gcta/gcta64  /usr/local/bin/
+COPY tools/quicktree /usr/local/bin/
+COPY tools/sreformat /usr/local/bin/
+
+COPY repos/sgn/js/install_node.sh /
+RUN bash /install_node.sh
+
+COPY slurm.conf /etc/slurm-llnl/slurm.conf
+
+COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
+COPY starmachine.conf /etc/starmachine/
+COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+# copy code repos.
+# This also adds the Mason website skins
+#
+ADD repos /home/production/cxgn
+
+WORKDIR /home/production/cxgn/sgn
+
+ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
+
+ENV HOME=/home/production
+ENV PGPASSFILE=/home/production/.pgpass
+RUN echo "R_LIBS_USER=/home/production/cxgn/R_libs" >> /etc/R/Renviron
+ENV R_LIBS_USER=/home/production/cxgn/R_libs
+#RUN rm /home/production/cxgn/sgn/static/static
+#RUN rm /home/production/cxgn/sgn/static/s
+#RUN rm /home/production/cxgn/sgn/documents
+
 RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/sgn
 
 ARG CREATED
