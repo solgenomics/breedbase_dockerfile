@@ -46,8 +46,8 @@ RUN bash -c "apt-key adv --keyserver keys.gnupg.net --recv-key 'E19F5F87128899B1
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc |  apt-key add -
 
-#RUN apt-get update --fix-missing -y
-RUN apt-get update -y
+RUN apt-get update --fix-missing -y
+#RUN apt-get update -y
 
 RUN apt-get install -y aptitude
 
