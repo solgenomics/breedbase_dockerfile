@@ -7,6 +7,8 @@ sed -i s/localhost/$HOSTNAME/g /etc/slurm-llnl/slurm.conf
 /etc/init.d/slurmd start
 #/etc/init.d/postgres start
 
+# sometimes localhost is in drained mode, set to active mode
+scontrol update NodeName=$HOSTNAME State=RESUME
 
 # load empty fixture and run any missing patches
 
