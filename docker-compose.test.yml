@@ -6,6 +6,7 @@ services:
         - breedbase/breedbase:v0.25
     environment:
       HOME: /root
+      MODE: 'TESTING'
       PGPASSWORD: postgres
       SGN_TEST_SERVER: http://test_breedbase:3010
       SGN_REMOTE_SERVER_ADDR: selenium
@@ -18,8 +19,7 @@ services:
       - ./repos:/home/production/cxgn
       # repos/sgn/sgn_test.conf assumes /home/vagrant
       - ./repos:/home/vagrant/cxgn
-    entrypoint: ["perl", "t/test_fixture.pl", "--carpalways", "-v"]
-    command: ["t/unit", "t/unit_fixture", "t/selenium2"]
+    command: ["t/unit", "t/unit_fixture", "t/unit_mech", "t/selenium2"]
     networks:
       - test-breedbase
 
