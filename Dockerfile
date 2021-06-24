@@ -159,4 +159,4 @@ LABEL org.opencontainers.image.description="Breedbase web server"
 LABEL org.opencontainers.image.documentation="https://solgenomics.github.io/sgn/"
 
 # start services when running container...
-ENTRYPOINT /bin/bash /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

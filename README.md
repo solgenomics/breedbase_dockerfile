@@ -159,10 +159,10 @@ docker-compose -f docker-compose.test.yml run --use-aliases test_breedbase
 
 Testing can be performed while other services deployed using docker-compose for development or production are up, as the services defined in docker-compose.test.yml are started on a separate Docker network.
 
-To run only select tests, list them:
+To run only select tests, list them after the `test_breedbase` service:
 
 ```
-docker-compose -f docker-compose.test.yml run --use-aliases test_breedbase t/unit_fixture t/selenium2
+docker-compose -f docker-compose.test.yml run --use-aliases test_breedbase t/unit_fixture/SGN/genefamily.t
 ```
 
 After testing, stop remaining test (for selenium & postgres):
