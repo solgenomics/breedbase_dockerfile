@@ -9,6 +9,10 @@ services:
       - type: bind
         source: ./cxgn
         target: /home/production/cxgn
+        # include .git dir that tracks all submodules in cxgn
+      - type: bind
+        source: .git
+        target: /home/production/.git
     environment:
       MODE: 'DEVELOPMENT'
       PGDATABASE: breedbase
