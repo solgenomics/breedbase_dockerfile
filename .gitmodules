@@ -1,113 +1,113 @@
 [submodule "repos/cxgn-corelibs"]
-	path = repos/cxgn-corelibs
+	path = cxgn/cxgn-corelibs
 	url = https://github.com/solgenomics/cxgn-corelibs.git
 [submodule "repos/sgn"]
-	path = repos/sgn
+	path = cxgn/sgn
 	url = https://github.com/solgenomics/sgn.git
 [submodule "repos/Phenome"]
-	path = repos/Phenome
+	path = cxgn/Phenome
 	url = https://github.com/solgenomics/Phenome.git
 [submodule "repos/rPackages"]
-	path = repos/rPackages
+	path = cxgn/rPackages
 	url = https://github.com/solgenomics/rPackages.git
 [submodule "repos/biosource"]
-	path = repos/biosource
+	path = cxgn/biosource
 	url = https://github.com/solgenomics/biosource.git
 [submodule "repos/Cview"]
-	path = repos/Cview
+	path = cxgn/Cview
 	url = https://github.com/solgenomics/Cview.git
 [submodule "repos/ITAG"]
-	path = repos/ITAG
+	path = cxgn/ITAG
 	url = https://github.com/solgenomics/ITAG.git
 [submodule "repos/tomato_genome"]
-	path = repos/tomato_genome
+	path = cxgn/tomato_genome
 	url = https://github.com/solgenomics/tomato_genome.git
 [submodule "repos/sgn-devtools"]
-	path = repos/sgn-devtools
+	path = cxgn/sgn-devtools
 	url = https://github.com/solgenomics/sgn-devtools.git
 [submodule "repos/solGS"]
-	path = repos/solGS
+	path = cxgn/solGS
 	url = https://github.com/solgenomics/solGS.git
 [submodule "repos/starmachine"]
-	path = repos/starmachine
+	path = cxgn/starmachine
 	url = https://github.com/solgenomics/starmachine.git
 [submodule "repos/DroneImageScripts"]
-	path = repos/DroneImageScripts
+	path = cxgn/DroneImageScripts
 	url = https://github.com/solgenomics/DroneImageScripts.git
 [submodule "repos/local-lib"]
-	path = repos/local-lib
+	path = cxgn/local-lib
 	url = https://github.com/solgenomics/perl-local-lib
 [submodule "repos/R_libs"]
-	path = repos/R_libs
+	path = cxgn/R_libs
 	url = https://github.com/solgenomics/R_libs
 [submodule "repos/cassava"]
-	path = repos/cassava
+	path = cxgn/cassava
 	url = https://github.com/solgenomics/cassava.git
 [submodule "repos/yambase"]
-	path = repos/yambase
+	path = cxgn/yambase
 	url = https://github.com/solgenomics/yambase.git
 [submodule "repos/sweetpotatobase"]
-	path = repos/sweetpotatobase
+	path = cxgn/sweetpotatobase
 	url = https://github.com/solgenomics/sweetpotatobase.git
 [submodule "repos/ricebase"]
-	path = repos/ricebase
+	path = cxgn/ricebase
 	url = https://github.com/solgenomics/ricebase.git
 [submodule "repos/citrusgreening"]
-	path = repos/citrusgreening
+	path = cxgn/citrusgreening
 	url = https://github.com/solgenomics/citrusgreening.git
 [submodule "repos/coconut"]
-	path = repos/coconut
+	path = cxgn/coconut
 	url = https://github.com/solgenomics/coconut.git
 [submodule "repos/cassbase"]
-	path = repos/cassbase
+	path = cxgn/cassbase
 	url = https://github.com/solgenomics/cassbase.git
 [submodule "repos/musabase"]
-	path = repos/musabase
+	path = cxgn/musabase
 	url = https://github.com/solgenomics/musabase.git
 [submodule "repos/potatobase"]
-	path = repos/potatobase
+	path = cxgn/potatobase
 	url = https://github.com/solgenomics/potatobase.git
 [submodule "repos/cea"]
-	path = repos/cea
+	path = cxgn/cea
 	url = https://github.com/solgenomics/cea.git
 [submodule "repos/cippotatobase"]
-	path = repos/cippotatobase
+	path = cxgn/cippotatobase
 	url = https://github.com/solgenomics/cippotatobase.git
 [submodule "repos/fernbase"]
-	path = repos/fernbase
+	path = cxgn/fernbase
 	url = https://github.com/solgenomics/fernbase.git
 [submodule "repos/solgenomics"]
-	path = repos/solgenomics
+	path = cxgn/solgenomics
 	url = https://github.com/solgenomics/solgenomics.git
 [submodule "repos/panzeabase"]
-	path = repos/panzeabase
+	path = cxgn/panzeabase
 	url = https://github.com/solgenomics/panzeabase.git
 [submodule "repos/varitome"]
-	path = repos/varitome
+	path = cxgn/varitome
 	url = https://github.com/solgenomics/varitome.git
 [submodule "repos/milkweed"]
-	path = repos/milkweed
+	path = cxgn/milkweed
 	url = https://github.com/solgenomics/milkweed.git
 [submodule "repos/erysimum"]
-	path = repos/erysimum
+	path = cxgn/erysimum
 	url = https://github.com/solgenomics/erysimum.git
 [submodule "repos/vitisbase"]
-	path = repos/vitisbase
+	path = cxgn/vitisbase
 	url = https://github.com/solgenomics/vitisbase.git
 [submodule "repos/panandbase"]
-	path = repos/panandbase
+	path = cxgn/panandbase
 	url = https://github.com/solgenomics/panandbase.git
 [submodule "repos/triticum"]
-	path = repos/triticum
+	path = cxgn/triticum
 	url = https://github.com/solgenomics/triticum.git
 [submodule "repos/gorelabbbase"]
-	path = repos/gorelabbbase
+	path = cxgn/gorelabbbase
 	url = https://github.com/solgenomics/gorelabbase.git
 [submodule "repos/imagesol"]
-	path = repos/imagesol
+	path = cxgn/imagesol
 	url = https://github.com/solgenomics/imagesol.git
 [submodule "repos/Chado"]
-	path = repos/Chado
+	path = cxgn/Chado
 	url = https://github.com/GMOD/Chado
 [submodule "repos/repos/chado_tools"]
 	path = repos/chado_tools
@@ -116,8 +116,8 @@
 	path = repos/Bio-Chado-Schema
 	url = https://github.com/GMOD/Bio-Chado-Schema
 [submodule "repos/chado_tools"]
-	path = repos/chado_tools
+	path = cxgn/chado_tools
 	url = https://github.com/GMOD/chado_tools
 [submodule "repos/Bio-Chado-Schema"]
-	path = repos/Bio-Chado-Schema
+	path = cxgn/Bio-Chado-Schema
 	url = https://github.com/GMOD/Bio-Chado-Schema

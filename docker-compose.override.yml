@@ -7,7 +7,7 @@ services:
         source: ./sgn_local.conf
         target: /home/production/cxgn/sgn/sgn_local.conf
       - type: bind
-        source: ./repos
+        source: ./cxgn
         target: /home/production/cxgn
     environment:
       MODE: 'DEVELOPMENT'
