@@ -50,7 +50,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
 3. Deploy with docker-compose
 
-    Make sure to specify both the base yml file and the production yml file with your command. These will overwrite the default development settings found in `docker-compose.override.yml`, and instead use production settings. These settings include setting the env MODE to PRODUCTION rather than DEVELOPMENT, and mounting fewer volumes from the host (won't use host `/repos` dir to overwrite `/home/production/cxgn` in the container).
+    Make sure to specify both the base yml file and the production yml file with your command. These will overwrite the default development settings found in `docker-compose.override.yml`, and instead use production settings. These settings include setting the env MODE to PRODUCTION rather than DEVELOPMENT, and mounting fewer volumes from the host (won't use host `./cxgn` dir to overwrite `/home/production/cxgn` in the container).
 
     ```
     docker-compose -f docker-compose.yml -f production.yml up -d
@@ -99,7 +99,7 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     git clone --recursive https://github.com/solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
     ```
-    This will clone all the git repos that are needed for breedbase into a subdirectory called `repos/`.
+    This will clone all the git repos that are needed for breedbase into a subdirectory called `cxgn/`.
     This directory will be mounted onto the devel container during the compose step, but will still be accessible from the host for development work.
 
 3. Deploy with docker-compose, then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment!
@@ -219,7 +219,7 @@ Note that for this to work, the $PERL5LIB environment variable should have the c
 
 2. Deploy a Web Server
 
-  This will create a Breedbase web server container. The -v flag is used to mount a local conf file and a couple of dirs from the host. Create the file and ris on your host if they don't exist and update the paths before running the command. If you will use this container for development it is also recommended to run `./prepare.sh` and mount the resulting `repos` repo at `/home/production/cxgn`.
+  This will create a Breedbase web server container. The -v flag is used to mount a local conf file and a couple of dirs from the host. Create the file and ris on your host if they don't exist and update the paths before running the command.
 
   ```
   docker run -d --name breedbase_web -p 8080:8080 -v /host/path/to/sgn_local.conf:/home/production/cxgn/sgn/sgn_local.conf -v /host/path/to/archive:/home/production/archive -v /host/path/to/public_breedbase:/home/production/public breedbase/breedbase:latest
