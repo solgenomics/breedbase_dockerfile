@@ -16,9 +16,10 @@ services:
       selenium:
         condition: service_healthy
     volumes:
-      - ./repos:/home/production/cxgn
+      - ./cxgn:/home/production/cxgn
       # repos/sgn/sgn_test.conf assumes /home/vagrant
-      - ./repos:/home/vagrant/cxgn
+      - ./cxgn:/home/vagrant/cxgn
+      - ./.git:/home/production/.git
     command: ["t/unit", "t/unit_fixture", "t/unit_mech", "t/selenium2"]
     networks:
       - test-breedbase
