@@ -1,9 +1,7 @@
 services:
   test_breedbase:
-    build:
-      context: .
-      cache_from:
-        - breedbase/breedbase:v0.25
+    image: breedbase/breedbase:v0.27
+    build: .
     environment:
       HOME: /root
       MODE: 'TESTING'
