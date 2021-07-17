@@ -105,11 +105,13 @@ RUN pip3 install --upgrade pip
 RUN pip3 install imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
     && pip3 install -U keras-tuner
 
+# biosquid provides sreformat
+RUN apt install -y --no-install-recommends biosquid
+
 # copy some tools that don't have a Debian package
 #
 COPY tools/gcta/gcta64  /usr/local/bin/
 COPY tools/quicktree /usr/local/bin/
-COPY tools/sreformat /usr/local/bin/
 
 COPY cxgn/sgn/js/install_node.sh /
 RUN bash /install_node.sh
