@@ -121,3 +121,6 @@
 [submodule "repos/Bio-Chado-Schema"]
 	path = cxgn/Bio-Chado-Schema
 	url = https://github.com/GMOD/Bio-Chado-Schema
+[submodule "cxgn/tassel-5-standalone"]
+	path = cxgn/tassel-5-standalone
+	url = https://bitbucket.com/tasseladmin/tassel-5-standalone
