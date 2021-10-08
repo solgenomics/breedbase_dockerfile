@@ -124,3 +124,6 @@
 [submodule "cxgn/tassel-5-standalone"]
 	path = cxgn/tassel-5-standalone
 	url = https://bitbucket.com/tasseladmin/tassel-5-standalone
+[submodule "cxgn/QuantGenResources"]
+	path = cxgn/QuantGenResources
+	url = git@github.com:solgenomics/QuantGenResources
