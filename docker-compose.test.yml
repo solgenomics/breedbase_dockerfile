@@ -3,7 +3,7 @@ services:
     build:
       context: .
       cache_from:
-        - breedbase/breedbase:v0.25
+        - breedbase/breedbase:v0.31
     environment:
       HOME: /root
       MODE: 'TESTING'
@@ -25,7 +25,7 @@ services:
       - test-breedbase
 
   selenium:
-    image: selenium/standalone-firefox:3.141.59-20210607
+    image: selenium/standalone-firefox:3.141.59-20210929
     shm_size: '2gb'
     healthcheck:
       test: "curl --silent --head http://localhost:4444 || exit 1"
@@ -33,7 +33,7 @@ services:
       - test-breedbase
 
   breedbase_db:
-    image: postgres:12.7
+    image: postgres:12.8
     environment:
       POSTGRES_PASSWORD: postgres
     healthcheck:
