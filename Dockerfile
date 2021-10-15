@@ -115,6 +115,12 @@ COPY tools/sreformat /usr/local/bin/
 COPY cxgn/sgn/js/install_node.sh /
 RUN bash /install_node.sh
 
+WORKDIR sgn/js
+COPY ./cxgn/sgn/js/package.json .
+RUN npm install
+COPY ./cxgn/sgn/js/ .
+RUN npm run build
+
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
 COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
