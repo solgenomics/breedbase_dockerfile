@@ -1,124 +1,124 @@
-[submodule "repos/cxgn-corelibs"]
+[submodule "cxgn/cxgn-corelibs"]
 	path = cxgn/cxgn-corelibs
 	url = https://github.com/solgenomics/cxgn-corelibs.git
-[submodule "repos/sgn"]
+[submodule "cxgn/sgn"]
 	path = cxgn/sgn
 	url = https://github.com/solgenomics/sgn.git
-[submodule "repos/Phenome"]
+[submodule "cxgn/Phenome"]
 	path = cxgn/Phenome
 	url = https://github.com/solgenomics/Phenome.git
-[submodule "repos/rPackages"]
+[submodule "cxgn/rPackages"]
 	path = cxgn/rPackages
 	url = https://github.com/solgenomics/rPackages.git
-[submodule "repos/biosource"]
+[submodule "cxgn/biosource"]
 	path = cxgn/biosource
 	url = https://github.com/solgenomics/biosource.git
-[submodule "repos/Cview"]
+[submodule "cxgn/Cview"]
 	path = cxgn/Cview
 	url = https://github.com/solgenomics/Cview.git
-[submodule "repos/ITAG"]
+[submodule "cxgn/ITAG"]
 	path = cxgn/ITAG
 	url = https://github.com/solgenomics/ITAG.git
-[submodule "repos/tomato_genome"]
+[submodule "cxgn/tomato_genome"]
 	path = cxgn/tomato_genome
 	url = https://github.com/solgenomics/tomato_genome.git
-[submodule "repos/sgn-devtools"]
+[submodule "cxgn/sgn-devtools"]
 	path = cxgn/sgn-devtools
 	url = https://github.com/solgenomics/sgn-devtools.git
-[submodule "repos/solGS"]
+[submodule "cxgn/solGS"]
 	path = cxgn/solGS
 	url = https://github.com/solgenomics/solGS.git
-[submodule "repos/starmachine"]
+[submodule "cxgn/starmachine"]
 	path = cxgn/starmachine
 	url = https://github.com/solgenomics/starmachine.git
-[submodule "repos/DroneImageScripts"]
+[submodule "cxgn/DroneImageScripts"]
 	path = cxgn/DroneImageScripts
 	url = https://github.com/solgenomics/DroneImageScripts.git
-[submodule "repos/local-lib"]
+[submodule "cxgn/local-lib"]
 	path = cxgn/local-lib
 	url = https://github.com/solgenomics/perl-local-lib
-[submodule "repos/R_libs"]
+[submodule "cxgn/R_libs"]
 	path = cxgn/R_libs
 	url = https://github.com/solgenomics/R_libs
-[submodule "repos/cassava"]
+[submodule "cxgn/cassava"]
 	path = cxgn/cassava
 	url = https://github.com/solgenomics/cassava.git
-[submodule "repos/yambase"]
+[submodule "cxgn/yambase"]
 	path = cxgn/yambase
 	url = https://github.com/solgenomics/yambase.git
-[submodule "repos/sweetpotatobase"]
+[submodule "cxgn/sweetpotatobase"]
 	path = cxgn/sweetpotatobase
 	url = https://github.com/solgenomics/sweetpotatobase.git
-[submodule "repos/ricebase"]
+[submodule "cxgn/ricebase"]
 	path = cxgn/ricebase
 	url = https://github.com/solgenomics/ricebase.git
-[submodule "repos/citrusgreening"]
+[submodule "cxgn/citrusgreening"]
 	path = cxgn/citrusgreening
 	url = https://github.com/solgenomics/citrusgreening.git
-[submodule "repos/coconut"]
+[submodule "cxgn/coconut"]
 	path = cxgn/coconut
 	url = https://github.com/solgenomics/coconut.git
-[submodule "repos/cassbase"]
+[submodule "cxgn/cassbase"]
 	path = cxgn/cassbase
 	url = https://github.com/solgenomics/cassbase.git
-[submodule "repos/musabase"]
+[submodule "cxgn/musabase"]
 	path = cxgn/musabase
 	url = https://github.com/solgenomics/musabase.git
-[submodule "repos/potatobase"]
+[submodule "cxgn/potatobase"]
 	path = cxgn/potatobase
 	url = https://github.com/solgenomics/potatobase.git
-[submodule "repos/cea"]
+[submodule "cxgn/cea"]
 	path = cxgn/cea
 	url = https://github.com/solgenomics/cea.git
-[submodule "repos/cippotatobase"]
+[submodule "cxgn/cippotatobase"]
 	path = cxgn/cippotatobase
 	url = https://github.com/solgenomics/cippotatobase.git
-[submodule "repos/fernbase"]
+[submodule "cxgn/fernbase"]
 	path = cxgn/fernbase
 	url = https://github.com/solgenomics/fernbase.git
-[submodule "repos/solgenomics"]
+[submodule "cxgn/solgenomics"]
 	path = cxgn/solgenomics
 	url = https://github.com/solgenomics/solgenomics.git
-[submodule "repos/panzeabase"]
+[submodule "cxgn/panzeabase"]
 	path = cxgn/panzeabase
 	url = https://github.com/solgenomics/panzeabase.git
-[submodule "repos/varitome"]
+[submodule "cxgn/varitome"]
 	path = cxgn/varitome
 	url = https://github.com/solgenomics/varitome.git
-[submodule "repos/milkweed"]
+[submodule "cxgn/milkweed"]
 	path = cxgn/milkweed
 	url = https://github.com/solgenomics/milkweed.git
-[submodule "repos/erysimum"]
+[submodule "cxgn/erysimum"]
 	path = cxgn/erysimum
 	url = https://github.com/solgenomics/erysimum.git
-[submodule "repos/vitisbase"]
+[submodule "cxgn/vitisbase"]
 	path = cxgn/vitisbase
 	url = https://github.com/solgenomics/vitisbase.git
-[submodule "repos/panandbase"]
+[submodule "cxgn/panandbase"]
 	path = cxgn/panandbase
 	url = https://github.com/solgenomics/panandbase.git
-[submodule "repos/triticum"]
+[submodule "cxgn/triticum"]
 	path = cxgn/triticum
 	url = https://github.com/solgenomics/triticum.git
-[submodule "repos/gorelabbbase"]
+[submodule "cxgn/gorelabbbase"]
 	path = cxgn/gorelabbbase
 	url = https://github.com/solgenomics/gorelabbase.git
-[submodule "repos/imagesol"]
+[submodule "cxgn/imagesol"]
 	path = cxgn/imagesol
 	url = https://github.com/solgenomics/imagesol.git
-[submodule "repos/Chado"]
+[submodule "cxgn/Chado"]
 	path = cxgn/Chado
 	url = https://github.com/GMOD/Chado
-[submodule "repos/repos/chado_tools"]
-	path = repos/chado_tools
-	url = https://github.com/GMOD/chado_tools
-[submodule "repos/repos/Bio-Chado-Schema"]
-	path = repos/Bio-Chado-Schema
-	url = https://github.com/GMOD/Bio-Chado-Schema
-[submodule "repos/chado_tools"]
+[submodule "cxgn/cxgn/chado_tools"]
 	path = cxgn/chado_tools
 	url = https://github.com/GMOD/chado_tools
-[submodule "repos/Bio-Chado-Schema"]
+[submodule "cxgn/cxgn/Bio-Chado-Schema"]
+	path = cxgn/Bio-Chado-Schema
+	url = https://github.com/GMOD/Bio-Chado-Schema
+[submodule "cxgn/chado_tools"]
+	path = cxgn/chado_tools
+	url = https://github.com/GMOD/chado_tools
+[submodule "cxgn/Bio-Chado-Schema"]
 	path = cxgn/Bio-Chado-Schema
 	url = https://github.com/GMOD/Bio-Chado-Schema
 [submodule "cxgn/tassel-5-standalone"]
@@ -126,4 +126,4 @@
 	url = https://bitbucket.com/tasseladmin/tassel-5-standalone
 [submodule "cxgn/QuantGenResources"]
 	path = cxgn/QuantGenResources
-	url = git@github.com:solgenomics/QuantGenResources
+	url = https://github.com/solgenomics/QuantGenResources.git
