@@ -1,0 +1,22 @@
+on:
+  pull_request:
+    paths-ignore:
+      - '*.md'
+      - '*.png'
+      - '.gitignore'
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout breedbase_dockerfile repo
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+    
+      - name: Build container image
+        run: docker compose -f docker-compose.test.yml build --no-cache test_breedbase
+
+      - name: Run tests
+        run: docker compose -f docker-compose.test.yml run --use-aliases test_breedbase  
