@@ -39,7 +39,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
     touch .env
     ```
 
-    If you run the system in development mode, the `cxgn/` directory in the `breedbase_dockerfile` directory will be mounted inside the docker. After the initial cloning of the breedbase_dockerfile repo, you will need to update all the git submodules that are located in the `cxgn` directory:
+    If you run the system in development mode, the `cxgn/` directory in the `breedbase_dockerfile` directory will be mounted inside the docker. After the initial cloning of the breedbase_dockerfile repo, you will need to update all the git submodules that are located in the that directory:
     
     ```
     git submodule update --init 
