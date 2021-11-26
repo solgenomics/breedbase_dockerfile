@@ -9,6 +9,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      DOCKER_BUILDKIT: 1
+
     steps:
       - name: Checkout breedbase_dockerfile repo
         uses: actions/checkout@v2
