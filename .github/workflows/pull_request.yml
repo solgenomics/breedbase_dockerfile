@@ -19,4 +19,4 @@ jobs:
         run: docker compose -f docker-compose.test.yml build --no-cache test_breedbase
 
       - name: Run tests
-        run: docker compose -f docker-compose.test.yml run --use-aliases test_breedbase  
+        run: docker compose -f docker-compose.test.yml run --use-aliases --entrypoint='/bin/sh' test_breedbase -c '/entrypoint.sh t/unit t/unit_fixture t/unit_mech 2>/dev/null'
