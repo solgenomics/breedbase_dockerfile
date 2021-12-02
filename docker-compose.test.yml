@@ -3,7 +3,7 @@ services:
     build:
       context: .
       cache_from:
-        - breedbase/breedbase:v0.25
+        - breedbase/breedbase:v0.36
     environment:
       HOME: /root
       MODE: 'TESTING'
