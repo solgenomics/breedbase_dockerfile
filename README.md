@@ -39,13 +39,6 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
     touch .env
     ```
 
-    If you run the system in development mode, the `cxgn/` directory in the `breedbase_dockerfile` directory will be mounted inside the docker. After the initial cloning of the breedbase_dockerfile repo, you will need to update all the git submodules that are located in the that directory:
-    
-    ```
-    git submodule update --init 
-    
-    ```
-
     Add the following lines to `.env` to set the necessary environment variables
 
     ```
@@ -106,7 +99,8 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
     git clone --recursive https://github.com/solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
     ```
-    This will clone all the git repos that are needed for breedbase into a subdirectory called `cxgn/`.
+   
+   This will clone all the git repos that are needed for breedbase into a subdirectory called `cxgn/`.
     This directory will be mounted onto the devel container during the compose step, but will still be accessible from the host for development work.
 
 3. Deploy with docker-compose, then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment!
