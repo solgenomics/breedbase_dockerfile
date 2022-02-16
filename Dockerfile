@@ -117,7 +117,6 @@ RUN bash /install_node.sh
 
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
-COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
 COPY starmachine.conf /etc/starmachine/
 COPY slurm.conf /etc/slurm-llnl/slurm.conf
 
@@ -129,9 +128,13 @@ RUN chmod +x /entrypoint.sh
 #
 ADD cxgn /home/production/cxgn
 
+# move this here so it is not clobbered by the cxgn move
+#
+COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
+
 WORKDIR /home/production/cxgn/sgn
 
-ENV PERL5LIB=/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:/home/production/cxgn/Bio-Chado-Schema/lib:.
+ENV PERL5LIB=/home/production/cxgn/Bio-Chado-Schema/lib:/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:.
 
 ENV HOME=/home/production
 ENV PGPASSFILE=/home/production/.pgpass
