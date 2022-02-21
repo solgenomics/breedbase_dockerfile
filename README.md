@@ -18,6 +18,10 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 [Testing](#testing)<br>
 [Miscellaneous](#miscellaneous)<br>
 
+## Install Docker
+
+Follow the instructions on https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-debian-10 to install the docker executable.
+(Choose the correct version of your OS from the pull down menu on that site)
 
 ## Deploy in Production
 
