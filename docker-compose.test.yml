@@ -20,7 +20,7 @@ services:
       # repos/sgn/sgn_test.conf assumes /home/vagrant
       - ./cxgn:/home/vagrant/cxgn
       - ./.git:/home/production/.git
-    command: ["t/unit", "t/unit_fixture", "t/unit_mech", "t/selenium2"]
+    command: ["t/unit", "t/unit_fixture", "t/unit_mech"]
     networks:
       - test-breedbase
 
