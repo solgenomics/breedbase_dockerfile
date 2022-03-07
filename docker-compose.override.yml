@@ -17,7 +17,7 @@ services:
       PGHOST: breedbase_db
       PGPASSWORD: postgres
       PGUSER: postgres
-      SGN_TEST_SERVER: http://breedbase_web:3010
+      SGN_TEST_SERVER: http://breedbase:3010
       SGN_REMOTE_SERVER_ADDR: selenium
 
   selenium:
