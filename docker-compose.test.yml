@@ -18,14 +18,14 @@ services:
     volumes:
       - ./cxgn:/home/production/cxgn
       # repos/sgn/sgn_test.conf assumes /home/vagrant
-      - ./cxgn:/home/vagrant/cxgn
+      - ./cxgn:/home/production/cxgn
       - ./.git:/home/production/.git
     command: ["t/unit", "t/unit_fixture", "t/unit_mech"]
     networks:
       - test-breedbase
 
   selenium:
-    image: selenium/standalone-firefox:3.141.59-20210607
+    image: selenium/standalone-firefox:97.0
     shm_size: '2gb'
     healthcheck:
       test: "curl --silent --head http://localhost:4444 || exit 1"
