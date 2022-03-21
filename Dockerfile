@@ -56,11 +56,7 @@ RUN apt-get update --fix-missing -y
 
 RUN apt-get install -y aptitude
 
-<<<<<<< HEAD
-RUN aptitude install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-amd64 perl-doc ack-grep make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 blast2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron
-=======
-RUN aptitude install -y libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-5.10.0-10-amd64 perl-doc ack make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron
->>>>>>> tweak slurm and munge configs, cran version, other small tweaks.
+RUN aptitude install -y npm libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-5.10.0-10-amd64 perl-doc ack make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron nlibnlopt0
 
 # Set the locale correclty to UTF-8
 RUN locale-gen en_US.UTF-8
@@ -140,8 +136,12 @@ COPY starmachine.conf /etc/starmachine/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
-COPY cxgn/sgn/js/install_node.sh /
-RUN bash /install_node.sh
+#COPY cxgn/sgn/js/install_node.sh /
+#RUN bash /install_node.sh
+
+# npm install needs a non-root user (new in latest version)
+#
+RUN adduser -u 1250 production && chown -R production /home/production
 
 WORKDIR /home/production/cxgn/sgn
 
