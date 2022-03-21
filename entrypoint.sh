@@ -13,6 +13,7 @@ if [ "${MODE}" = 'TESTING' ]; then
 fi
 
 umask 002
+
 # load empty fixture and run any missing patches
 
 if [ $(psql -h breedbase_db -U postgres -Atc 'select count(distinct table_schema) from information_schema.tables;') == "2" ]; then
