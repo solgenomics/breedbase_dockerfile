@@ -9,6 +9,10 @@ EXPOSE 8080
 
 # create directory layout
 #
+# npm install needs a non-root user (new in latest version)
+#
+RUN useradd -d /home/production -u 1000 production 
+
 RUN mkdir -p /home/production/public/sgn_static_content
 #RUN mkdir -p /home/production/tmp/solgs
 #RUN mkdir -p /home/production/archive
@@ -26,6 +30,8 @@ RUN mkdir -p /home/production/cxgn/local-lib
 RUN mkdir /etc/starmachine
 RUN mkdir /var/log/sgn
 
+RUN chown -R production /home/production
+
 WORKDIR /home/production/cxgn
 
 # install system dependencies
@@ -34,6 +40,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN apt-get update -y --allow-unauthenticated
 RUN apt-get upgrade -y
 RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl wget -y
+
 # key for cran-backports (not working though)
 #
 #
@@ -41,7 +48,6 @@ RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl wget -y
 
 # for R cran-40
 RUN bash -c "apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' 1>/key.out 2> /key.err"
-
 
 # add cran backports repo and required deps
 #
@@ -56,7 +62,7 @@ RUN apt-get update --fix-missing -y
 
 RUN apt-get install -y aptitude
 
-RUN aptitude install -y npm libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-5.10.0-10-amd64 perl-doc ack make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron nlibnlopt0
+RUN aptitude install -y npm libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-5.10.0-10-amd64 perl-doc ack make xutils-dev nfs-common lynx xvfb ncbi-blast+ libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron libnlopt0
 
 # Set the locale correclty to UTF-8
 RUN locale-gen en_US.UTF-8
@@ -139,9 +145,6 @@ COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
 #COPY cxgn/sgn/js/install_node.sh /
 #RUN bash /install_node.sh
 
-# npm install needs a non-root user (new in latest version)
-#
-RUN adduser -u 1250 production && chown -R production /home/production
 
 WORKDIR /home/production/cxgn/sgn
 
