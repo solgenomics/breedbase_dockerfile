@@ -17,15 +17,6 @@ services:
       PGHOST: breedbase_db
       PGPASSWORD: postgres
       PGUSER: postgres
-      SGN_TEST_SERVER: http://breedbase:3010
-      SGN_REMOTE_SERVER_ADDR: selenium
-
-  selenium:
-    container_name: selenium
-    image: selenium/standalone-firefox-debug
-    ports:
-      - 5900:5900
-      - 4444:4444
 
   breedbase_db:
     environment:
