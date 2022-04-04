@@ -92,7 +92,7 @@ fi
 
 
 if [ "$MODE" == "DEVELOPMENT" ]; then
-        /home/production/cxgn/sgn/bin/sgn_server.pl --fork -r -d -p 8080
+        /home/production/cxgn/sgn/bin/sgn_server.pl --fork -r -p 8080
 else
     /etc/init.d/sgn start
     touch /var/log/sgn/error.log
