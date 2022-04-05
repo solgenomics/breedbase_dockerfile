@@ -3,8 +3,9 @@ services:
     volumes:
       - webdata:/home/production/volume
     ports:
-      - 8081:8080
-    image: breedbase/breedbase:v0.42
+      - 8080:8080
+      - 25:25
+    image: breedbase/breedbase:v0.43_test2
     depends_on:
       - breedbase_db
     container_name: breedbase_web
