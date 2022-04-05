@@ -11,22 +11,11 @@ EXPOSE 8080
 #
 # npm install needs a non-root user (new in latest version)
 #
-RUN useradd -d /home/production -u 1000 production 
+RUN useradd -d /home/production -u 1250 production 
 
 RUN mkdir -p /home/production/public/sgn_static_content
-#RUN mkdir -p /home/production/tmp/solgs
-#RUN mkdir -p /home/production/archive
-#RUN mkdir -p /home/production/public/images/image_files
-#RUN chown -R www-data /home/production/public
-#RUN mkdir -p /home/production/tmp
-#RUN chown -R www-data /home/production/tmp
-#RUN mkdir -p /home/production/archive/breedbase
-#RUN chown -R www-data /home/production/archive
-#RUN mkdir -p /home/production/blast/databases/current
 RUN mkdir -p /home/production/cxgn
 RUN mkdir -p /home/production/cxgn/local-lib
-#RUN mkdir -p /home/production/cache
-#RUN chown -R www-data /home/production/cache
 RUN mkdir /etc/starmachine
 RUN mkdir /var/log/sgn
 
@@ -134,6 +123,7 @@ COPY tools/sreformat /usr/local/bin/
 # This also adds the Mason website skins
 #
 ADD cxgn /home/production/cxgn
+RUN chown -R production /home/production/cxgn
 
 # move this here so it is not clobbered by the cxgn move
 #
