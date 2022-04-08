@@ -5,7 +5,7 @@ services:
     ports:
       - 8080:8080
       - 25:25
-    image: breedbase/breedbase:v0.43_test2
+    image: breedbase/breedbase:v0.46
     depends_on:
       - breedbase_db
     container_name: breedbase_web
@@ -22,4 +22,3 @@ services:
 volumes:
   webdata:
   dbdata:
-
