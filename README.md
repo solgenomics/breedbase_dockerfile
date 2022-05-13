@@ -59,7 +59,7 @@ Follow the instructions on https://www.digitalocean.com/community/tutorials/how-
     ```
     docker-compose -f docker-compose.yml -f production.yml up -d
     ```
-    Then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment!
+    Then follow [the instructions below](#access-and-configure) to access and configure your new breedbase deployment. You might also have to run the db patches to have an up to date database structure. See [Updating the database schema from the docker](#updating-the-database-schema-from-the-docker).
 
 ### Using `docker swarm`
 Docker Swarm allows you to define a service, as well as to allow you to configure auto scaling and clustering of a service.
