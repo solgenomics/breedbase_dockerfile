@@ -73,7 +73,7 @@ RUN chmod 777 /var/spool/ \
     && ln -s /var/lib/slurm-llnl /var/lib/slurm \
     && mkdir -p /var/log/slurm
 
-RUN apt-get install r-base r-base-dev libopenblas-base -y --allow-unauthenticated
+RUN apt-get install r-base r-base-dev -y --allow-unauthenticated
 
 # required for R-package spdep, and other dependencies of agricolae
 #
