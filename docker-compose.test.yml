@@ -18,7 +18,6 @@ services:
     volumes:
       - ./cxgn:/home/production/cxgn
       # repos/sgn/sgn_test.conf assumes /home/vagrant
-      - ./cxgn:/home/production/cxgn
       - ./.git:/home/production/.git
     command: ["t/unit", "t/unit_fixture", "t/unit_mech"]
     networks:
