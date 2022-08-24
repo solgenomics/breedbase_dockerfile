@@ -40,7 +40,7 @@ Follow the instructions on https://www.digitalocean.com/community/tutorials/how-
     ```
     git clone https://github.com/solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
-    touch .env
+    source .env
     ```
 
     Add the following lines to `.env` to set the necessary environment variables
