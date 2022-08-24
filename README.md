@@ -40,7 +40,7 @@ Follow the instructions on https://www.digitalocean.com/community/tutorials/how-
     ```
     git clone https://github.com/solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
-    source .env
+    touch .env
     ```
 
     Add the following lines to `.env` to set the necessary environment variables
@@ -51,6 +51,8 @@ Follow the instructions on https://www.digitalocean.com/community/tutorials/how-
     PGPASSWORD=postgres
     PGUSER=postgres
     ```
+    
+    Use ``` source .env ``` to read the environment variables.
 
 3. Deploy with docker-compose
 
