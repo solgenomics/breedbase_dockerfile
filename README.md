@@ -204,7 +204,7 @@ The db patches can be run individually by changing into the specific directory, 
 
 The database can be updated to the current level in one step (recommended method) by running the ```run_all_patches.pl``` script in the ```db/``` directory, which calls all the db patches individually. If you are using the standard docker-compose setup, the command line is (options in square brackets are optional):
 ```
-    cd cxgn/sgn/db
+    cd db;
     perl run_all_patches.pl -u postgres -p postgres -h breedbase_db -d
     breedbase -e admin [-s <startfrom>] [--test]
 ```
