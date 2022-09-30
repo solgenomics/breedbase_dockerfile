@@ -30,6 +30,14 @@ services:
       test: "curl --silent --head http://localhost:4444 || exit 1"
     networks:
       - test-breedbase
+    volumes:
+      - type: bind
+        source: /home/mueller/docker11/breedbase_dockerfile/cxgn/sgn/t/data
+        target: /home/production/cxgn/sgn/t/data
+    ports:
+       - 5900:5900
+       - 4444:4444
+
 
   breedbase_db:
     image: postgres:12.7
