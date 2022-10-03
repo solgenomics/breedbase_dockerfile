@@ -3,7 +3,7 @@ services:
     build:
       context: .
       cache_from:
-        - breedbase/breedbase:v0.36
+        - breedbase/breedbase:v0.54
     environment:
       HOME: /root
       MODE: 'TESTING'
@@ -32,7 +32,7 @@ services:
       - test-breedbase
     volumes:
       - type: bind
-        source: /home/mueller/docker11/breedbase_dockerfile/cxgn/sgn/t/data
+        source: ./cxgn/sgn/t/data
         target: /home/production/cxgn/sgn/t/data
     ports:
        - 5900:5900
