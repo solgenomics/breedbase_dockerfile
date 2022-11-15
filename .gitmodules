@@ -127,3 +127,6 @@
 [submodule "cxgn/QuantGenResources"]
 	path = cxgn/QuantGenResources
 	url = https://github.com/solgenomics/QuantGenResources.git
+[submodule "cxgn/gtsimsrch"]
+	path = cxgn/gtsimsrch
+	url = git@github.com:solgenomics/gtsimsrch
