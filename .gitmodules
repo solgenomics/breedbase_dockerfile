@@ -106,9 +106,6 @@
 [submodule "cxgn/imagesol"]
 	path = cxgn/imagesol
 	url = https://github.com/solgenomics/imagesol.git
-[submodule "cxgn/Chado"]
-	path = cxgn/Chado
-	url = https://github.com/GMOD/Chado
 [submodule "cxgn/cxgn/chado_tools"]
 	path = cxgn/chado_tools
 	url = https://github.com/GMOD/chado_tools
