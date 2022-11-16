@@ -10,19 +10,8 @@ EXPOSE 8080
 # create directory layout
 #
 RUN mkdir -p /home/production/public/sgn_static_content
-#RUN mkdir -p /home/production/tmp/solgs
-#RUN mkdir -p /home/production/archive
-#RUN mkdir -p /home/production/public/images/image_files
-#RUN chown -R www-data /home/production/public
-#RUN mkdir -p /home/production/tmp
-#RUN chown -R www-data /home/production/tmp
-#RUN mkdir -p /home/production/archive/breedbase
-#RUN chown -R www-data /home/production/archive
-#RUN mkdir -p /home/production/blast/databases/current
 RUN mkdir -p /home/production/cxgn
 RUN mkdir -p /home/production/cxgn/local-lib
-#RUN mkdir -p /home/production/cache
-#RUN chown -R www-data /home/production/cache
 RUN mkdir /etc/starmachine
 RUN mkdir /var/log/sgn
 
@@ -34,12 +23,9 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 RUN apt-get update -y --allow-unauthenticated
 RUN apt-get upgrade -y
 RUN apt-get install build-essential pkg-config apt-utils gnupg2 curl wget -y
-# key for cran-backports (not working though)
-#
-#
-# old cran key
 
 # for R cran-40
+#
 RUN bash -c "apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38DB3CCAD0C080A7BDC78B2DDEABC47B7' 1>/key.out 2> /key.err"
 
 
@@ -136,8 +122,6 @@ COPY starmachine.conf /etc/starmachine/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
-#COPY cxgn/sgn/js/install_node.sh /
-#RUN bash /install_node.sh
 
 # npm install needs a non-root user (new in latest version)
 #
@@ -145,15 +129,12 @@ RUN adduser -u 1250 production && chown -R production /home/production
 
 WORKDIR /home/production/cxgn/sgn
 
-ENV PERL5LIB=/home/production/cxgn/Bio-Chado-Schema/lib:/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/Chado/chado/lib:.
+ENV PERL5LIB=/home/production/cxgn/Bio-Chado-Schema/lib:/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/chado_tools/chado/lib:.
 
 ENV HOME=/home/production
 ENV PGPASSFILE=/home/production/.pgpass
 RUN echo "R_LIBS_USER=/home/production/cxgn/R_libs" >> /etc/R/Renviron
 ENV R_LIBS_USER=/home/production/cxgn/R_libs
-#RUN rm /home/production/cxgn/sgn/static/static
-#RUN rm /home/production/cxgn/sgn/static/s
-#RUN rm /home/production/cxgn/sgn/documents
 
 RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/sgn
 
@@ -173,4 +154,5 @@ LABEL org.opencontainers.image.description="Breedbase web server"
 LABEL org.opencontainers.image.documentation="https://solgenomics.github.io/sgn/"
 
 # start services when running container...
+#
 ENTRYPOINT ["/entrypoint.sh"]
