@@ -130,6 +130,6 @@
 [submodule "sgn-biotools"]
 	path = sgn-biotools
 	url = git@github.com:solgenomics/sgn-biotools
-[submodule "NextGenMap"]
-	path = NextGenMap
+[submodule "cxgn/NextGenMap"]
+	path = cxgn/NextGenMap
 	url = https://github.com/Cibiv/NextGenMap.git
