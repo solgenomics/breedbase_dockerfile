@@ -20,8 +20,7 @@ Access [breedbase.org](https://breedbase.org/) to explore a default instance of 
 
 ## Install Docker
 
-Follow the instructions on https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-debian-10 to install the docker executable.
-(Choose the correct version of your OS from the pull down menu on that site)
+For installs on Debian, follow the instructions on https://docs.docker.com/engine/install/debian/ to install the docker executable.
 
 ## Deploy in Production
 
@@ -29,7 +28,7 @@ Follow the instructions on https://www.digitalocean.com/community/tutorials/how-
 
 1. Install docker-compose
 
-    Debian/Ubuntu: https://www.digitalocean.com/community/tutorials/how-to-install-docker-compose-on-ubuntu-18-04
+    Debian/Ubuntu: ```apt-get install docker-compose-plugin```
 
     For Mac/Windows: It will be installed as part of installing [Docker Desktop](https://www.docker.com/products/docker-desktop)
 
