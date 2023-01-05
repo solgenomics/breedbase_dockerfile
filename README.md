@@ -100,6 +100,8 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
 
 2. Clone this repo and set up other requirements on your host
 
+    If you haven't done so already, setup keys with GitHub following the instructions athttps://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account .
+
     ```bash
     git clone --recursive git@github.com:solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
