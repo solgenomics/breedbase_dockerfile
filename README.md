@@ -101,7 +101,7 @@ You need to write an `sgn_local.conf` file specific to your service. A [template
 2. Clone this repo and set up other requirements on your host
 
     ```bash
-    git clone --recursive https://github.com/solgenomics/breedbase_dockerfile
+    git clone --recursive git@github.com:solgenomics/breedbase_dockerfile
     cd breedbase_dockerfile
     ```
    
