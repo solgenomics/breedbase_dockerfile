@@ -88,9 +88,6 @@
 [submodule "cxgn/vitisbase"]
 	path = cxgn/vitisbase
 	url = https://github.com/solgenomics/vitisbase.git
-[submodule "cxgn/panandbase"]
-	path = cxgn/panandbase
-	url = https://github.com/solgenomics/panandbase.git
 [submodule "cxgn/gorelabbbase"]
 	path = cxgn/gorelabbbase
 	url = https://github.com/solgenomics/gorelabbase.git
