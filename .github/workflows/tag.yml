@@ -16,6 +16,9 @@ jobs:
       contents: read
 
     steps:
+      - name: Maximize build disk space
+        uses: easimon/maximize-build-space@v8
+            
       - name: Checkout
         uses: actions/checkout@v2
         with:
