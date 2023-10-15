@@ -125,7 +125,7 @@ COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
 
 # npm install needs a non-root user (new in latest version)
 #
-RUN adduser -u 1250 production && chown -R production /home/production
+RUN adduser --disabled-password --gecos "" -u 1250 production && chown -R production /home/production
 
 WORKDIR /home/production/cxgn/sgn
 
