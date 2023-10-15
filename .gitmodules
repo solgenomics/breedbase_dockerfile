@@ -25,9 +25,6 @@
 [submodule "cxgn/sgn-devtools"]
 	path = cxgn/sgn-devtools
 	url = https://github.com/solgenomics/sgn-devtools.git
-[submodule "cxgn/solGS"]
-	path = cxgn/solGS
-	url = https://github.com/solgenomics/solGS.git
 [submodule "cxgn/starmachine"]
 	path = cxgn/starmachine
 	url = https://github.com/solgenomics/starmachine.git
