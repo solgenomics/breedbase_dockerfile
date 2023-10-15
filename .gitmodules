@@ -79,9 +79,6 @@
 [submodule "cxgn/solgenomics"]
 	path = cxgn/solgenomics
 	url = https://github.com/solgenomics/solgenomics.git
-[submodule "cxgn/panzeabase"]
-	path = cxgn/panzeabase
-	url = https://github.com/solgenomics/panzeabase.git
 [submodule "cxgn/varitome"]
 	path = cxgn/varitome
 	url = https://github.com/solgenomics/varitome.git
