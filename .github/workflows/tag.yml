@@ -33,9 +33,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: free disk space
-        run: sudo swapoff -a; sudo rm -f /swapfile; sudo apt clean; rm -Rf /home/production/cxgn/sgn/.git
-
       - name: Build and push container image
         uses: docker/build-push-action@v2
         with:
