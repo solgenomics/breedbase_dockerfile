@@ -123,6 +123,11 @@ COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
 
+# compile the simsearch and contigalign tools
+#
+RUN cd /home/production/cxgn/gtsimsrch/src; make; cd -;
+RUN cd /home/production/cxgn/sgn/programs/; make; cd -;
+ 
 # npm install needs a non-root user (new in latest version)
 #
 RUN adduser --disabled-password --gecos "" -u 1250 production && chown -R production /home/production
