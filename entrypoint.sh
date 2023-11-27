@@ -18,14 +18,14 @@ umask 002
 
 if [ $(psql -h breedbase_db -U postgres -Atc 'select count(distinct table_schema) from information_schema.tables;') == "2" ]; then
     psql -c "CREATE USER web_usr PASSWORD 'postgres';"
-    if [ -e 'empty_breedbase.sql' ]
+    if [ -e '/db_dumps/empty_breedbase.sql' ]
     then
-	psql -f empty_breedbase.sql
+	psql -h ${PGHOST} -d ${PGDATABASE} -f /db_dumps/empty_breedbase.sql breedbase
     else
 	psql -f t/data/fixture/empty_fixture.sql
     fi
     
-    ( cd db && ./run_all_patches.pl -u ${PGUSER} -p "${PGPASSWORD}" -h ${PGHOST} -d ${PGDATABASE} -e janedoe )
+    ( cd db && ./run_all_patches.pl -u ${PGUSER} -p ${PGPASSWORD} -h ${PGHOST} -d ${PGDATABASE} -e janedoe )
 fi
 
 # create necessary dirs/permissions if we have a docker volume dir
