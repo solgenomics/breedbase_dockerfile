@@ -16,16 +16,27 @@ umask 002
 
 # load empty fixture and run any missing patches
 
-if [ $(psql -h breedbase_db -U postgres -Atc 'select count(distinct table_schema) from information_schema.tables;') == "2" ]; then
-    psql -c "CREATE USER web_usr PASSWORD 'postgres';"
+echo "CHECKING IF A DATABASE NEEDS TO BE INSTALLED...";
+
+if [ $(psql -h ${PGHOST} -U postgres -d postgres -Atc 'select count(distinct table_schema) from information_schema.tables;') == "2" ]; then
+    echo "INSTALLING DATABASE...";
+    echo "CREATING web_usr...";
+    psql -d postgres -c "CREATE USER web_usr PASSWORD 'postgres';"
+    echo "CREATING breedbase DATABASE...";
+    
+    psql -d postgres -c "CREATE DATABASE breedbase; "
     if [ -e '/db_dumps/empty_breedbase.sql' ]
     then
-	psql -h ${PGHOST} -d ${PGDATABASE} -f /db_dumps/empty_breedbase.sql breedbase
+	echo "LOADING empty_breedbase dump...";
+	psql -f /db_dumps/empty_breedbase.sql
+	(cd db && ./run_all_patches.pl -u ${PGUSER} -p ${PGPASSWORD} -h ${PGHOST} -d ${PGDATABASE} -e admin )
     else
-	psql -f t/data/fixture/empty_fixture.sql
+	echo "LOADING cxgn_fixture.sql dump...";
+	psql -f t/data/fixture/cxgn_fixture.sql
+	(cd db && ./run_all_patches.pl -u ${PGUSER} -p ${PGPASSWORD} -h ${PGHOST} -d ${PGDATABASE} -e janedoe )
     fi
     
-    ( cd db && ./run_all_patches.pl -u ${PGUSER} -p ${PGPASSWORD} -h ${PGHOST} -d ${PGDATABASE} -e janedoe )
+    
 fi
 
 # create necessary dirs/permissions if we have a docker volume dir
