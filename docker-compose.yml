@@ -20,7 +20,7 @@ services:
       test: "pg_isready -U postgres -d $${POSTGRES_DB} || exit 1"
       interval: 10s
     ports:
-      - 60100:5432
+      - 65432:5432
 
 volumes:
   webdata:
