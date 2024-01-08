@@ -16,11 +16,28 @@ umask 002
 
 # load empty fixture and run any missing patches
 
-if [ $(psql -h breedbase_db -U postgres -Atc 'select count(distinct table_schema) from information_schema.tables;') == "2" ]; then
+if [ $(psql -h breedbase_db -U postgres -Atc 'select count(distinct table_schema) from information_schema.tables;') == "3" ]; then
+    psql -c "CREATE EXTENSION age; "
+    psql -c "LOAD 'age';"    
     psql -c "CREATE USER web_usr PASSWORD 'postgres';"
-    psql -f t/data/fixture/empty_fixture.sql
+    psql -c "GRANT USAGE ON SCHEMA ag_catalog TO web_usr;"
+    psql -c "SET search_path = ag_catalog, web_usr, public;"
+    psql -c "SELECT * FROM ag_catalog.create_graph('pedigree_graph');"
+    psql -c "SELECT *
+        FROM ag_catalog.cypher('pedigree_graph', \$\$
+        CREATE (:PEDIGREE{
+            name: 'create',
+            stock_id: 0001
+        })
+        \$\$) as (v ag_catalog.agtype);"
+    psql -c "GRANT USAGE ON SCHEMA pedigree_graph TO web_usr;"
+    psql -c "GRANT CREATE ON SCHEMA pedigree_graph TO web_usr;"
+    psql -c "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA pedigree_graph TO web_usr;"
+    psql -c "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA pedigree_graph TO web_usr;"
+    psql -f t/data/fixture/empty_breedbase.sql
     ( cd db && ./run_all_patches.pl -u ${PGUSER} -p "${PGPASSWORD}" -h ${PGHOST} -d ${PGDATABASE} -e janedoe )
 fi
+
 
 # create necessary dirs/permissions if we have a docker volume dir
 # at /home/production/volume

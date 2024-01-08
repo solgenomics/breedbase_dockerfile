@@ -4,8 +4,8 @@ services:
       - webdata:/home/production/volume
     ports:
       - 8080:8080
-      - 25:25
-    image: breedbase/breedbase:v0.54
+      - 25:25          
+    image: .
     depends_on:
       - breedbase_db
     container_name: breedbase_web
@@ -13,11 +13,14 @@ services:
   breedbase_db:
     volumes:
       - dbdata:/var/lib/postgresql/data
-    image: postgres:12.7
+    # image: apache/age
+    image: apache/age:v1.1.0
     container_name: breedbase_db
     healthcheck:
       test: "pg_isready -U postgres -d $${POSTGRES_DB} || exit 1"
       interval: 10s
+    ports:
+      - 60100:5432
 
 volumes:
   webdata:

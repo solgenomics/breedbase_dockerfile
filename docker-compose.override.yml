@@ -4,9 +4,9 @@ services:
       - type: bind
         source: ./sgn_local.conf
         target: /home/production/cxgn/sgn/sgn_local.conf
-      - type: bind
-        source: ./cxgn
-        target: /home/production/cxgn
+      # - type: bind
+      #   source: ./cxgn
+      #   target: /home/production/cxgn
         # include .git dir that tracks all submodules in cxgn
       - type: bind
         source: .git
