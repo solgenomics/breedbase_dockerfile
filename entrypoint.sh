@@ -18,7 +18,7 @@ umask 002
 
 echo "CHECKING IF A DATABASE NEEDS TO BE INSTALLED...";
 
-if [ $(psql -h ${PGHOST} -U postgres -Atc 'select count(distinct table_schema) from information_schema.tables;') == "2" ]; then
+if [[ $(psql -lqt -h ${PGHOST} -U ${PGUSER}  | cut -d '|' -f1  | sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//;' |  grep -w breedbase ) = '' ]]; then
     echo "INSTALLING DATABASE...";
     echo "CREATING web_usr...";
     psql -d postgres -c "CREATE USER web_usr PASSWORD 'postgres';"
