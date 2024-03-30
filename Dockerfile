@@ -92,7 +92,7 @@ RUN apt-get install libmoosex-runnable-perl -y
 RUN apt-get install libgdbm6 libgdm-dev -y
 RUN apt-get install nodejs -y
 
-RUN cpanm Selenium::Remote::Driver@1.44
+RUN cpanm Selenium::Remote::Driver@1.49
 
 #INSTALL OPENCV IMAGING LIBRARY
 
