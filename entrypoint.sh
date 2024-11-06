@@ -8,6 +8,8 @@ chown 106 /etc/munge/munge.key
 /etc/init.d/slurmd start
 #/etc/init.d/postgres start
 
+chown root /etc/crontab # in case it was mounted from local dir
+
 if [ "${MODE}" = 'TESTING' ]; then
     exec perl t/test_fixture.pl --carpalways -v "${@}"
 fi
