@@ -99,13 +99,10 @@
 	url = https://github.com/GMOD/chado_tools
 [submodule "cxgn/cxgn/Bio-Chado-Schema"]
 	path = cxgn/Bio-Chado-Schema
-	url = https://github.com/GMOD/Bio-Chado-Schema
+	url = https://github.com/solgenomics/bio-chado-schema
 [submodule "cxgn/chado_tools"]
 	path = cxgn/chado_tools
 	url = https://github.com/GMOD/chado_tools
-[submodule "cxgn/Bio-Chado-Schema"]
-	path = cxgn/Bio-Chado-Schema
-	url = https://github.com/GMOD/Bio-Chado-Schema
 [submodule "cxgn/QuantGenResources"]
 	path = cxgn/QuantGenResources
 	url = https://github.com/solgenomics/QuantGenResources.git
@@ -117,3 +114,6 @@
 	url = https://github.com/solgenomics/sgn-biotools.git
 
 
+[submodule "cxgn/Bio-Chado-Schema"]
+	path = cxgn/Bio-Chado-Schema
+	url = git@github.com:solgenomics/bio-chado-schema
