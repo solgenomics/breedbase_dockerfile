@@ -115,5 +115,5 @@
 
 
 [submodule "cxgn/Bio-Chado-Schema"]
-	path = cxgn/Bio-Chado-Schema
+	path = cxgn/bio-chado-schema
 	url = git@github.com:solgenomics/bio-chado-schema
