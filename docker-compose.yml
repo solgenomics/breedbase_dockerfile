@@ -4,7 +4,6 @@ services:
       - webdata:/home/production/volume
     ports:
       - 8080:8080
-      - 25:25
     image: breedbase/breedbase:latest
     depends_on:
       - breedbase_db
