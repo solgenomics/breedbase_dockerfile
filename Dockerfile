@@ -147,6 +147,9 @@ ARG CREATED
 ARG REVISION
 ARG BUILD_VERSION
 
+ENV VERSION=$BUILD_VERSION
+ENV BUILD_DATE=$CREATED
+
 LABEL maintainer="lam87@cornell.edu"
 LABEL org.opencontainers.image.created=$CREATED
 LABEL org.opencontainers.image.url="https://breedbase.org/"
@@ -158,8 +161,6 @@ LABEL org.opencontainers.image.title="breedbase/breedbase"
 LABEL org.opencontainers.image.description="Breedbase web server"
 LABEL org.opencontainers.image.documentation="https://solgenomics.github.io/sgn/"
 
-ENV VERSION=$BUILD_VERSION
-ENV BUILD_DATE=$CREATED
 
 
 # start services when running container...
