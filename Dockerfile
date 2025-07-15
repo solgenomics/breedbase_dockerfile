@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 ENV CPANMIRROR=http://cpan.cpantesters.org
 # based on the vagrant provision.sh script by Nick Morales <nm529@cornell.edu>
@@ -31,9 +31,9 @@ RUN bash -c "apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38D
 
 # add cran backports repo and required deps
 #
-RUN echo "deb http://lib.stat.cmu.edu/R/CRAN/bin/linux/debian bullseye-cran40/" >> /etc/apt/sources.list
+RUN echo "deb http://lib.stat.cmu.edu/R/CRAN/bin/linux/debian bookworm-cran40/" >> /etc/apt/sources.list
 
-RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ bookworm-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
 
 RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc |  apt-key add -
 
@@ -42,7 +42,7 @@ RUN apt-get update --fix-missing -y
 
 RUN apt-get install -y aptitude
 
-RUN aptitude install -y npm libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-generic perl-doc ack make xutils-dev nfs-common lynx xvfb ncbi-blast+ primer3 libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 postfix mailutils libcupsimage2 postgresql-client-12 libglib2.0-dev libglib2.0-bin screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron libnlopt0 plink
+RUN aptitude install -y npm libicu72 libterm-readline-zoid-perl nginx starman emacs gedit vim less sudo htop git dkms linux-headers-generic perl-doc ack make xutils-dev nfs-common lynx xvfb ncbi-blast+ primer3 libmunge-dev libmunge2 munge slurm-wlm slurmctld slurmd libslurm-perl libssl-dev graphviz lsof imagemagick mrbayes muscle bowtie bowtie2 postfix mailutils libcupsimage2 postgresql-client-15  libglib2.0-0 screen apt-transport-https libgdal-dev libproj-dev libudunits2-dev locales locales-all rsyslog cron libnlopt0 plink 
 
 # Set the locale correclty to UTF-8
 RUN locale-gen en_US.UTF-8
@@ -59,7 +59,7 @@ RUN chmod 777 /var/spool/ \
     && ln -s /var/lib/slurm-llnl /var/lib/slurm \
     && mkdir -p /var/log/slurm
 
-RUN apt-get install r-base r-base-dev -y --allow-unauthenticated
+RUN apt-get install  r-base r-base-dev -y --allow-unauthenticated
 
 # required for R-package spdep, and other dependencies of agricolae
 #
@@ -96,12 +96,22 @@ RUN cpanm Selenium::Remote::Driver@1.49
 
 #INSTALL OPENCV IMAGING LIBRARY
 
-RUN apt-get install -y python3-dev  python3-pip python3-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
+RUN apt-get install -y python3-full python3-dev  python3-pip pipx python3-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbbmalloc2 libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev cmake
 
-RUN pip3 install --upgrade pip
-RUN pip3 install grpcio==1.40.0 imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
-    && pip3 install -U keras-tuner
+RUN python3 -m venv /usr/local/python3
 
+###RUN pipx install --upgrade pip
+
+###RUN pipx install grpcio==1.40.0 imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
+###    && pipx install -U keras-tuner
+RUN pipx ensurepath
+###RUN pipx install grpcio
+####
+RUN pipx install --include-deps imutils && pipx install --include-deps numpy && pipx install --include-deps matplotlib  && pipx install --include-deps statistics && pipx install --include-deps  pysolar && pipx install --include-deps scikit-image  && pipx install --include-deps pyzbar && pipx install  --include-deps pandas && pipx install --include-deps opencv-python  && pipx install --include-deps keras-tuner
+## && pipx install --include-deps  pillow
+##  && pipx install --include-deps PyExifTool
+## && pipx install --include-deps  pytz
+## && pipx install --include-deps  packaging
 # copy some tools that don't have a Debian package
 #
 COPY tools/gcta/gcta64  /usr/local/bin/
@@ -134,7 +144,7 @@ RUN adduser --disabled-password --gecos "" -u 1250 production && chown -R produc
 
 WORKDIR /home/production/cxgn/sgn
 
-ENV PERL5LIB=/home/production/cxgn/bio-chado-schema/lib:/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/chado_tools/chado/lib:.
+ENV PERL5LIB=/home/production/cxgn/Bio-Chado-Schema/lib:/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/chado_tools/chado/lib:.
 
 ENV HOME=/home/production
 ENV PGPASSFILE=/home/production/.pgpass
