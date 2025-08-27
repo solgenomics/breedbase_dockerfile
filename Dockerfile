@@ -31,7 +31,7 @@ RUN bash -c "apt-key adv --keyserver keyserver.ubuntu.com --recv-key '95C0FAF38D
 
 # add cran backports repo and required deps
 #
-RUN echo "deb http://lib.stat.cmu.edu/R/CRAN/bin/linux/debian bullseye-cran40/" >> /etc/apt/sources.list
+RUN echo "deb https://cloud.r-project.org/bin/linux/debian/ bullseye-cran40/" >> /etc/apt/sources.list
 
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" | tee  /etc/apt/sources.list.d/pgdg.list
 
