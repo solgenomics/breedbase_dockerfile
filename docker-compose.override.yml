@@ -11,6 +11,9 @@ services:
       - type: bind
         source: .git
         target: /home/production/.git
+      - type: bind
+        source: /tmp/downloads
+        target: /downloads
     environment:
       MODE: 'DEVELOPMENT'
       PGDATABASE: breedbase
@@ -19,7 +22,7 @@ services:
       PGUSER: postgres
       SGN_TEST_SERVER: http://breedbase:3010
       SGN_REMOTE_SERVER_ADDR: selenium
-
+      DBIC_TRACE: 0
   selenium:
     container_name: selenium
     image: selenium/standalone-firefox-debug
@@ -27,6 +30,9 @@ services:
       - type: bind
         source: ./cxgn/sgn/t/data
         target: /home/production/cxgn/sgn/t/data
+      - type: bind
+        source: /tmp/downloads
+        target: /downloads
     ports:
       - 5900:5900
       - 4444:4444
