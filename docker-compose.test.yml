@@ -19,6 +19,7 @@ services:
       - ./cxgn:/home/production/cxgn
       # repos/sgn/sgn_test.conf assumes /home/vagrant
       - ./.git:/home/production/.git
+      - shared_data:/downloads
     command: ["t/unit", "t/unit_fixture", "t/unit_mech"]
     networks:
       - test-breedbase
@@ -34,6 +35,7 @@ services:
       - type: bind
         source: ./cxgn/sgn/t/data
         target: /home/production/cxgn/sgn/t/data
+      - shared_data:/downloads
     ports:
        - 5900:5900
        - 4444:4444
@@ -49,5 +51,8 @@ services:
     networks:
       - test-breedbase
 
+volumes:
+  shared_data:
+  
 networks:
   test-breedbase:
