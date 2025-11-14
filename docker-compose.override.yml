@@ -11,9 +11,7 @@ services:
       - type: bind
         source: .git
         target: /home/production/.git
-      - type: bind
-        source: /tmp/downloads
-        target: /downloads
+      - shared_data:/downloads
     environment:
       MODE: 'DEVELOPMENT'
       PGDATABASE: breedbase
@@ -30,9 +28,7 @@ services:
       - type: bind
         source: ./cxgn/sgn/t/data
         target: /home/production/cxgn/sgn/t/data
-      - type: bind
-        source: /tmp/downloads
-        target: /downloads
+      - shared_data:/downloads
     ports:
       - 5900:5900
       - 4444:4444
@@ -41,3 +37,6 @@ services:
     environment:
       POSTGRES_DB: breedbase
       POSTGRES_PASSWORD: postgres
+
+volumes:
+  shared_data:
