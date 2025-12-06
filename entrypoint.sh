@@ -118,3 +118,8 @@ else
   chmod 777 /var/log/sgn/error.log
   tail -f /var/log/sgn/error.log
 fi
+
+# for unigene page, compile drawcontig align program
+cd /home/production/cxgn/sgn/programs
+make
+cd /home/production/cxgn/sgn
