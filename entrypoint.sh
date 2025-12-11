@@ -120,6 +120,6 @@ else
 fi
 
 # for unigene page, compile drawcontig align program
-cd /home/production/cxgn/sgn/programs
-make
-cd /home/production/cxgn/sgn
+#cd /home/production/cxgn/sgn/programs
+#make
+#cd /home/production/cxgn/sgn
