@@ -96,7 +96,7 @@ RUN cpanm Selenium::Remote::Driver@1.49
 
 #INSTALL OPENCV IMAGING LIBRARY
 
-RUN apt-get install -y python3-dev  python3-pip python3-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev zbar-tools cmake
+RUN apt-get install -y python3-dev  python3-pip python3-numpy libgtk2.0-dev libgtk-3-0 libgtk-3-dev libavcodec-dev libavformat-dev libswscale-dev libhdf5-serial-dev libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libxvidcore-dev libatlas-base-dev gfortran libgdal-dev exiftool libzbar-dev zbar-tools libbarcode-zbar-perl cmake
 
 RUN pip3 install --upgrade pip
 RUN pip3 install grpcio==1.40.0 imutils numpy matplotlib pillow statistics PyExifTool pytz pysolar scikit-image packaging pyzbar pandas opencv-python \
@@ -127,7 +127,7 @@ COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
 #
 RUN cd /home/production/cxgn/gtsimsrch/src; make; cd -;
 RUN cd /home/production/cxgn/sgn/programs/; make; cd -;
- 
+
 # npm install needs a non-root user (new in latest version)
 #
 RUN adduser --disabled-password --gecos "" -u 1250 production && chown -R production /home/production
