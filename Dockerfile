@@ -115,6 +115,17 @@ COPY tools/sreformat /usr/local/bin/
 #
 ADD cxgn /home/production/cxgn
 
+# add npm
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt install nodejs -y
+RUN cd /home/production/cxgn/sgn/js; npm install
+
+#then a few steps to clean up permissions
+RUN rm -rf /home/production/.npm
+RUN chown -R production /home/production/cxgn/sgn/js/node_modules
+RUN chown production /home/production/cxgn/sgn/js/package-lock.json
+
+
 # move this here so it is not clobbered by the cxgn move
 #
 COPY slurm.conf /etc/slurm/slurm.conf
