@@ -115,17 +115,6 @@ COPY tools/sreformat /usr/local/bin/
 #
 ADD cxgn /home/production/cxgn
 
-# add npm
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
-RUN apt install nodejs -y
-RUN cd /home/production/cxgn/sgn/js; npm install
-
-#then a few steps to clean up permissions
-RUN rm -rf /home/production/.npm
-RUN chown -R production /home/production/cxgn/sgn/js/node_modules
-RUN chown production /home/production/cxgn/sgn/js/package-lock.json
-
-
 # move this here so it is not clobbered by the cxgn move
 #
 COPY slurm.conf /etc/slurm/slurm.conf
@@ -144,6 +133,17 @@ RUN cd /home/production/cxgn/sgn/programs/; make; cd -;
 RUN adduser --disabled-password --gecos "" -u 1250 production && chown -R production /home/production
 
 WORKDIR /home/production/cxgn/sgn
+
+# add npm
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt install nodejs -y
+RUN cd /home/production/cxgn/sgn/js; npm install
+
+#then a few steps to clean up permissions
+RUN rm -rf /home/production/.npm
+RUN chown -R production /home/production/cxgn/sgn/js/node_modules
+RUN chown production /home/production/cxgn/sgn/js/package-lock.json
+
 
 ENV PERL5LIB=/home/production/cxgn/bio-chado-schema/lib:/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/chado_tools/chado/lib:.
 
