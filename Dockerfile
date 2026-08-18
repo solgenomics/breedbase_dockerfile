@@ -90,7 +90,6 @@ RUN apt-get install libpq-dev -y
 RUN apt-get install libmoosex-runnable-perl -y
 
 RUN apt-get install libgdbm6 libgdm-dev -y
-RUN apt-get install nodejs -y
 
 RUN cpanm Selenium::Remote::Driver@1.49
 
@@ -135,7 +134,7 @@ RUN adduser --disabled-password --gecos "" -u 1250 production && chown -R produc
 WORKDIR /home/production/cxgn/sgn
 
 # add npm
-RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_24.x | bash -
 RUN apt install nodejs -y
 RUN cd /home/production/cxgn/sgn/js; npm install
 
