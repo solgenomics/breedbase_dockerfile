@@ -7,6 +7,8 @@ ENV CPANMIRROR=http://cpan.cpantesters.org
 #
 EXPOSE 8080
 
+
+
 # create directory layout
 #
 RUN mkdir -p /home/production/public/sgn_static_content
@@ -30,14 +32,28 @@ RUN apt-get update -y --allow-unauthenticated && \
             linux-headers-generic locales locales-all lsof lynx mailutils make mrbayes \
             munge muscle nano ncbi-blast+ nfs-common nginx npm perl-doc pkg-config plink \
             postfix postgresql-client primer3 rsyslog screen slurm-wlm slurmctld slurmd \
-            starman sudo vim wget xutils-dev xvfb
+            starman sudo vim wget xutils-dev xvfb libstring-crc32-perl locate adduser
+
+
+# npm install needs a non-root user (new in latest version)
+#
+USER root
+RUN adduser --disabled-password --gecos "" -u 1250 production
+
+###&& chown -R production /home/production
+
+
 
 # Slurm setup
 #
 RUN rm /etc/munge/munge.key
 RUN chmod 777 /var/spool/ \
     && mkdir /var/spool/slurmstate \
+    && mkdir /var/run/slurm-llnl/ \
+    && chown slurm:slurm /var/run/slurm-llnl/ \
     && chown slurm:slurm /var/spool/slurmstate/ \
+    && mkdir /var/spool/slurmd/ \
+    && chown slurm:slurm /var/spool/slurmd/ \
     && /usr/sbin/mungekey \
     && ln -s /var/lib/slurm-llnl /var/lib/slurm \
     && mkdir -p /var/log/slurm
@@ -124,9 +140,11 @@ COPY tools/sreformat /usr/local/bin/
 #
 ADD cxgn /home/production/cxgn
 
+
 # move this here so it is not clobbered by the cxgn move
 #
 COPY slurm.conf /etc/slurm/slurm.conf
+COPY cgroup.conf /etc/slurm/cgroup.conf
 COPY starmachine.conf /etc/starmachine/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
@@ -137,9 +155,17 @@ COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
 RUN cd /home/production/cxgn/gtsimsrch/src; make; cd -;
 RUN cd /home/production/cxgn/sgn/programs/; make; cd -;
 
-# npm install needs a non-root user (new in latest version)
-#
-RUN adduser --disabled-password --gecos "" -u 1250 production && chown -R production /home/production
+
+# add npm
+RUN curl -sL https://deb.nodesource.com/setup_24.x | bash -
+RUN apt-get install nodejs -y
+RUN cd /home/production/cxgn/sgn/js; npm install
+
+#then a few steps to clean up permissions
+RUN rm -rf /home/production/.npm
+RUN chown -R production /home/production/cxgn/sgn/js/node_modules
+RUN chown production /home/production/cxgn/sgn/js/package-lock.json
+
 
 WORKDIR /home/production/cxgn/sgn
 
@@ -147,8 +173,12 @@ ENV PERL5LIB=/home/production/cxgn/bio-chado-schema/lib:/home/production/cxgn/lo
 
 ENV HOME=/home/production
 ENV PGPASSFILE=/home/production/.pgpass
-RUN echo "R_LIBS_USER=/home/production/cxgn/R_libs" >> /etc/R/Renviron
-ENV R_LIBS_USER=/home/production/cxgn/R_libs
+RUN echo "R_LIBS_USER=/home/production/cxgn/R4.5_libs" >> /etc/R/Renviron
+ENV R_LIBS_USER=/home/production/cxgn/R4.5_libs
+
+COPY R_deps.R /home/production/R_deps.R
+
+RUN Rscript --vanilla /home/production/R_deps.R
 
 RUN ln -s /home/production/cxgn/starmachine/bin/starmachine_init.d /etc/init.d/sgn
 
