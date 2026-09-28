@@ -4,7 +4,7 @@ on:
       - '*.md'
       - '*.png'
       - '.gitignore'
-    
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout breedbase_dockerfile repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
         with:
           submodules: true
-    
+
       - name: Build container image
         run: docker compose -f docker-compose.test.yml build --no-cache test_breedbase
 

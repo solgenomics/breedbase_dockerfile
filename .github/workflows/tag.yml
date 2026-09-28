@@ -22,7 +22,7 @@ jobs:
           # this might remove tools that are actually needed,
           # when set to "true" but frees about 6 GB
           tool-cache: true
-        
+
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
           android: true
@@ -30,9 +30,9 @@ jobs:
           haskell: false
           large-packages: false
           swap-storage: false
-  
+
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v5
         with:
           submodules: true
 

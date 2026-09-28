@@ -40,9 +40,11 @@ RUN apt-get update -y --allow-unauthenticated && \
 USER root
 RUN adduser --disabled-password --gecos "" -u 1250 production
 
-###&& chown -R production /home/production
+# Set the locale correclty to UTF-8
+RUN locale-gen en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
-
+RUN curl -L https://cpanmin.us | perl - --sudo App::cpanminus
 
 # Slurm setup
 #
@@ -168,6 +170,17 @@ RUN chown production /home/production/cxgn/sgn/js/package-lock.json
 
 
 WORKDIR /home/production/cxgn/sgn
+
+# add npm
+RUN curl -sL https://deb.nodesource.com/setup_24.x | bash -
+RUN apt install nodejs -y
+RUN cd /home/production/cxgn/sgn/js; npm install
+
+#then a few steps to clean up permissions
+RUN rm -rf /home/production/.npm
+RUN chown -R production /home/production/cxgn/sgn/js/node_modules
+RUN chown production /home/production/cxgn/sgn/js/package-lock.json
+
 
 ENV PERL5LIB=/home/production/cxgn/bio-chado-schema/lib:/home/production/cxgn/local-lib/:/home/production/cxgn/local-lib/lib/perl5:/home/production/cxgn/sgn/lib:/home/production/cxgn/cxgn-corelibs/lib:/home/production/cxgn/Phenome/lib:/home/production/cxgn/Cview/lib:/home/production/cxgn/ITAG/lib:/home/production/cxgn/biosource/lib:/home/production/cxgn/tomato_genome/lib:/home/production/cxgn/chado_tools/chado/lib:.
 
