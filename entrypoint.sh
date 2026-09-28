@@ -2,11 +2,15 @@
 sed -i s/localhost/$HOSTNAME/g /etc/slurm/slurm.conf
 /etc/init.d/postfix start
 /etc/init.d/cron start
-chown 106 /etc/munge/munge.key
+chown munge /etc/munge/munge.key
 /etc/init.d/munge start
 /etc/init.d/slurmctld start
 /etc/init.d/slurmd start
 #/etc/init.d/postgres start
+
+# undrain node if needed
+#
+scontrol update NodeName=node_name State=RESUME
 
 chown root /etc/crontab # in case it was mounted from local dir
 
@@ -25,7 +29,7 @@ if [[ $(psql -lqt -h ${PGHOST} -U ${PGUSER}  | cut -d '|' -f1  | sed 's/^[[:blan
     echo "CREATING web_usr...";
     psql -d postgres -c "CREATE USER web_usr PASSWORD 'postgres';"
     echo "CREATING breedbase DATABASE...";
-    
+
     psql -d postgres -c "CREATE DATABASE breedbase; "
     if [ -e '/db_dumps/empty_breedbase.sql' ]
     then
@@ -37,8 +41,8 @@ if [[ $(psql -lqt -h ${PGHOST} -U ${PGUSER}  | cut -d '|' -f1  | sed 's/^[[:blan
 	psql -f t/data/fixture/cxgn_fixture.sql
 	(cd db && ./run_all_patches.pl -u ${PGUSER} -p ${PGPASSWORD} -h ${PGHOST} -d ${PGDATABASE} -e janedoe )
     fi
-    
-    
+
+
 fi
 
 # create necessary dirs/permissions if we have a docker volume dir
@@ -99,7 +103,7 @@ then
         chown www-data /home/production/volume/cluster
 	chmod 770 /home/production/volume/cluster
     fi
-    
+
     if [[ ! -e /home/production/volume/pgdata ]]
     then
         mkdir /home/production/volume/pgdata
@@ -109,9 +113,12 @@ else
     echo "/home/production/volume does not exist... not creating dirs";
 fi
 
+echo "PERL5LIB: " $PERL5LIB
+echo "PERL LOCATION: " `which perl`
+echo "PERL VERSION: " `perl -v`
 
 if [ "$MODE" == "DEVELOPMENT" ]; then
-        /home/production/cxgn/sgn/bin/sgn_server.pl --fork -r -p 8080
+        perl /home/production/cxgn/sgn/bin/sgn_server.pl --fork -r -p 8080
 else
     /etc/init.d/sgn start
     touch /var/log/sgn/error.log
