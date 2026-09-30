@@ -34,9 +34,6 @@
 [submodule "cxgn/local-lib"]
 	path = cxgn/local-lib
 	url = https://github.com/solgenomics/perl-local-lib
-[submodule "cxgn/R_libs"]
-	path = cxgn/R_libs
-	url = git@github.com:solgenomics/R_libs
 [submodule "cxgn/cassava"]
 	path = cxgn/cassava
 	url = https://github.com/solgenomics/cassava.git
