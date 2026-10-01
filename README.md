@@ -203,13 +203,7 @@ With `backend Tsp`, jobs are queued with [task-spooler](https://viric.name/soft/
 docker exec breedbase_web tsp -l
 ```
 
-To run each job in its own podman container instead, add `docker-compose.podman-jobs.yml`:
-
-```
-docker compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.podman-jobs.yml up -d
-```
-
-This needs rootful podman on the host with its API socket enabled (`sudo systemctl enable --now podman.socket`), and the breedbase image in podman's image store. See the comments in `docker-compose.podman-jobs.yml`: job containers run as host root and mounting the podman socket gives the breedbase container root access to the host. Rootless podman does not work, because jobs have to write root-owned tempfiles created by the web server. Extra `podman run` options for all jobs, such as resource limits, can be set with `BB_JOB_PODMAN_ARGS`, e.g. `BB_JOB_PODMAN_ARGS="--memory 16g --cpus 4"`.
+Optionally, each job can run in its own podman container instead. The settings for this are in `docker-compose.yml` (and, for development, `BB_JOB_MOUNTS` in `docker-compose.override.yml`), commented out; uncomment them to enable it. This needs rootful podman on the host with its API socket enabled (`sudo systemctl enable --now podman.socket`), and the breedbase image in podman's image store. Job containers run as host root, and mounting the podman socket gives the breedbase container root access to the host, so only enable this if you need it, e.g. for per-job resource limits (`BB_JOB_PODMAN_ARGS`). Rootless podman does not work, because jobs have to write root-owned tempfiles created by the web server.
 
 `backend Slurm` still works and starts Slurm in the container as before.
 
