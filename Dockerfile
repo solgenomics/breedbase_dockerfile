@@ -85,6 +85,11 @@ RUN apt-get update --fix-missing -y
 #
 RUN apt-get install -y postgresql-client
 
+# job backend: task-spooler (backend Tsp in sgn_local.conf), and the podman
+# API client for running jobs in podman containers (docker-compose.podman-jobs.yml)
+#
+RUN apt-get install -y task-spooler podman-remote
+
 # Set the locale correclty to UTF-8
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
