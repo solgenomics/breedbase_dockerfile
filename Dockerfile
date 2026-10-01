@@ -155,7 +155,8 @@ COPY cgroup.conf /etc/slurm/cgroup.conf
 COPY starmachine.conf /etc/starmachine/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
+# sgn_local.conf is not part of the image (it is local configuration and is not
+# tracked in git); mount it at /home/production/cxgn/sgn/sgn_local.conf
 
 # compile the simsearch and contigalign tools
 #
