@@ -10,7 +10,7 @@ chown munge /etc/munge/munge.key
 
 # undrain node if needed
 #
-scontrol update NodeName=node_name State=RESUME
+scontrol update NodeName=$HOSTNAME State=RESUME
 
 chown root /etc/crontab # in case it was mounted from local dir
 
