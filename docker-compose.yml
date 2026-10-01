@@ -8,11 +8,16 @@ services:
     depends_on:
       - breedbase_db
     container_name: breedbase_web
+    cap_add:
+      - SYS_ADMIN
+#      - SYS_PTRACE
+#    security_opt:
+#      - seccomp:unconfined
 
   breedbase_db:
     volumes:
-      - dbdata:/var/lib/postgresql/data
-    image: postgres:12.7
+      - dbdatanew:/var/lib/postgresql
+    image: postgres:16
     container_name: breedbase_db
     healthcheck:
       test: "pg_isready -U postgres -d $${POSTGRES_DB} || exit 1"
@@ -20,4 +25,4 @@ services:
 
 volumes:
   webdata:
-  dbdata:
+  dbdatanew:
