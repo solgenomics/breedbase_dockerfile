@@ -9,6 +9,10 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    container:
+      image: ubuntu:latest
+      options: --cap-add=SYS_ADMIN --cap-add=NET_ADMIN --privileged
+
     env:
       DOCKER_BUILDKIT: 1
 
