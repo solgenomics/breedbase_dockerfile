@@ -189,6 +189,24 @@ docker-compose -f docker-compose.test.yml down
 
 ## Miscellaneous
 
+### Background jobs: task-spooler and podman
+
+Background jobs (downloads, analyses) are run by the job backend set in `sgn_local.conf`:
+
+```
+backend Tsp
+```
+
+With `backend Tsp`, jobs are queued with [task-spooler](https://viric.name/soft/ts/) (`tsp`) inside the breedbase container. The entrypoint starts the tsp server with half the available CPUs as job slots; set `TSP_SLOTS` in the container environment to change that. Unlike Slurm, this needs no extra container privileges. To see the queue:
+
+```
+docker exec breedbase_web tsp -l
+```
+
+Optionally, each job can run in its own podman container instead. The settings for this are in `docker-compose.yml` (and, for development, `BB_JOB_MOUNTS` in `docker-compose.override.yml`), commented out; uncomment them to enable it. This needs rootful podman on the host with its API socket enabled (`sudo systemctl enable --now podman.socket`), and the breedbase image in podman's image store. Job containers run as host root, and mounting the podman socket gives the breedbase container root access to the host, so only enable this if you need it, e.g. for per-job resource limits (`BB_JOB_PODMAN_ARGS`). Rootless podman does not work, because jobs have to write root-owned tempfiles created by the web server.
+
+`backend Slurm` still works and starts Slurm in the container as before.
+
 ### Running Breedbase behind a proxy server
 
 In many situations, the Breedbase server will be installed behind a proxy server. While everything should run normally, there is an issue with ```npm```, and it needs to be specially configured. Create a file on the host server, let's say, ```npm_config.txt```, with the following lines in it:

@@ -83,6 +83,11 @@ RUN apt-get update --fix-missing -y
 #
 RUN apt-get install -y postgresql-client
 
+# job backend: task-spooler (backend Tsp in sgn_local.conf), and the podman
+# API client for running jobs in podman containers (docker-compose.podman-jobs.yml)
+#
+RUN apt-get install -y task-spooler podman-remote
+
 # Set the locale correclty to UTF-8
 RUN locale-gen en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
@@ -148,7 +153,8 @@ COPY cgroup.conf /etc/slurm/cgroup.conf
 COPY starmachine.conf /etc/starmachine/
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
+# sgn_local.conf is not part of the image (it is local configuration and is not
+# tracked in git); mount it at /home/production/cxgn/sgn/sgn_local.conf
 
 # compile the simsearch and contigalign tools
 #

@@ -2,12 +2,35 @@ services:
   breedbase:
     volumes:
       - webdata:/home/production/volume
+      # podman job containers, see "Optional: podman job containers" below:
+      # - /run/podman/podman.sock:/run/podman-host/podman.sock
     ports:
       - 8080:8080
     image: breedbase/breedbase:latest
     depends_on:
       - breedbase_db
     container_name: breedbase_web
+    # Optional: podman job containers.
+    # By default (backend Tsp in sgn_local.conf), task-spooler runs background
+    # jobs directly in this container. To run each job in its own podman
+    # container instead, uncomment the podman socket mount under volumes above
+    # and the environment section below. This needs rootful podman on the host
+    # with its API socket enabled (sudo systemctl enable --now podman.socket),
+    # and the breedbase image in podman's image store.
+    # Security: job containers run as host root, and mounting the rootful podman
+    # socket gives this container root access to the host (like mounting the
+    # docker socket). Rootless podman does not work: jobs have to write
+    # root-owned tempfiles created by the web server.
+    # BB_JOB_MOUNTS are host paths: the web data volume, by its location in
+    # docker's data directory (docker-compose.override.yml adds the ./cxgn
+    # checkout and sgn_local.conf for development).
+    # environment:
+    #   BB_JOB_PODMAN_URL: unix:///run/podman-host/podman.sock
+    #   BB_JOB_IMAGE: docker.io/breedbase/breedbase:latest
+    #   BB_JOB_ADD_HOSTS: breedbase_db
+    #   BB_JOB_MOUNTS: /var/lib/docker/volumes/breedbase_dockerfile_webdata/_data:/home/production/volume
+    #   # extra podman run arguments for every job, e.g. resource limits
+    #   BB_JOB_PODMAN_ARGS: --memory 16g --cpus 4
     cap_add:
       - SYS_ADMIN
 #      - SYS_PTRACE

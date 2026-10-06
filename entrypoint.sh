@@ -1,16 +1,10 @@
 #!/bin/bash
-sed -i s/localhost/$HOSTNAME/g /etc/slurm/slurm.conf
 /etc/init.d/postfix start
 /etc/init.d/cron start
-chown munge /etc/munge/munge.key
-/etc/init.d/munge start
-/etc/init.d/slurmctld start
-/etc/init.d/slurmd start
 #/etc/init.d/postgres start
 
 # start the job backend configured in sgn_local.conf ("backend Tsp" or "backend Slurm")
 #
-
 JOB_BACKEND=$(awk 'tolower($1) == "backend" { b = tolower($2) } END { print b }' /home/production/cxgn/sgn/sgn_local.conf)
 
 if [ "$JOB_BACKEND" = "tsp" ] && ! command -v tsp > /dev/null; then
