@@ -6,6 +6,8 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: breedbase/breedbase
+  PGPASSWRD: postgres
+  PGUSER: postgres
 
 jobs:
   build-and-push-image:
