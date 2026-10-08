@@ -11,10 +11,12 @@ jobs:
 
     container:
       image: ubuntu:latest
-      options: --cap-add=SYS_ADMIN --cap-add=NET_ADMIN --privileged
+#      options: --cap-add=SYS_ADMIN --cap-add=NET_ADMIN --privileged
 
     env:
       DOCKER_BUILDKIT: 1
+      PGPASSWRD: postgres
+      PGUSER: postgres
 
     steps:
       - name: Checkout breedbase_dockerfile repo
