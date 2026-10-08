@@ -8,6 +8,7 @@ services:
       HOME: /root
       MODE: 'TESTING'
       PGPASSWORD: postgres
+      PGUSER: postgres
       SGN_TEST_SERVER: http://test_breedbase:3010
       SGN_REMOTE_SERVER_ADDR: selenium
     depends_on:
