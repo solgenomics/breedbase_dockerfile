@@ -1,0 +1,50 @@
+services:
+  breedbase:
+    volumes:
+      - webdata:/home/production/volume
+    ports:
+      - 8080:8080
+    image: breedbase/breedbase:latest
+    depends_on:
+      - breedbase_db
+    container_name: breedbase_web
+
+  breedbase_db:
+    volumes:
+      - dbdata18:/var/lib/postgresql
+    image: postgres:18
+    container_name: breedbase_db
+    healthcheck:
+      test: "pg_isready -U postgres -d $${POSTGRES_DB} || exit 1"
+      interval: 10s
+
+  # cap:
+  #   image: tiago2/cap:latest
+  #   container_name: cap
+  #   ports:
+  #     - "3001:3000"
+  #   environment:
+  #     ADMIN_KEY: moregreatstuffever
+  #     REDIS_URL: redis://valkey:6379
+  #   depends_on:
+  #     valkey:
+  #       condition: service_healthy
+  #   restart: unless-stopped
+
+  # valkey:
+  #   image: valkey/valkey:9-alpine
+  #   container_name: cap-valkey
+  #   volumes:
+  #     - valkey-data:/data
+  #   command: valkey-server --save 60 1 --loglevel warning --maxmemory-policy noeviction
+  #   healthcheck:
+  #     test: ["CMD", "valkey-cli", "ping"]
+  #     interval: 5s
+  #     timeout: 3s
+  #     retries: 5
+  #   restart: unless-stopped
+
+volumes:
+#  valkey-data:
+  webdata:
+  dbdata18:
