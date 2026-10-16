@@ -40,7 +40,7 @@ services:
   breedbase_db:
     volumes:
       - dbdatanew:/var/lib/postgresql
-    image: postgres:16
+    image: postgres:17
     container_name: breedbase_db
     healthcheck:
       test: "pg_isready -U postgres -d $${POSTGRES_DB} || exit 1"
