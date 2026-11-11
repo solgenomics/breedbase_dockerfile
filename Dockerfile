@@ -32,7 +32,8 @@ RUN apt-get update -y --allow-unauthenticated && \
             linux-headers-generic locales locales-all lsof lynx mailutils make mrbayes \
             munge muscle nano ncbi-blast+ nfs-common nginx npm perl-doc pkg-config plink \
             postfix postgresql-client primer3 task-spooler rsyslog screen slurm-wlm slurmctld slurmd \
-            starman sudo vim wget xutils-dev xvfb libstring-crc32-perl locate adduser
+            starman sudo vim wget xutils-dev xvfb libstring-crc32-perl locate adduser \
+            gettext libintl-perl
 
 
 # npm install needs a non-root user (new in latest version)
@@ -156,6 +157,11 @@ COPY sgn_local.conf /home/production/cxgn/sgn/sgn_local.conf
 #
 RUN cd /home/production/cxgn/gtsimsrch/src; make; cd -;
 RUN cd /home/production/cxgn/sgn/programs/; make; cd -;
+
+# build the interface translations (gettext .mo files and browser messages);
+# sgn reads them from ../sgn-translations/build when i18n_enabled is set
+#
+RUN make -C /home/production/cxgn/sgn-translations
 
 
 # add npm

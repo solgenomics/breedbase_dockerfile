@@ -4,6 +4,9 @@
 [submodule "cxgn/sgn"]
 	path = cxgn/sgn
 	url = https://github.com/solgenomics/sgn.git
+[submodule "cxgn/sgn-translations"]
+	path = cxgn/sgn-translations
+	url = https://github.com/Globgor/sgn-translations.git
 [submodule "cxgn/Phenome"]
 	path = cxgn/Phenome
 	url = https://github.com/solgenomics/Phenome.git
